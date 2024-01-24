@@ -35,7 +35,8 @@ export const handleMessageToZenvia = async (
 			const response = await axios.post(url, { content: messageGpt });
 
 			const firstFiveWords = messageGpt.split(" ").slice(0, 5).join(" ");
-
+			console.log("Response de Zenvia", response)
+			
 			if (response.data) {
 				console.log(
 					`13. GPT response to ${name}: "${firstFiveWords}..." sent successfully to Zenvia.`

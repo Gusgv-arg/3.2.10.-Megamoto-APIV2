@@ -3,9 +3,12 @@
 export const validateRequestData = (req, res, next) => {
 	const data = req.body;
 	const name = data.prospect?.firstName || data.message.visitor.name 
-	const message = data.interaction.output.message && data.interaction.output.message.content
-	? data.interaction.output.message.content
-	: data.message.contents[0].text
+	const message = 
+	data.interaction.output.message && data.interaction.output.message.content
+		? data.interaction.output.message.content
+		: data.message?.contents[0].text
+		? data.message.contents[0].text
+		: "No message";
 
 	if (
 		(data &&

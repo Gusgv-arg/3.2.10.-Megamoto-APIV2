@@ -22,11 +22,12 @@ export class UserMessageQueue {
 			try {
 				// Process the message with the Assistant
 				const response = await processMessageWithGPTAssistant(newMessage);
-
+				console.log("Lo q recibe response:", response)
+				
 				// Check if it's an agent's response
 				if (newMessage.channel === "Respuesta Agente"){
 					// Save the agent's response in DB
-					await saveAgentResponseInDb(newMessage)
+					await saveAgentResponseInDb(newMessage, response.threadId)
 
 				} else {
 					// Send the message to Zenvia

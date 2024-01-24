@@ -2,21 +2,22 @@ import Messages from "../models/messages.js";
 import Leads from "../models/leads.js";
 import { logError } from "./logError.js";
 
-export const saveAgentResponseInDb = async (newMessage) => {
+export const saveAgentResponseInDb = async (newMessage, threadId) => {
 	// Save the sent message to the database
+	console.log("Newmessage q recibe saveAgentResponseInDb", newMessage, threadId)
 	try {
 		// Saves message in Messages DB (stores everything)
 		await Messages.create({
 			name: newMessage.name,
 			id_user: newMessage.senderId,
 			role: "Vendedor Megamoto",
-			content: newMessage.messageGpt,
+			content: newMessage.receivedMessage,
 			id_message: newMessage.messageId,
 			channel: newMessage.channel,
-			thread_id: newMessage.threadId,
+			thread_id: threadId,
 		});
 
-		const firstFiveWords = newMessage.messageGpt.split(" ").slice(0, 5).join(" ");
+		const firstFiveWords = newMessage.receivedMessage.split(" ").slice(0, 5).join(" ");
 		console.log(
 			`11. Store Agent response in Messages DB --> ${newMessage.name}: "${firstFiveWords}..."`
 		);
@@ -37,7 +38,7 @@ export const saveAgentResponseInDb = async (newMessage) => {
 		const currentDateTime = new Date().toLocaleString();
 		
 		// Concatenate the new message to the existing content
-		const newContent = `${lead.content}\n${currentDateTime} - Vendedor Megamoto: ${newMessage.messageGpt}`;
+		const newContent = `${lead.content}\n${currentDateTime} - Vendedor Megamoto: ${newMessage.receivedMessage}`;
 
 		// Update the lead content
 		lead.content = newContent;
@@ -53,7 +54,7 @@ export const saveAgentResponseInDb = async (newMessage) => {
 	} catch (error) {
 		logError(
 			error,
-			`12. An error occured while saving message for ${newMessage.name}: "${newMessage.messageGpt}" in Messages or Leads DB.`
+			`12. An error occured while saving message for ${newMessage.name}: "${newMessage.receivedMessage}" in Messages or Leads DB.`
 		);
 		throw new Error(error.message);
 	}

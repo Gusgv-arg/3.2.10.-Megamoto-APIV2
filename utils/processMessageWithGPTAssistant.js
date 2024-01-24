@@ -42,8 +42,10 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				content: `Te envío la respuesta de un vendedor a este cliente para que tengas en consideración ante una posible nueva pregunta. Esta información la deberás tomar como si hubiera sido tu respuesta. Respuesta del vendedor: ${newMessage.receivedMessage}`,
 			});
 			// Exit the process
-			console.log(`7. Agent response saved in threadId. Customer --> ${newMessage.name}: ${newMessage.receivedMessage}`)
-			return
+			console.log(
+				`7. Agent response saved in threadId. Customer --> ${newMessage.name}: ${newMessage.receivedMessage}`
+			);
+			return { threadId };
 		} else {
 			// Pass in the user question into the existing thread
 			await openai.beta.threads.messages.create(threadId, {
@@ -76,11 +78,11 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 
 	do {
 		try {
-			// Check if its a new customer and set new intructions for welcome
+			// If its a new customer set intructions for welcome
 			if (newMessage.firstCustomerMessage === true) {
 				let saludo = `¡Hola ${newMessage.name}! Soy MegaBot, un Asistente Virtual de Megamoto. Puedo cometer errores, pero para que un vendedor pueda atenderte más rápido decime que moto estas buscando, de donde sos, y como queres pagar.`;
 
-				let instructions = `Saluda al cliente con el mensaje que envío a continuación. No deberás modificar ni agregar nada. Texto del saludo: ${saludo}`;
+				let instructions = `Por cuestiones legales de Megamoto, en tu primer intervención y sin importar la pregunta, deberás saludar al cliente con el mensaje que envío a continuación. No deberás modificar ni agregar nada. Texto del saludo: ${saludo}`;
 
 				run = await openai.beta.threads.runs.create(
 					threadId,
@@ -90,7 +92,21 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 					},
 					{ max_tokens: 50, temperature: 0 }
 				);
+			} else if (newMessage.receivedMessage === "No message") {
+				//If its a file (No message) set new Instructions
+				let noMessageInstructions =
+					"Como el cliente envió un archivo, deberás responder que por el momento no fuiste autorizado a procesar archivos y que podrás responder preguntas con texto.";
+
+				run = await openai.beta.threads.runs.create(
+					threadId,
+					{
+						assistant_id: assistantId,
+						instructions: noMessageInstructions,
+					},
+					{ max_tokens: 50, temperature: 0 }
+				);
 			} else {
+				// Run the assistant normally
 				run = await openai.beta.threads.runs.create(
 					threadId,
 					{
