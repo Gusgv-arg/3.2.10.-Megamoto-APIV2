@@ -4,7 +4,7 @@ import { logError } from "./logError.js";
 
 export const saveAgentResponseInDb = async (newMessage, threadId) => {
 	// Save the sent message to the database
-	console.log("Newmessage q recibe saveAgentResponseInDb", newMessage, threadId)
+	
 	try {
 		// Saves message in Messages DB (stores everything)
 		await Messages.create({
@@ -50,7 +50,7 @@ export const saveAgentResponseInDb = async (newMessage, threadId) => {
 			`12. Updated Leads DB with Agent Message to --> ${newMessage.name}: "${firstFiveWords}..."`
 		);
 
-		return;
+		//return;
 	} catch (error) {
 		logError(
 			error,

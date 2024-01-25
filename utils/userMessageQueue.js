@@ -22,8 +22,7 @@ export class UserMessageQueue {
 			try {
 				// Process the message with the Assistant
 				const response = await processMessageWithGPTAssistant(newMessage);
-				console.log("Lo q recibe response:", response)
-				
+								
 				// Check if it's an agent's response
 				if (newMessage.channel === "Respuesta Agente"){
 					// Save the agent's response in DB
@@ -67,14 +66,14 @@ export class UserMessageQueue {
 		let channel;
 
 		//Depending the origin I define the variables according the object I receive
-		if (messageToProcess.origin === "whatsApp") {
+		if (messageToProcess.origin === "whatsapp") {
 			name = messageToProcess.data.prospect.firstName;
 			senderId = messageToProcess.data.prospect.id;
 			messageId = messageToProcess.data.operationId;
 			senderPage = messageToProcess.data.prospect.accountId;
 			receivedMessage =
 				messageToProcess.data.interaction.output.message.content;
-			channel = "whatsApp";
+			channel = "whatsapp";
 		} else if (messageToProcess.origin === "instagram") {
 			name = messageToProcess.data.prospect.firstName;
 			senderId = messageToProcess.data.prospect.phones[0]

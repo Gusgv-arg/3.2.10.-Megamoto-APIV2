@@ -4,7 +4,7 @@ import { prospectController } from "../controllers/prospectsController.js";
 import { validateRequestData } from "../middlewares/validateRequestData.js";
 import { webhookController } from "../controllers/webhookController.js";
 import { checkRepeatedWebhookMessage } from "../middlewares/checkRepeatedWebhookMessage.js";
-import { checkAgentResponse } from "../middlewares/checkAgentResponse.js";
+import { checkAgentOrBotResponse } from "../middlewares/checkAgentOrBotResponse.js";
 
 /* Pasos
 1. Se recibe el dato
@@ -22,7 +22,7 @@ chatMegamotoRouter.post(
 	checkRepeatedWebhookMessage,
 	validateRequestData,
 	determineOrigin,
-	checkAgentResponse,
+	checkAgentOrBotResponse,
 	webhookController
 );
 

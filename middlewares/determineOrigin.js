@@ -29,7 +29,7 @@ export const determineOrigin = (req, res, next) => {
 		data.interaction?.via === "whatsApp" &&
 		typeof data.interaction?.output.message.content === "string"
 	) {
-		origin = "whatsApp";
+		origin = "whatsapp";
 		console.log(`4. Origin: Whatsapp from --> ${name}: "${message}".`);
 	} else if ( 
 		data.interaction?.via === "instagram" &&
