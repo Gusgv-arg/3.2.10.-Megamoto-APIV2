@@ -47,16 +47,15 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			);
 			return { threadId };
 
-		// Check if it's a "No message"
+			// Check if it's a "No message"
 		} else if (newMessage.receivedMessage === "No message") {
 			// Tell the assistant to respond with a tailored question
-			const gptQuestion = `¡Gracias ${newMessage.name} por tu contacto! Para que pueda responder a tu pregunta necesitaría que me escribas y así poder ayudarte.`
+			const gptQuestion = `¡Gracias ${newMessage.name} por tu contacto! Para que pueda responder a tu pregunta necesitaría que me escribas y así poder ayudarte.`;
 
 			await openai.beta.threads.messages.create(threadId, {
 				role: "user",
 				content: `Como no envié un mensaje escrito, para que podamos atendernos mejor te pido me respondas lo siguiente: ${gptQuestion}`,
 			});
-		
 		} else {
 			// Pass in the user question into the existing thread
 			await openai.beta.threads.messages.create(threadId, {
@@ -64,24 +63,32 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				content: newMessage.receivedMessage,
 			});
 		}
-
 	} else {
-		// Create a new thread
+		// Create a new thread because its a new customer
 		const thread = await openai.beta.threads.create();
 		threadId = thread.id;
 		console.log(`6. New thread created --> ${newMessage.name}.`);
 
 		let greeting = `¡Hola ${newMessage.name}! Soy MegaBot, un Asistente Virtual de Megamoto. Puedo cometer errores, pero para que un vendedor pueda atenderte más rápido decime que moto estas buscando, de donde sos, y como queres pagar.`;
 
-		// Pass in the user name into the new thread and instruct the assistant to greet
-		await openai.beta.threads.messages.create(
-			threadId,
-			{
-				role: "user",
-				content: `Quiero que me saludes con esta frase para saber quien sos, saber y entender que podrías cometer errores, y que debo responder para que puedas atenderme mejor: ${greeting}`,
-			},
-			{ max_tokens: 100, temperature: 0 }
+		// Pass the greet to the new thread and post directly to Zenvia without running the assistant
+		await openai.beta.threads.messages.create(threadId, {
+			role: "user",
+			content: `Yo te he enviado este mensaje: ${newMessage.receivedMessage}. Pero para ordenar la conversación voy a recibir este mensaje: ${greeting}. Luego de mi respuesta a este último mensaje podrás responder tú.`,
+		});
+
+        // Save the received message from the USER to the database
+		const role = "user";
+		await saveUserMessageInDb(
+			newMessage.name,
+			newMessage.senderId,
+			role,
+			newMessage.receivedMessage,
+			newMessage.messageId,
+			newMessage.channel,
+			threadId
 		);
+		return { greeting, threadId };
 	}
 
 	// Run the assistant and wait for completion
@@ -96,7 +103,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				//If its a new customer set new Instructions
 				let instructions =
 					"Por cuestiones legales de Argentina, deberás saludar al cliente como él te solicita sin modificar y/o agregar nada en tu saludo. Es muy importante que el cliente se de por notificado que podrías cometer errores";
-				
+
 				run = await openai.beta.threads.runs.create(
 					threadId,
 					{
@@ -164,10 +171,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			newMessage.messageId,
 			newMessage.channel,
 			threadId
-		);
-		console.log(
-			`10. Sending GPT response --> ${newMessage.name}: "${messageGpt}".`
-		);
+		);		
 		return { messageGpt, threadId };
 	}
 };

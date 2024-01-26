@@ -34,7 +34,7 @@ export class UserMessageQueue {
 						newMessage.name,
 						newMessage.senderPage,
 						newMessage.senderId,
-						response.messageGpt,
+						response.messageGpt ? response.messageGpt : response.greeting,
 						response.threadId,
 						newMessage.messageId,
 						newMessage.channel

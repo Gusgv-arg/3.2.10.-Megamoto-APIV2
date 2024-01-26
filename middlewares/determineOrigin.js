@@ -1,37 +1,26 @@
-
 export const determineOrigin = (req, res, next) => {
 	const data = req.body;
 	const name = data.prospect?.firstName || data.message.visitor.name;
 	const message =
 		data.interaction.output.message && data.interaction.output.message.content
 			? data.interaction.output.message.content
-			: data.message.contents[0].text;
+			: data.message?.contents[0].text
+			? data.message.contents[0].text
+			: "No message";
+
 	let origin = "";
 
-	if (
-		data.interaction?.bot === true &&
-		typeof data.interaction?.output.message.content === "string"
-	) {
-		origin = "bot";
-		console.log(
-			`4. Origin: Bot message --> ${name}: "${data.interaction?.output.message.content}".`
-		);
-	} else if (
-		(data.interaction?.proactive === true &&
-			typeof data.interaction?.output.message.content === "string") ||
-		(data.interaction?.proactive === true &&
-			typeof data.interaction?.output.message === "string")
-	) {
+	if (data.interaction.proactive === true) {
 		origin = "Respuesta Agente";
-		console.log("Lo q entra x Agente", data)
-		console.log(`4. Origin: Agent Message --> ${name}: "${message}".`);		
+		const firstTenWords = message.split(" ").slice(0, 10).join(" ");
+		console.log(`4. Origin: Agent Message --> ${name}: "${firstTenWords}...".`);
 	} else if (
 		data.interaction?.via === "whatsApp" &&
 		typeof data.interaction?.output.message.content === "string"
 	) {
 		origin = "whatsapp";
 		console.log(`4. Origin: Whatsapp from --> ${name}: "${message}".`);
-	} else if ( 
+	} else if (
 		data.interaction?.via === "instagram" &&
 		typeof data.interaction?.output.message.content === "string"
 	) {
@@ -45,6 +34,9 @@ export const determineOrigin = (req, res, next) => {
 	) {
 		origin = "facebook";
 		console.log(`4. Origin: Facebook from --> ${name}: "${message}".`);
+	} else if (message === "No message") {
+		origin = "No message";
+		console.log(`4. Origin: No message from --> ${name}".`);
 	} else {
 		origin = "orígen desconocido o el mensaje no es texto!!!!!";
 		console.log(

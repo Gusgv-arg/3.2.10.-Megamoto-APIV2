@@ -24,9 +24,8 @@ export const saveGPTMessageInDb = async (
 			thread_id: threadId,
 		});
 
-		const firstFiveWords = messageGpt.split(" ").slice(0, 5).join(" ");
 		console.log(
-			`11. Store GPT response in Messages DB --> ${name}: "${firstFiveWords}..."`
+			`10. Store GPT response in Messages DB --> ${name}: "${messageGpt}"`
 		);
 
 		// Find the lead by threadId
@@ -36,7 +35,7 @@ export const saveGPTMessageInDb = async (
 		// ACA VER QUE HACER XQ TENDRIA QUE MANEJAR ESTE ERROR
 		if (lead === null) {
 			console.log(
-				`12. An error has ocurred finding in Leads DB for --> ${name}`
+				`11. An error has ocurred finding in Leads DB for --> ${name}`
 			);
 			return;
 		}
@@ -53,8 +52,9 @@ export const saveGPTMessageInDb = async (
 		// Save the updated lead
 		await lead.save();
 
+		const firstFiveWords = messageGpt.split(" ").slice(0, 5).join(" ");
 		console.log(
-			`12. Updated Leads DB with GPT Message to --> ${name}: "${firstFiveWords}..."`
+			`11. Updated Leads DB with GPT Message to --> ${name}: "${firstFiveWords}..."`
 		);
 
 		return;

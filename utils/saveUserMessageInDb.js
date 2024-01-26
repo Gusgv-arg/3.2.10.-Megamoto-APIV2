@@ -23,6 +23,7 @@ export const saveUserMessageInDb = async (
 			channel: channel,
 			thread_id: threadId,
 		});
+		console.log("If it's a new customer there is no 7. (running the assistant).")
 		console.log(`8. Store in Messages DB --> ${name}: "${userMessage}".`);
 
 		// Find the lead by threadId

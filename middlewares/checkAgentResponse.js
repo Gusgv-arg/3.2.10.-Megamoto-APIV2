@@ -1,6 +1,6 @@
 import Leads from "../models/leads.js";
 
-export const checkAgentOrBotResponse = async (req, res, next) => {
+export const checkAgentResponse = async (req, res, next) => {
 	const name = req.body.prospect?.firstName || req.body.message.visitor.name;
 
 	if (req.origin === "Respuesta Agente") {
@@ -16,10 +16,6 @@ export const checkAgentOrBotResponse = async (req, res, next) => {
 			// If lead exists in DB next()
 			next();
 		}
-	} else if (req.origin === "bot") {
-		// If bot origin exit the process
-		console.log(`5. Exit process --> Bot responded to ${name}`);
-		return;
 	} else {
 		next();
 	}
