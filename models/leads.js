@@ -6,7 +6,7 @@ const leadsSchema = new mongoose.Schema(
 		id_user: { type: String, required: true },
 		channel: { type: String, required: true },	
 		content: { type: String, required: true },
-		thread_id: {type: String},			
+		thread_id: {type: String},					
 		contact_method: { type: String },
 		address: { type: String },
 		product: { type: String },

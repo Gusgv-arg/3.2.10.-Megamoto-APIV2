@@ -16,18 +16,19 @@ export class UserMessageQueue {
 		queue.processing = true;
 
 		while (queue.messages.length > 0) {
-			// Take the first record and delete form the queue
+			// Take the first record and delete it from the queue
 			const newMessage = queue.messages.shift();
 
 			try {
+				// PARA REPENSAR EL PROCESO
+
 				// Process the message with the Assistant
 				const response = await processMessageWithGPTAssistant(newMessage);
-								
-				// Check if it's an agent's response
-				if (newMessage.channel === "Respuesta Agente"){
-					// Save the agent's response in DB
-					await saveAgentResponseInDb(newMessage, response.threadId)
 
+				// Check if it's an agent's response
+				if (newMessage.channel === "Respuesta Agente") {
+					// Save the agent's response in DB
+					await saveAgentResponseInDb(newMessage, response.threadId);
 				} else {
 					// Send the message to Zenvia
 					await handleMessageToZenvia(
@@ -43,7 +44,6 @@ export class UserMessageQueue {
 
 				// Export to Excel Leads DB
 				await exportLeadsToExcel();
-				
 			} catch (error) {
 				console.error(
 					`14. Error processing message for user ${newMessage.name}: ${error}`
@@ -71,8 +71,9 @@ export class UserMessageQueue {
 			senderId = messageToProcess.data.prospect.id;
 			messageId = messageToProcess.data.operationId;
 			senderPage = messageToProcess.data.prospect.accountId;
-			receivedMessage =
-				messageToProcess.data.interaction.output.message.content;
+			receivedMessage = messageToProcess.data.interaction.output.message.content
+				? messageToProcess.data.interaction.output.message.content
+				: "No message";
 			channel = "whatsapp";
 		} else if (messageToProcess.origin === "instagram") {
 			name = messageToProcess.data.prospect.firstName;
@@ -118,8 +119,11 @@ export class UserMessageQueue {
 		}
 		const queue = this.queues.get(senderId);
 		queue.messages.push(newMessage);
+		
+		const firstFiveWords = newMessage.receivedMessage.split(" ").slice(0, 5).join(" ");
+		
 		console.log(
-			`5. Data added to Messages Queue --> ${newMessage.name}: "${newMessage.receivedMessage}".`
+			`5. Data added to Messages Queue --> ${newMessage.name}: "${firstFiveWords}".`
 		);
 		// Process the queue
 		this.processQueue(senderId);

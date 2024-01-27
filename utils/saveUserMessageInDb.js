@@ -23,8 +23,10 @@ export const saveUserMessageInDb = async (
 			channel: channel,
 			thread_id: threadId,
 		});
+		
+		const firstFiveWords = userMessage.split(" ").slice(0, 5).join(" ");
 		console.log("If it's a new customer there is no 7. (running the assistant).")
-		console.log(`8. Store in Messages DB --> ${name}: "${userMessage}".`);
+		console.log(`8. Store in Messages DB --> ${name}: "${firstFiveWords}".`);
 
 		// Find the lead by threadId
 		let lead = await Leads.findOne({ thread_id: threadId });
@@ -39,7 +41,7 @@ export const saveUserMessageInDb = async (
 				id_user: senderId,
 				channel: channel,
 				content: `${currentDateTime} - ${name}: ${userMessage}`,
-				thread_id: threadId,
+				thread_id: threadId,				
 			});
 			console.log(`9. New lead created in Leads DB --> ${name}`);
 			return;

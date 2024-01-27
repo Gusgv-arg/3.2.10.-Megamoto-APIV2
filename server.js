@@ -7,6 +7,7 @@ import chatMegamotoRouter from "./routers/chatMegamotoRouter.js";
 import { errorHandler } from "./utils/errorHandler.js";
 import { test } from "./controllers/test.js";
 import jsonRouter from "./routers/jsonRouter.js";
+import BotSwitch from "./models/botSwitch.js";
 
 dotenv.config();
 
@@ -30,6 +31,18 @@ app.use(
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
+
+// Looking for General Bot Switch
+let botSwitchInstance = await BotSwitch.findOne();
+if (botSwitchInstance){
+	console.log(`MegaBot is ${botSwitchInstance.generalSwitch}`)
+} else {
+	let botSwitch = new BotSwitch({
+		generalSwitch: "ON"
+	});
+	botSwitch.save()
+	console.log(`BotSwitch created and set to ${botSwitch.generalSwitch}`)
+}
 
 app.use("/test", test);
 app.use("/json", jsonRouter);

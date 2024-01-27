@@ -2,6 +2,8 @@ import OpenAI from "openai";
 import dotenv from "dotenv";
 import { saveUserMessageInDb } from "./saveUserMessageInDb.js";
 import Leads from "../models/leads.js";
+import { changeGeneralBotSwitch } from "./changeGeneralBotSwitch.js";
+import axios from "axios";
 
 dotenv.config();
 
@@ -31,7 +33,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		threadId = existingThread.thread_id;
 		newMessage.firstCustomerMessage = false;
 		console.log(
-			`6. Existing thread for --> ${newMessage.name}. Changed firstCustomerMessage property to false.`
+			`6. Existing thread for --> ${newMessage.name}: ${newMessage.receivedMessage}. Changed firstCustomerMessage property to false.`
 		);
 
 		// Check if it is an Agent response
@@ -41,6 +43,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				role: "user",
 				content: `Te envío la respuesta que me envió un vendedor de Megamoto para que tus posibles próximas respuestas estén alineadas con lo que estamos hablando. Respuesta del vendedor: ${newMessage.receivedMessage}`,
 			});
+
 			// Exit the process
 			console.log(
 				`7. Agent response saved in threadId. Customer --> ${newMessage.name}: ${newMessage.receivedMessage}`
@@ -56,6 +59,8 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				role: "user",
 				content: `Como no envié un mensaje escrito, para que podamos atendernos mejor te pido me respondas lo siguiente: ${gptQuestion}`,
 			});
+
+			// Check if it's a Switch ON/OFF message
 		} else {
 			// Pass in the user question into the existing thread
 			await openai.beta.threads.messages.create(threadId, {
@@ -74,10 +79,10 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		// Pass the greet to the new thread and post directly to Zenvia without running the assistant
 		await openai.beta.threads.messages.create(threadId, {
 			role: "user",
-			content: `Yo te he enviado este mensaje: ${newMessage.receivedMessage}. Pero para ordenar la conversación voy a recibir este mensaje: ${greeting}. Luego de mi respuesta a este último mensaje podrás responder tú.`,
+			content: `Para ordenar nuestra conversación voy a recibir este mensaje como si MegaBot me hubiera respondido: ${greeting}. Luego de mi respuesta a este último mensaje podrás responder tú.`,
 		});
 
-        // Save the received message from the USER to the database
+		// Save the received message from the USER to the database
 		const role = "user";
 		await saveUserMessageInDb(
 			newMessage.name,
@@ -171,7 +176,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			newMessage.messageId,
 			newMessage.channel,
 			threadId
-		);		
+		);
 		return { messageGpt, threadId };
 	}
 };

@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import axios from "axios";
 import { saveGPTMessageInDb } from "./saveGPTMessageInDb.js";
+import { changeGeneralBotSwitch } from "./changeGeneralBotSwitch.js";
 
 dotenv.config();
 
@@ -25,7 +26,7 @@ export const handleMessageToZenvia = async (
 			channel,
 			threadId,
 			messageId
-		);
+		);		
 
 		// Para que solo me conteste a mi
 		if (name === "Gustavo Gomez Villafañe") {
@@ -46,6 +47,7 @@ export const handleMessageToZenvia = async (
 				);
 			}
 		}
+		
 
 		// Posts the message to Zenvia
 		/* const prospectId = senderId;
