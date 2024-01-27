@@ -7,12 +7,15 @@ dotenv.config();
 
 export const checkGeneralBotSwitch = async (req, res, next) => {
 	const data = req.body;
+	console.log("Entro esto:",data)
+	
 	const message =
-		data.interaction.output.message && data.interaction.output.message.content
+		data.interaction?.output?.message && data.interaction.output.message.content
 			? data.interaction.output.message.content
 			: "No message";
 
 	const name = data?.prospect.firstName;
+
 
 	let botSwitchInstance = await BotSwitch.findOne();
 

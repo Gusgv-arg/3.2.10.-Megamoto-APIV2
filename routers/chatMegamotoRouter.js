@@ -7,6 +7,7 @@ import { checkRepeatedWebhookMessage } from "../middlewares/checkRepeatedWebhook
 import { checkAgentResponse } from "../middlewares/checkAgentResponse.js";
 import { checkBotOrigin } from "../middlewares/checkBotOrigin.js";
 import { checkGeneralBotSwitch } from "../middlewares/checkGeneralBotSwitch.js";
+import { checkNoMessage } from "../middlewares/checkNoMessage.js";
 
 /* Pasos
 1. Se recibe el dato
@@ -23,6 +24,7 @@ chatMegamotoRouter.post(
 	"/webhook-megamoto",
 	checkGeneralBotSwitch,
 	checkBotOrigin,
+	checkNoMessage,
 	checkRepeatedWebhookMessage,
 	validateRequestData,
 	determineOrigin,
