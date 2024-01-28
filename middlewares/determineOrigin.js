@@ -9,7 +9,7 @@ export const determineOrigin = (req, res, next) => {
 			: "No message";
 
 	let origin = "";
-	
+
 	const firstTenWords = message.split(" ").slice(0, 10).join(" ");
 	const firstFiveWords = message.split(" ").slice(0, 5).join(" ");
 

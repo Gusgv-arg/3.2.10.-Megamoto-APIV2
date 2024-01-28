@@ -8,6 +8,7 @@ import { checkAgentResponse } from "../middlewares/checkAgentResponse.js";
 import { checkBotOrigin } from "../middlewares/checkBotOrigin.js";
 import { checkGeneralBotSwitch } from "../middlewares/checkGeneralBotSwitch.js";
 import { checkNoMessage } from "../middlewares/checkNoMessage.js";
+import { errorHandler } from "../utils/errorHandler.js";
 
 /* Pasos
 1. Se recibe el dato
@@ -29,60 +30,9 @@ chatMegamotoRouter.post(
 	validateRequestData,
 	determineOrigin,
 	checkAgentResponse,
-	webhookController
+	webhookController,
+	errorHandler
 );
-
-// Posts a message in Zenvia back to the client using AI
-/* chatMegamotoRouter.post("/webhook-megamoto", (req, res, next) => {
-	const data = req.body;
-
-	//Push data received to queue
-	messageQueue.push(data);
-	console.log(messageQueue);
-
-	//Process while there is data in the array
-	while (messageQueue.length > 0) {
-		//Take the oldest record of the array of messages and take it off
-		const messageToProcess = messageQueue.shift();
-
-		//If flag is true-->set flag to false && enter the process
-		if (flag === true) {
-			//Enters the process of the message
-			// Dtermine the origin so as to direct to the corresponding controller
-			const origin = determineOrigin(data);
-
-			if (origin === "facebook") {
-				webhookFacebookController(req, res, next);
-				//res.status(200).send("Received!");
-			} else if (origin === "whatsApp") {
-				if (messageToProcess.prospect.phones[0] === "+5491161405589") {
-					webhookWhatsappController(messageToProcess);
-				}
-				//if (data.prospect.phones[0] === "+5491161405589") {
-				//console.log("yooo", data);
-				//webhookWhatsappController(req, res, next);
-				//} else {
-				//	res.status(200).send("Received!");
-				//}
-			} else if (origin === "bot") {
-				res.status(200).send("Received!");
-			} else if (origin === "instagram") {
-				webhookInstagramController(req, res, next);
-				//res.status(200).send("Received!");
-			} else if (origin === "Respuesta Agente") {
-				//------------ Acá debería actualizar mi BD de Leads ------------------------//
-				res.status(200).send("Received!");
-			} else {
-				res.status(200).send("Received!");
-			}
-		} else {
-			//If flag is false-->wait 5 seconds and check flag
-			setTimeout(() => {
-				flag = checkFlagToProcessMessage();
-			}, 5000);
-		}
-	}
-}); */
 
 // Gets prospects from Zenvia API
 chatMegamotoRouter.get("/prospects", prospectController);

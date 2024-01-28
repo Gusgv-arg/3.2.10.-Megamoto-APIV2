@@ -17,7 +17,6 @@ export const checkNoMessage = async (req, res, next) => {
 	const prospectId = data.prospect?.id;
 	const channel = data.interaction?.via;
 	const agentInternalNote = data?.interaction?.output?.comment;
-	const updated = data.type;
 
 	if (message === "No message") {
 		console.log("Entro un no message", data);
@@ -32,19 +31,13 @@ export const checkNoMessage = async (req, res, next) => {
 		return;
 	}
 
-	// Exit if the data object has no interaction or message object
+	// Exit if the data object has no interaction or message property
 	if (!data.hasOwnProperty("interaction") || !data.hasOwnProperty("message")) {
 		console.log("El objeto data NO tiene la propiedad interaction o message");
-		console.log("data.prospect.leads",data?.prospect.leads)
-		console.log("data.updates",data?.updates)
+		console.log("data.prospect.leads", data?.prospect.leads);
+		console.log("data.prospect.contactMediums", data?.prospect.contactMediums);
+		console.log("1. Exiting process. API does not manage this notification.");
 		res.status(200).send("Received");
-		return;
-	}
-
-	// Exit if its an updated prospect
-	if (updated === "updated") {
-		res.status(200).send("Received");
-		console.log(`Exit the process. Updated prospect for: ${name}`);
 		return;
 	}
 
@@ -67,12 +60,13 @@ export const checkNoMessage = async (req, res, next) => {
 			res.status(200).send("Received");
 			// Exit the process
 			console.log(
-				`Exit process. No message from: ${name}. Requested the user to send a text message.`
+				`1. Exiting the process. No message from: ${name}. Requested the user to send a text message.`
 			);
 			return;
 		} catch (error) {
 			console.log("There was an error in checkNoMessage.js");
-			throw error;
+			// Pass the error to the centralized error handling middleware
+			next(error);
 		}
 	} else {
 		next();

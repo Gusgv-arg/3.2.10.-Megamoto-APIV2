@@ -33,15 +33,20 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 
 // Looking for General Bot Switch
-let botSwitchInstance = await BotSwitch.findOne();
-if (botSwitchInstance){
-	console.log(`MegaBot is ${botSwitchInstance.generalSwitch}`)
-} else {
-	let botSwitch = new BotSwitch({
-		generalSwitch: "ON"
-	});
-	botSwitch.save()
-	console.log(`BotSwitch created and set to ${botSwitch.generalSwitch}`)
+let botSwitchInstance;
+try {
+	botSwitchInstance = await BotSwitch.findOne();
+	if (botSwitchInstance) {
+		console.log(`MegaBot is ${botSwitchInstance.generalSwitch}`);
+	} else {
+		let botSwitch = new BotSwitch({
+			generalSwitch: "ON",
+		});
+		await botSwitch.save();
+		console.log(`BotSwitch created and set to ${botSwitch.generalSwitch}`);
+	}
+} catch (error) {
+	console.error("Error initializing bot switch:", error.message);
 }
 
 app.use("/test", test);

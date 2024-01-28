@@ -7,15 +7,14 @@ dotenv.config();
 
 export const checkGeneralBotSwitch = async (req, res, next) => {
 	const data = req.body;
-	console.log("Entro esto:",data)
-	
+	//console.log("Entro esto:",data)
+
 	const message =
 		data.interaction?.output?.message && data.interaction.output.message.content
 			? data.interaction.output.message.content
 			: "No message";
 
 	const name = data?.prospect.firstName;
-
 
 	let botSwitchInstance = await BotSwitch.findOne();
 
@@ -57,7 +56,8 @@ export const checkGeneralBotSwitch = async (req, res, next) => {
 				"There has been an error while checking General Switch in checkGeneralBotSwitch.js.",
 				error.message
 			);
-			throw error;
+			// Pass the error to the centralized error handling middleware
+			next(error);
 		}
 	} else {
 		console.log("General Bot Switch is turned OFF. MegaBot has been stopped!");

@@ -49,6 +49,7 @@ export class UserMessageQueue {
 					`14. Error processing message for user ${newMessage.name}: ${error}`
 				);
 				// Handle error, possibly re-queue the message
+				next(error);
 			}
 		}
 

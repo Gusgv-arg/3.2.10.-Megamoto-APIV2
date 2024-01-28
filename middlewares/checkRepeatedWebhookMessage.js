@@ -42,7 +42,8 @@ export const checkRepeatedWebhookMessage = async (req, res, next) => {
 			error,
 			`2. There has been a problem checking in DB: ${name}: "${message}"`
 		);
-		res.status(500).send(error.message);
+		// Pass the error to the centralized error handling middleware
+		next(error);
 	}
 	const firstFiveWords = message.split(" ").slice(0, 5).join(" ");
 	console.log(`2. Ok Non duplicate for --> ${name}: "${firstFiveWords}...".`);
