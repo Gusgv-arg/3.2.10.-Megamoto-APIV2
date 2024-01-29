@@ -2,7 +2,6 @@ import OpenAI from "openai";
 import dotenv from "dotenv";
 import { saveUserMessageInDb } from "./saveUserMessageInDb.js";
 import Leads from "../models/leads.js";
-import { changeGeneralBotSwitch } from "./changeGeneralBotSwitch.js";
 import axios from "axios";
 
 dotenv.config();

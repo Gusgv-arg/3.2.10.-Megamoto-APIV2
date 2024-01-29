@@ -34,8 +34,8 @@ export const checkNoMessage = async (req, res, next) => {
 	// Exit if the data object has no interaction or message property
 	if (!data.hasOwnProperty("interaction") || !data.hasOwnProperty("message")) {
 		console.log("El objeto data NO tiene la propiedad interaction o message");
-		console.log("data.prospect.leads", data?.prospect.leads);
-		console.log("data.prospect.contactMediums", data?.prospect.contactMediums);
+		//console.log("data.prospect.leads", data?.prospect.leads);
+		//console.log("data.prospect.contactMediums", data?.prospect.contactMediums);
 		console.log("1. Exiting process. API does not manage this notification.");
 		res.status(200).send("Received");
 		return;
