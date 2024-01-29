@@ -31,8 +31,9 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 	if (existingThread) {
 		threadId = existingThread.thread_id;
 		newMessage.firstCustomerMessage = false;
+		const firstFiveWords = newMessage.receivedMessage.split(" ").slice(0, 5).join(" ");
 		console.log(
-			`6. Existing thread for --> ${newMessage.name}: ${newMessage.receivedMessage}. Changed firstCustomerMessage property to false.`
+			`6. Existing thread for --> ${newMessage.name}, ID: ${newMessage.senderId}, Message: ${firstFiveWords}. Changed firstCustomerMessage property to false.`
 		);
 
 		// Check if it is an Agent response
@@ -48,18 +49,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				`7. Agent response saved in threadId. Customer --> ${newMessage.name}: ${newMessage.receivedMessage}`
 			);
 			return { threadId };
-
-			// Check if it's a "No message"
-		} else if (newMessage.receivedMessage === "No message") {
-			// Tell the assistant to respond with a tailored question
-			const gptQuestion = `¡Gracias ${newMessage.name} por tu contacto! Para que pueda responder a tu pregunta necesitaría que me escribas y así poder ayudarte.`;
-
-			await openai.beta.threads.messages.create(threadId, {
-				role: "user",
-				content: `Como no envié un mensaje escrito, para que podamos atendernos mejor te pido me respondas lo siguiente: ${gptQuestion}`,
-			});
-
-			// Check if it's a Switch ON/OFF message
+			
 		} else {
 			// Pass in the user question into the existing thread
 			await openai.beta.threads.messages.create(threadId, {

@@ -12,8 +12,9 @@ export const checkBotSwitch = async (req, res, next) => {
 	const message =
 		data.interaction?.output?.message && data.interaction.output.message.content
 			? data.interaction.output.message.content
+			: data.message?.contents[0].text
+			? data.message.contents[0].text
 			: "No message";
-
 	const name = data?.prospect.firstName;
 
 	let botSwitchInstance = await BotSwitch.findOne();
@@ -25,7 +26,6 @@ export const checkBotSwitch = async (req, res, next) => {
 		message.toLowerCase() !== "megabot on"
 	) {
 		next();
-	
 	} else if (
 		message.toLowerCase() === "megabot off" ||
 		message.toLowerCase() === "megabot on"
@@ -34,7 +34,7 @@ export const checkBotSwitch = async (req, res, next) => {
 			// Change Bot Switch
 			const prospectId = data.prospect?.id;
 			const botSwitch = await changeBotSwitch(message, name, prospectId);
-			
+
 			// Notify the user in Zenvia
 			const channel = "whatsapp";
 			const url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
@@ -60,8 +60,8 @@ export const checkBotSwitch = async (req, res, next) => {
 			// Pass the error to the centralized error handling middleware
 			next(error);
 		}
-	
-	// General Bot Switch is off
+
+		// General Bot Switch is off
 	} else {
 		console.log("General Bot Switch is turned OFF. MegaBot has been stopped!");
 		res.status(200).send("Received");

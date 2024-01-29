@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// Checks No messages and other that the API does no process
+// Checks No messages and others that the API does no process
 export const checkNoMessage = async (req, res, next) => {
 	const data = req.body;
 	const message =
@@ -31,9 +31,10 @@ export const checkNoMessage = async (req, res, next) => {
 		return;
 	}
 
-	// Exit if the data object has no interaction or message property
-	if (!data.hasOwnProperty("interaction") || !data.hasOwnProperty("message")) {
+	// Exit if the data object has no interaction and message property
+	if (!req.body.hasOwnProperty("interaction") && !req.body.hasOwnProperty("message")) {
 		console.log("El objeto data NO tiene la propiedad interaction o message");
+		console.log(data)
 		//console.log("data.prospect.leads", data?.prospect.leads);
 		//console.log("data.prospect.contactMediums", data?.prospect.contactMediums);
 		console.log("1. Exiting process. API does not manage this notification.");
