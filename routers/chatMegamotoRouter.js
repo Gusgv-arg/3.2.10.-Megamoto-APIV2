@@ -10,15 +10,6 @@ import { checkBotSwitch } from "../middlewares/checkBotSwitch.js";
 import { checkNoMessage } from "../middlewares/checkNoMessage.js";
 import { errorHandler } from "../utils/errorHandler.js";
 
-/* Pasos
-1. Se recibe el dato
-2. Validar data ->middleware
-3. Verificar si no fue recibido antes
-4. Determinar el origen ->middleware
-5. Guardar en la fila
-6. Derivar al controller para que procese la respuesta y la envíe al cliente
-7. Responder recibido a zenvia */
-
 const chatMegamotoRouter = express.Router();
 
 chatMegamotoRouter.post(

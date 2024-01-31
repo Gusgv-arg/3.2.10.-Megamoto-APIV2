@@ -67,6 +67,6 @@ export const saveUserMessageInDb = async (
 			error,
 			`An error occured while saving message from ${name}: "${userMessage}" in Messages or Leads DB.`
 		);
-		throw new Error(error.message);
+		next(error);
 	}
 };

@@ -28,7 +28,7 @@ export const determineOrigin = (req, res, next) => {
 	) {
 		origin = "instagram";
 		console.log(
-			`4. Origin: Instagram from --> ${name}: "${firstFiveWords}". Object Instagram --> ${data}`
+			`4. Origin: Instagram from --> ${name}: "${firstFiveWords}". Object Instagram ver el senderId --> ${data}`
 		);
 	} else if (
 		data?.channel === "facebook" &&

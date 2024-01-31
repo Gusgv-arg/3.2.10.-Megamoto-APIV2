@@ -63,7 +63,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		threadId = thread.id;
 		console.log(`6. New thread created --> ${newMessage.name}.`);
 
-		let greeting = `¡Hola ${newMessage.name}! Soy MegaBot, un Asistente Virtual de Megamoto. Puedo cometer errores, pero para que un vendedor pueda atenderte más rápido decime que moto estas buscando, de donde sos, y como queres pagar.`;
+		let greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, un Asistente Virtual de Megamoto. Puedo cometer errores, por lo que te pido me escribas lo más claro posible 🙏. Para que un vendedor pueda atenderte más rápido decime que moto estas buscando, de donde sos, y como queres pagar. 😀`;
 
 		// Pass the greet to the new thread and post directly to Zenvia without running the assistant
 		await openai.beta.threads.messages.create(threadId, {
@@ -120,7 +120,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			runStatus = await openai.beta.threads.runs.retrieve(threadId, run.id);
 
 			while (runStatus.status !== "completed") {
-				await new Promise((resolve) => setTimeout(resolve, 2000));
+				await new Promise((resolve) => setTimeout(resolve, 3000));
 				runStatus = await openai.beta.threads.runs.retrieve(threadId, run.id);
 			}
 
@@ -136,7 +136,10 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			currentAttempt++;
 			if (currentAttempt >= maxAttempts) {
 				console.error("7. Exceeded maximum attempts. Exiting the loop.");
-				break; // Exit the loop if maximum attempts are exceeded
+				const errorMessage = "Lo siento, en este momento no puedo procesar tu solicitud. Por favor, intenta de nuevo más tarde.";
+
+				// Exit the loop if maximum attempts are exceeded and send an error message to the user
+				return {errorMessage, threadId}; 
 			}
 		}
 	} while (currentAttempt < maxAttempts);

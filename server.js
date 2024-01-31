@@ -8,6 +8,7 @@ import { errorHandler } from "./utils/errorHandler.js";
 import { test } from "./controllers/test.js";
 import jsonRouter from "./routers/jsonRouter.js";
 import BotSwitch from "./models/botSwitch.js";
+import excelRouter from "./routers/excelRouter.js";
 
 dotenv.config();
 
@@ -51,6 +52,7 @@ try {
 
 app.use("/test", test);
 app.use("/json", jsonRouter);
+app.use("/excel", excelRouter);
 app.use("/megamoto", chatMegamotoRouter);
 
 // Middleware de manejo de errores

@@ -1,4 +1,3 @@
-import { exportLeadsToExcel } from "./exportLeadsToExcel.js";
 import { handleMessageToZenvia } from "./handleMessageToZenvia.js";
 import { processMessageWithGPTAssistant } from "./processMessageWithGPTAssistant.js";
 import { saveAgentResponseInDb } from "./saveAgentResponseInDb.js";
@@ -41,9 +40,7 @@ export class UserMessageQueue {
 						newMessage.channel
 					);
 				}
-
-				// Export to Excel Leads DB
-				await exportLeadsToExcel();
+				
 			} catch (error) {
 				console.error(
 					`14. Error processing message for user ${newMessage.name}: ${error}`
@@ -77,6 +74,7 @@ export class UserMessageQueue {
 				: "No message";
 			channel = "whatsapp";
 		} else if (messageToProcess.origin === "instagram") {
+			console.log("\nEntro Instagram ver propiedad del senderID!!",messageToProcess)
 			name = messageToProcess.data.prospect.firstName;
 			senderId = messageToProcess.data.prospect.phones[0]
 				? messageToProcess.data.prospect.phones[0]
