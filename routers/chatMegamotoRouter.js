@@ -1,6 +1,5 @@
 import express from "express";
 import { determineOrigin } from "../middlewares/determineOrigin.js";
-import { prospectController } from "../controllers/prospectsController.js";
 import { validateRequestData } from "../middlewares/validateRequestData.js";
 import { webhookController } from "../controllers/webhookController.js";
 import { checkRepeatedWebhookMessage } from "../middlewares/checkRepeatedWebhookMessage.js";
@@ -24,8 +23,5 @@ chatMegamotoRouter.post(
 	webhookController,
 	errorHandler
 );
-
-// Gets prospects from Zenvia API
-chatMegamotoRouter.get("/prospects", prospectController);
 
 export default chatMegamotoRouter;

@@ -1,0 +1,154 @@
+const prospects = [
+  {
+    "id": "65b879100e837f0008269b78",
+    "createdAt": "2024-01-30T04:20:32.572Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "finishedAt": "2024-01-30T04:20:32.572Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "¡Hola! Podrías darme más información de...",
+        "content": "¡Hola! Podrías darme más información de...",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65b87910c6f8866f4a52aeb5",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65baa00d1e79570008cd919e",
+    "createdAt": "2024-01-31T19:31:25.974Z",
+    "status": "updated",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-01-31T23:06:56.762Z",
+    "proactive": true,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Hola, BUENAS TARDES. Disculpe la demora en responder. Cómo estás?",
+        "content": "Hola, BUENAS TARDES. Disculpe la demora en responder. Cómo estás?",
+        "performer": "agent",
+        "delivered": true,
+        "providerId": "65baa00c182da889803ad096",
+        "sender": "5491152371354",
+        "recipient": "5491131505814",
+        "template": "megamoto_com_ar_re_contacto_15911940125120",
+        "templateParameters": {
+          "prospectName": "BUENAS TARDES"
+        },
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bad2971cf7c40008a38a02",
+    "createdAt": "2024-01-31T23:07:03.987Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-01-31T23:07:03.987Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Hola",
+        "content": "Hola",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65bad2973deb4f264ec61ec1",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bad29e27777c0008666ac0",
+    "createdAt": "2024-01-31T23:07:10.065Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-01-31T23:07:10.065Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Toman motos usadas ?",
+        "content": "Toman motos usadas ?",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65bad29dab7f040043176994",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bad2a47f37b3000843799d",
+    "createdAt": "2024-01-31T23:07:16.148Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-01-31T23:07:16.148Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "De parte de pago",
+        "content": "De parte de pago",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65bad2a45dda64472fd4a3ce",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  }
+];
+
+export default interactions;

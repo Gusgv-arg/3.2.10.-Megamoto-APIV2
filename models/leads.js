@@ -8,10 +8,8 @@ const leadsSchema = new mongoose.Schema(
 		content: { type: String, required: true },
 		thread_id: {type: String},
 		botSwitch: { type: String, enum: ['ON', 'OFF'], required: true },					
-		contact_method: { type: String },
-		address: { type: String },
-		product: { type: String },
-		payment: { type: String },
+		phones: { type: String },
+		emails: {type: String}		
 	},
 	{
 		timestamps: true,
