@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const checkBotSwitch = async (req, res, next) => {
+export const checkGeneralBotSwitch = async (req, res, next) => {
 	const data = req.body;
 	//console.log("Entro esto:",data)
 

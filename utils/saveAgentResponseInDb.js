@@ -40,8 +40,9 @@ export const saveAgentResponseInDb = async (newMessage, threadId) => {
 		// Concatenate the new message to the existing content
 		const newContent = `${lead.content}\n${currentDateTime} - Vendedor Megamoto: ${newMessage.receivedMessage}`;
 
-		// Update the lead content
+		// Update the lead content and turn botSwitch to OFF
 		lead.content = newContent;
+		lead.botSwitch = "OFF"
 
 		// Save the updated lead
 		await lead.save();

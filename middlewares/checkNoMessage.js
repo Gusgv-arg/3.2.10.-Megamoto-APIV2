@@ -1,4 +1,5 @@
 import axios from "axios";
+import Leads from "../models/leads.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -17,6 +18,14 @@ export const checkNoMessage = async (req, res, next) => {
 	const prospectId = data.prospect?.id;
 	const channel = data.interaction?.via;
 	const agentInternalNote = data?.interaction?.output?.comment;
+	let lead;
+	
+	try {
+		lead = await Leads.findOne({ id_user: prospectId });
+	} catch (error) {
+		console.log("Theres has been an error looking in leads DB");
+		next(error);
+	}
 
 	if (message === "No message") {
 		console.log("Entro un no message", data);
@@ -32,9 +41,12 @@ export const checkNoMessage = async (req, res, next) => {
 	}
 
 	// Exit if the data object has no interaction and message property
-	if (!req.body.hasOwnProperty("interaction") && !req.body.hasOwnProperty("message")) {
+	if (
+		!req.body.hasOwnProperty("interaction") &&
+		!req.body.hasOwnProperty("message")
+	) {
 		console.log("El objeto data NO tiene la propiedad interaction o message");
-		console.log(data)
+		console.log(data);
 		//console.log("data.prospect.leads", data?.prospect.leads);
 		//console.log("data.prospect.contactMediums", data?.prospect.contactMediums);
 		console.log("1. Exiting process. API does not manage this notification.");
@@ -42,8 +54,12 @@ export const checkNoMessage = async (req, res, next) => {
 		return;
 	}
 
-	// If there is no message in users notification advice the user to text
-	if (message === "No message" && data?.interaction?.proactive === false) {
+	// If there is no message in users notification and its in Leads DB advice the user to text
+	if (
+		message === "No message" &&
+		data?.interaction?.proactive === false &&
+		lead !== null
+	) {
 		try {
 			// Post a message to the user to send a text message
 			const url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
@@ -51,9 +67,9 @@ export const checkNoMessage = async (req, res, next) => {
 			const noMessageResponse = `¡Gracias ${name} por tu contacto! Para atenderte más rápido escribí tu consulta en texto así nuestro Asistente Virtual podrá responder tus dudas y derivarte con un vendedor.`;
 
 			//DESCOMENTAR CUANDO ESTEMOS EN PRODUCCION!!!
-			/* const response = await axios.post(url, {
+			const response = await axios.post(url, {
 				content: noMessageResponse,
-			}); */
+			});
 			console.log(
 				"Aca se hubiera enviado una respuesta al usuario diciendo que envíe un texto. En producción hay que descomentar el axios.post"
 			);
@@ -69,7 +85,19 @@ export const checkNoMessage = async (req, res, next) => {
 			// Pass the error to the centralized error handling middleware
 			next(error);
 		}
-	} else {
+	} else if (
+		message === "No message" &&
+		data?.interaction?.proactive === false &&
+		lead === null
+	) {
+		res.status(200).send("Received");
+		// Exit the process
+		console.log(
+			`1. Exiting the process. No message from: ${name} because he is not in Leads DB.`
+		);
+		return;
+	}
+	{
 		next();
 	}
 };

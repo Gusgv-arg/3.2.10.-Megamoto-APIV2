@@ -148,6 +148,370 @@ const prospects = [
       }
     },
     "via": "whatsApp"
+  },
+  {
+    "id": "65bc4298d3f3b400088482fc",
+    "createdAt": "2024-02-02T01:17:12.316Z",
+    "status": "updated",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-02T02:02:35.785Z",
+    "proactive": true,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Hola, *Te comento: por el  momento no estamos tomando usados. Pero podemos ver algun tipo de financiación, bien sea con tarjeta de crédito o crédito personal*. Disculpe la demora en responder. Cómo estás?",
+        "content": "Hola, *Te comento: por el  momento no estamos tomando usados. Pero podemos ver algun tipo de financiación, bien sea con tarjeta de crédito o crédito personal*. Disculpe la demora en responder. Cómo estás?",
+        "performer": "agent",
+        "delivered": true,
+        "providerId": "65bc2f70e18a729cc7e8d075",
+        "sender": "5491152371354",
+        "recipient": "+5491131505814",
+        "template": "megamoto_com_ar_re_contacto_15911940125120",
+        "templateParameters": {
+          "prospectName": "*Te comento: por el  momento no estamos tomando usados. Pero podemos ver algun tipo de financiación, bien sea con tarjeta de crédito o crédito personal*"
+        },
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bc4d4eadae2e0008687b16",
+    "createdAt": "2024-02-02T02:02:54.241Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-02T02:02:54.241Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Hola",
+        "content": "Hola",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65bc4d4e5dda640ef8e4ad2b",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bc4ec625466a00084d831c",
+    "createdAt": "2024-02-02T02:09:10.338Z",
+    "status": "updated",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-02T02:17:40.625Z",
+    "proactive": true,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "hola! como estas?\n\n",
+        "content": "hola! como estas?\n\n",
+        "performer": "agent",
+        "delivered": true,
+        "providerId": "65bc3b9e82d4783fe5cdd4ac",
+        "sender": "5491152371354",
+        "recipient": "+5491131505814",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bc50c546d08c00082defc3",
+    "createdAt": "2024-02-02T02:17:41.424Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-02T02:17:41.424Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Hola",
+        "content": "Hola",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65bc50c50a6c3cf7dbb68824",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bc50ce715c61000861dbfb",
+    "createdAt": "2024-02-02T02:17:50.956Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-02T02:17:50.956Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Crédito",
+        "content": "Crédito",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65bc50ce0e305337ff962466",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bd1443b59f8b000829305c",
+    "createdAt": "2024-02-02T16:11:47.012Z",
+    "status": "updated",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-02T17:37:43.180Z",
+    "proactive": true,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Bien te comento: En el caso de crédito personal,  los requisitos son: A partir de 21 años, tener recibo de sueldo,  monotributo,  pensión o jubilación y no estar en veraz (puede ser tuyo o de otra persona) pasame tu nro de DNI y así lo verificamos en sistema",
+        "content": "Bien te comento: En el caso de crédito personal,  los requisitos son: A partir de 21 años, tener recibo de sueldo,  monotributo,  pensión o jubilación y no estar en veraz (puede ser tuyo o de otra persona) pasame tu nro de DNI y así lo verificamos en sistema",
+        "performer": "agent",
+        "delivered": true,
+        "providerId": "65bc6df49afb3261ff7e39bf",
+        "sender": "5491152371354",
+        "recipient": "+5491131505814",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bd287597952100081d9cf1",
+    "createdAt": "2024-02-02T17:37:57.864Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-02T17:37:57.864Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "38993712",
+        "content": "38993712",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65bd28750a6c3ce071bdb863",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bd2879172fb2000891b6f7",
+    "createdAt": "2024-02-02T17:38:01.928Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-02T17:38:01.928Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Hernán Rubén ifran",
+        "content": "Hernán Rubén ifran",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65bd28790f06a636b35b941c",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bd4c2683c52e00094c6a2d",
+    "createdAt": "2024-02-02T20:10:14.309Z",
+    "status": "updated",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-02T21:54:09.117Z",
+    "proactive": true,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Verificamos el DNI de Nombre: IFRAN HERNAN RUBEN 20389937127, pero por el momento no tiene oferta disponible para crédito personal. Se te ocurre alguien mas que te salga de garante?",
+        "content": "Verificamos el DNI de Nombre: IFRAN HERNAN RUBEN 20389937127, pero por el momento no tiene oferta disponible para crédito personal. Se te ocurre alguien mas que te salga de garante?",
+        "performer": "agent",
+        "delivered": true,
+        "providerId": "65bca5d7249259a06b52f7cb",
+        "sender": "5491152371354",
+        "recipient": "+5491131505814",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bd4c478a13640008d1c829",
+    "createdAt": "2024-02-02T20:10:47.043Z",
+    "status": "updated",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-02T20:10:47.043Z",
+    "proactive": true,
+    "output": {},
+    "via": "other"
+  },
+  {
+    "id": "65bda133d02d560008169b80",
+    "createdAt": "2024-02-03T02:13:07.910Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-03T02:13:07.910Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Noo creo",
+        "content": "Noo creo",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65bda1330a6c3c0189c40c61",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65be926acf6911000844df9e",
+    "createdAt": "2024-02-03T19:22:18.629Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-03T19:22:24.558Z",
+    "proactive": true,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "buenas tardes. Quedo a disposición",
+        "content": "buenas tardes. Quedo a disposición",
+        "performer": "agent",
+        "delivered": true,
+        "providerId": "65be9268b0af7d5df5777e88",
+        "sender": "5491152371354",
+        "recipient": "+5491131505814",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
   }
 ];
 

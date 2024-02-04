@@ -1,10 +1,10 @@
 export const checkBotOrigin = (req, res, next) => {
 	const data = req.body;
 	const name = data.prospect?.firstName || data.message.visitor.name;
-
+	
 	if (
 		data.interaction?.bot === true &&
-		typeof data.interaction?.output.message.content === "string"
+		typeof data.interaction?.output.message.content === "string" || data.interaction?.agent?.lastName === "Bot 🤖"
 	) {
 		console.log(
 			`\n1. Exit the process --> Bot message to --> ${name}: "${data.interaction?.output.message.content}".`

@@ -6,7 +6,7 @@ export const changeBotSwitch = async (message, name, prospectId) => {
 	
 	try {
 		// Change General Bot Switch
-		if ((name = "Gustavo Gomez Villafañe") || (name = "Gustavo Glunz")) {
+		if ((name = "Gustavo Gomez Villafañe") || (name = "Gg")) {
 			let botSwitch = await BotSwitch.findOne();
 			
 			if (message.toLowerCase() === "megabot on") {
