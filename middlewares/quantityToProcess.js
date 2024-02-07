@@ -5,13 +5,12 @@ const clients = new Set(); // Usar un Set para almacenar IDs únicos
 export const quantityToProcess = (req, res, next) => {
 	const prospectId = req.body.prospect?.id;
 
-	console.log("contactmediums", req.body.prospect.contactMediums)
-	console.log("leads", req.body.prospect.leads)
-	console.log("output", req.body.interaction.output.message)
+	//console.log("contactmediums", req.body.prospect.contactMediums)
+	//console.log("leads", req.body.prospect.leads)
+	//console.log("output", req.body.interaction.output.message)
 	// Verifica si el prospectId ya ha sido procesado o si es una respuesta de un vendedor
 	if (
-		(clients.has(prospectId) && req.body.type === "updated") ||
-		(clients.has(prospectId) && req.body.interaction.proactive === true)
+		(clients.has(prospectId))
 	) {
 		next();
 	} else if (
@@ -20,7 +19,7 @@ export const quantityToProcess = (req, res, next) => {
 		// Si aún no se ha alcanzado el límite y el ID no está en el conjunto
 		clients.add(prospectId);
 		clientsProcessed++;
-		console.log(clients);
+		console.log("Clientes procesados", clients);
 		next();
 	} else {
 		// Si se ha alcanzado el límite de clientes a procesar

@@ -2,12 +2,15 @@ import axios from "axios";
 import BotSwitch from "../models/botSwitch.js";
 import { changeBotSwitch } from "../utils/changeBotSwitch.js";
 import dotenv from "dotenv";
+import { saveData } from "../utils/saveData.js";
 
 dotenv.config();
 
 export const checkGeneralBotSwitch = async (req, res, next) => {
 	const data = req.body;
 	//console.log("Entro esto:",data)
+
+	//await saveData(data)
 
 	const message =
 		data.interaction?.output?.message && data.interaction.output.message.content

@@ -21,7 +21,7 @@ export const saveUserMessageInDb = async (
 			content: userMessage,
 			id_message: messageId,
 			channel: channel,
-			thread_id: threadId,
+			thread_id: threadId,			
 		});
 		
 		const firstFiveWords = userMessage.split(" ").slice(0, 5).join(" ");

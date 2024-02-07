@@ -66,7 +66,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		console.log(`6. New thread created --> ${newMessage.name}.`);
 
 		// Create a First Greet, pass it to the new thread, and post directly to Zenvia without running the assistant
-		let greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Te pido me seas lo más preciso posible para evitar errores 🙏. Para que un vendedor pueda atenderte más rápido decime que moto estas buscando, como queres pagar, un teléfono y de donde sos. 😀`;
+		let greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Te pido me seas lo más preciso posible para entenderte mejor y evitar errores 🙏. Para que un vendedor pueda atenderte más rápido decime que moto estas buscando, como queres pagar, un teléfono y de donde sos. 😀`;
 
 		await openai.beta.threads.messages.create(threadId, {
 			role: "user",
@@ -82,7 +82,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			newMessage.receivedMessage,
 			newMessage.messageId,
 			newMessage.channel,
-			threadId
+			threadId,			
 		);
 		return { greeting, threadId };
 	}
@@ -155,7 +155,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			newMessage.receivedMessage,
 			newMessage.messageId,
 			newMessage.channel,
-			threadId
+			threadId,
 		);
 		return { messageGpt, threadId };
 	}

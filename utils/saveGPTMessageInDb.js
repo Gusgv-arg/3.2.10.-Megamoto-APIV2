@@ -21,7 +21,7 @@ export const saveGPTMessageInDb = async (
 			content: messageGpt,
 			id_message: messageId,
 			channel: channel,
-			thread_id: threadId,
+			thread_id: threadId,			
 		});
 
 		console.log(

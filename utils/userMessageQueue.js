@@ -41,7 +41,7 @@ export class UserMessageQueue {
 							: response.errorMessage,
 						response.threadId,
 						newMessage.messageId,
-						newMessage.channel
+						newMessage.channel,						
 					);
 				}
 			} catch (error) {
@@ -121,6 +121,7 @@ export class UserMessageQueue {
 			this.queues.set(senderId, { messages: [], processing: false });
 		}
 		const queue = this.queues.get(senderId);
+
 		queue.messages.push(newMessage);
 
 		const firstFiveWords = newMessage.receivedMessage

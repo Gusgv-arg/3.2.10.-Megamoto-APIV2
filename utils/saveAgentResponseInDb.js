@@ -14,7 +14,7 @@ export const saveAgentResponseInDb = async (newMessage, threadId) => {
 			content: newMessage.receivedMessage,
 			id_message: newMessage.messageId,
 			channel: newMessage.channel,
-			thread_id: threadId,
+			thread_id: threadId,			
 		});
 
 		const firstFiveWords = newMessage.receivedMessage.split(" ").slice(0, 5).join(" ");

@@ -14,8 +14,7 @@ export const checkRepeatedWebhookMessage = async (req, res, next) => {
 			: "No message";
 
 	console.log(`\n1. Webhook notification --> ${name}: "${message}".`);
-	console.log("data", data);
-	
+		
 	// Check if the message has already been processed
 	try {
 		const existingIdMessage = await Messages.findOne({

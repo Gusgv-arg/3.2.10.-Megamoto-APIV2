@@ -1,0 +1,91 @@
+[
+  {
+    "subscriptionId": "65b7e408b517d9f6de2feec7",
+    "topic": "interactions",
+    "type": "created",
+    "received": "2024-02-06T13:50:44.668Z",
+    "sent": "2024-02-06T13:50:44.668Z",
+    "attempts": 1,
+    "prospect": {
+      "id": "6596d62461f4a300081b28cb",
+      "created": "2024-01-04T16:00:36.544Z",
+      "transferredAt": "2024-01-04T16:18:46.176Z",
+      "group": "Megamoto",
+      "groupId": "5cd09261a6f3d300596a39d0",
+      "account": "Megamoto",
+      "accountId": "5cc1d395ac14ff0059c1e78c",
+      "initialGroup": "Megamoto Merlo",
+      "initialGroupId": "628d15e99cb6020018237d2c",
+      "firstName": "Gustavo Gomez Villafañe",
+      "nin": [],
+      "userMade": false,
+      "status": "followUp",
+      "additionalData": {},
+      "phones": [
+        "+5491161405589"
+      ],
+      "emails": [],
+      "contactMediums": [
+        {
+          "_id": "6596d62461f4a300081b28d3",
+          "type": "phone"
+        }
+      ],
+      "leads": [
+        {
+          "created": "2024-01-04T16:00:36.579Z",
+          "source": "WHATSAPP",
+          "utmSource": "WHATSAPP",
+          "providerKey": "wasp",
+          "comments": "",
+          "providerLeadId": "13061ebc-95ac-4d2f-b2f1-b66b51f609c6_5491161405589",
+          "type": "savingPlan"
+        }
+      ],
+      "whatsAppDueAt": "2024-02-07T13:50:44.521Z",
+      "agent": {
+        "id": "5ed51c5b44ae9e00047330b2",
+        "firstName": "Johanna",
+        "lastName": "Cabrera",
+        "phone": "+5491122934144",
+        "email": "johannacabrera2015@gmail.com",
+        "appFields": {}
+      },
+      "assigned": "2024-01-04T16:01:32.687Z",
+      "firstContactedAt": "2024-01-04T16:00:37.163Z"
+    },
+    "updatedAt": "2024-02-06T13:50:44.521Z",
+    "operationId": "65c23934e99c2100082e848a",
+    "interaction": {
+      "id": "65c23934e99c2100082e848a",
+      "createdAt": "2024-02-06T13:50:44.521Z",
+      "status": "created",
+      "prospectId": "6596d62461f4a300081b28cb",
+      "agentId": "5ed51c5b44ae9e00047330b2",
+      "agent": {
+        "id": "5ed51c5b44ae9e00047330b2",
+        "firstName": "Johanna",
+        "lastName": "Cabrera",
+        "phone": "+5491122934144",
+        "email": "johannacabrera2015@gmail.com",
+        "appFields": {}
+      },
+      "finishedAt": "2024-02-06T13:50:44.521Z",
+      "proactive": false,
+      "output": {
+        "message": {
+          "via": "whatsApp",
+          "body": "hola",
+          "content": "hola",
+          "performer": "integration",
+          "delivered": false,
+          "providerId": "65c23934a6f58a7e0d0ee20f",
+          "sender": "+5491161405589",
+          "recipient": "5491152371354",
+          "templateConfig": null
+        }
+      },
+      "via": "whatsApp"
+    }
+  }
+]
