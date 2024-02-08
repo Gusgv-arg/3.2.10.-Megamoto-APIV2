@@ -25,8 +25,8 @@ export const saveUserMessageInDb = async (
 		});
 		
 		const firstFiveWords = userMessage.split(" ").slice(0, 5).join(" ");
-		console.log("If it's a new customer there is no 7. (running the assistant).")
-		console.log(`8. Store in Messages DB --> ${name}: "${firstFiveWords}".`);
+		//console.log("If it's a new customer there is no 7. (running the assistant).")
+		//console.log(`8. Store in Messages DB --> ${name}: "${firstFiveWords}".`);
 
 		// Find the lead by threadId
 		let lead = await Leads.findOne({ thread_id: threadId });
@@ -44,7 +44,7 @@ export const saveUserMessageInDb = async (
 				thread_id: threadId,	
 				botSwitch: "ON"			
 			});
-			console.log(`9. New lead created in Leads DB --> ${name}`);
+			//console.log(`9. New lead created in Leads DB --> ${name}`);
 			return;
 		}
 		// Obtain current date and hour
@@ -59,7 +59,7 @@ export const saveUserMessageInDb = async (
 		// Save the updated lead
 		await lead.save();
 
-		console.log(`9. Updated Leads DB --> ${name}: "${userMessage}".`);
+		//console.log(`9. Updated Leads DB --> ${name}: "${userMessage}".`);
 
 		return;
 	} catch (error) {

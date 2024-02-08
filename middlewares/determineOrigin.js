@@ -21,21 +21,19 @@ export const determineOrigin = (req, res, next) => {
 		typeof data.interaction?.output.message.content === "string"
 	) {
 		origin = "whatsapp";
-		console.log(`4. Origin: Whatsapp from --> ${name}: "${firstFiveWords}".`);
+		//console.log(`4. Origin: Whatsapp from --> ${name}: "${firstFiveWords}".`);
 	} else if (
 		data.interaction?.via === "instagram" &&
 		typeof data.interaction?.output.message.content === "string"
 	) {
 		origin = "instagram";
-		console.log(
-			`4. Origin: Instagram from --> ${name}: "${firstFiveWords}". Object Instagram ver el senderId --> ${data}`
-		);
+		//console.log(`4. Origin: Instagram from --> ${name}: "${firstFiveWords}". Object Instagram ver el senderId --> ${data}`);
 	} else if (
 		data?.channel === "facebook" &&
 		typeof data.message.contents[0].text === "string"
 	) {
 		origin = "facebook";
-		console.log(`4. Origin: Facebook from --> ${name}: "${firstFiveWords}".`);
+		//console.log(`4. Origin: Facebook from --> ${name}: "${firstFiveWords}".`);
 	} else {
 		origin = "orígen desconocido o el mensaje no es texto!!!!!";
 		console.log(

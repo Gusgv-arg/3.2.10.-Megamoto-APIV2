@@ -129,9 +129,7 @@ export class UserMessageQueue {
 			.slice(0, 5)
 			.join(" ");
 
-		console.log(
-			`5. Data added to Messages Queue --> ${newMessage.name}: "${firstFiveWords}".`
-		);
+		//console.log(`5. Data added to Messages Queue --> ${newMessage.name}: "${firstFiveWords}".`);
 		// Process the queue
 		this.processQueue(senderId);
 	}

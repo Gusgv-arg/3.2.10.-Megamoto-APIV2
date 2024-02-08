@@ -2,9 +2,9 @@ export const checkBotOrigin = (req, res, next) => {
 	const data = req.body;
 	const name = data.prospect?.firstName || data.message.visitor.name;
 	if (data.interaction.proactive === true) {
-		console.log("data con proactive = true", data);
+		console.log("data con proactive = true", "Nombre:", name, "\nBot:",data.interaction?.bot, "\nAgent:", data.interaction?.agent.firstName, "\nPerfromer:", req.body.interaction.output.message.performer );
 		//console.log("leads", req.body.prospect.leads);
-		console.log("output.performer", req.body.interaction.output.performer);
+		//console.log("output.message.performer", req.body.interaction.output.message.performer);
 	}
 	if (
 		data.interaction?.bot === true ||

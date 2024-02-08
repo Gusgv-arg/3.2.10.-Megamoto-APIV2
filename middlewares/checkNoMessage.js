@@ -16,10 +16,11 @@ export const checkNoMessage = async (req, res, next) => {
 
 	const name = data.prospect?.firstName;
 	const prospectId = data.prospect?.id;
-	const channel = data.interaction?.via;
+	const channel =
+		data.interaction?.via === "whatsApp" ? "whatsapp" : data.interaction?.via;
 	const agentInternalNote = data?.interaction?.output?.comment;
 	let lead;
-	
+
 	try {
 		lead = await Leads.findOne({ id_user: prospectId });
 	} catch (error) {
@@ -45,7 +46,7 @@ export const checkNoMessage = async (req, res, next) => {
 		!req.body.hasOwnProperty("interaction") &&
 		!req.body.hasOwnProperty("message")
 	) {
-		console.log("El objeto data NO tiene la propiedad interaction o message");
+		console.log("El objeto data NO tiene la propiedad interaction y message");
 		console.log(data);
 		//console.log("data.prospect.leads", data?.prospect.leads);
 		//console.log("data.prospect.contactMediums", data?.prospect.contactMediums);
@@ -64,15 +65,11 @@ export const checkNoMessage = async (req, res, next) => {
 			// Post a message to the user to send a text message
 			const url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
 
-			const noMessageResponse = `¡Gracias ${name} por tu contacto! Para atenderte más rápido escribí tu consulta en texto así nuestro Asistente Virtual podrá responder tus dudas y derivarte con un vendedor.`;
+			const noMessageResponse = `¡Gracias ${name} por tu contacto!👋 Para atenderte más rápido escribí tu consulta en texto así nuestro Asistente Virtual, MegaBot, podrá responder tus dudas y derivarte con un vendedor.😀`;
 
-			//DESCOMENTAR CUANDO ESTEMOS EN PRODUCCION!!!
 			const response = await axios.post(url, {
 				content: noMessageResponse,
 			});
-			console.log(
-				"Aca se hubiera enviado una respuesta al usuario diciendo que envíe un texto. En producción hay que descomentar el axios.post"
-			);
 
 			res.status(200).send("Received");
 			// Exit the process
@@ -97,7 +94,6 @@ export const checkNoMessage = async (req, res, next) => {
 		);
 		return;
 	}
-	{
-		next();
-	}
+
+	next();
 };

@@ -13,14 +13,13 @@ import prospectRouter from "./routers/prospectsRouter.js";
 
 dotenv.config();
 
-mongoose
-	.connect(process.env.MONGODB_URI)
-	.then(() => {
-		console.log("Connected to data base MegamotoDB");
-	})
-	.catch((err) => {
-		console.log(err.message);
-	});
+try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log("Connected to data base Megamoto");
+} catch (error) {
+    console.error("Error connecting to database:", error.message);
+    // Aquí puedes realizar acciones de manejo de errores, como iniciar una conexión alternativa o mostrar un mensaje al usuario
+}
 
 const app = express();
 

@@ -24,9 +24,7 @@ export const saveGPTMessageInDb = async (
 			thread_id: threadId,			
 		});
 
-		console.log(
-			`10. Store GPT response in Messages DB --> ${name}: "${messageGpt}"`
-		);
+		//console.log(`10. Store GPT response in Messages DB --> ${name}: "${messageGpt}"`);
 
 		// Find the lead by threadId
 		let lead = await Leads.findOne({ thread_id: threadId });
@@ -52,9 +50,8 @@ export const saveGPTMessageInDb = async (
 		// Save the updated lead
 		await lead.save();
 
-		const firstFiveWords = messageGpt.split(" ").slice(0, 5).join(" ");
 		console.log(
-			`11. Updated Leads DB with GPT Message to --> ${name}: "${firstFiveWords}..."`
+			`11. Updated Leads DB with GPT Message to --> ${name}: "${messageGpt}..."`
 		);
 
 		return;

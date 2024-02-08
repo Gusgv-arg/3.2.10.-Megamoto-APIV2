@@ -35,9 +35,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			.split(" ")
 			.slice(0, 5)
 			.join(" ");
-		console.log(
-			`6. Existing thread for --> ${newMessage.name}, ID: ${newMessage.senderId}, Message: ${firstFiveWords}. Changed firstCustomerMessage property to false.`
-		);
+		//console.log(`6. Existing thread for --> ${newMessage.name}, ID: ${newMessage.senderId}, Message: ${firstFiveWords}. Changed firstCustomerMessage property to false.`);
 
 		// Check if it is an Agent response
 		if (newMessage.channel === "Respuesta Agente") {
@@ -63,7 +61,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		// Create a new thread because its a new customer
 		const thread = await openai.beta.threads.create();
 		threadId = thread.id;
-		console.log(`6. New thread created --> ${newMessage.name}.`);
+		//console.log(`6. New thread created --> ${newMessage.name}.`);
 
 		// Create a First Greet, pass it to the new thread, and post directly to Zenvia without running the assistant
 		let greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Te pido me seas lo más preciso posible para entenderte mejor y evitar errores 🙏. Para que un vendedor pueda atenderte más rápido decime que moto estas buscando, como queres pagar, un teléfono y de donde sos. 😀`;
@@ -82,7 +80,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			newMessage.receivedMessage,
 			newMessage.messageId,
 			newMessage.channel,
-			threadId,			
+			threadId
 		);
 		return { greeting, threadId };
 	}
@@ -111,9 +109,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				runStatus = await openai.beta.threads.runs.retrieve(threadId, run.id);
 			}
 
-			console.log(
-				`7. Run completed for --> ${newMessage.name}: "${newMessage.receivedMessage}".`
-			);
+			//console.log(`7. Run completed for --> ${newMessage.name}: "${newMessage.receivedMessage}".`);
 
 			break; // Exit the loop if the run is completed
 		} catch (error) {
@@ -124,7 +120,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			if (currentAttempt >= maxAttempts) {
 				console.error("7. Exceeded maximum attempts. Exiting the loop.");
 				const errorMessage =
-					"Lo siento, en este momento no puedo procesar tu solicitud. Por favor, intenta de nuevo más tarde.";
+					"Te pido disculpas 🙏, en este momento no puedo procesar tu solicitud ☹️. Por favor intentá mas tarde. Saludos de MegaBot!! 🙂";
 
 				// Exit the loop if maximum attempts are exceeded and send an error message to the user
 				return { errorMessage, threadId };
@@ -155,7 +151,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			newMessage.receivedMessage,
 			newMessage.messageId,
 			newMessage.channel,
-			threadId,
+			threadId
 		);
 		return { messageGpt, threadId };
 	}

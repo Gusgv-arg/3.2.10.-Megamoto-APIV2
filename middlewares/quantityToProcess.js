@@ -1,13 +1,10 @@
 const clientsToProcess = 10;
 let clientsProcessed = 0;
-const clients = new Set(); // Usar un Set para almacenar IDs únicos
+const clients = new Set(); 
 
 export const quantityToProcess = (req, res, next) => {
 	const prospectId = req.body.prospect?.id;
 
-	//console.log("contactmediums", req.body.prospect.contactMediums)
-	//console.log("leads", req.body.prospect.leads)
-	//console.log("output", req.body.interaction.output.message)
 	// Verifica si el prospectId ya ha sido procesado o si es una respuesta de un vendedor
 	if (
 		(clients.has(prospectId))

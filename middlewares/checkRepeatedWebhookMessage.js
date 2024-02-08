@@ -14,7 +14,7 @@ export const checkRepeatedWebhookMessage = async (req, res, next) => {
 			: "No message";
 
 	console.log(`\n1. Webhook notification --> ${name}: "${message}".`);
-		
+	//console.log(data.prospect)	
 	// Check if the message has already been processed
 	try {
 		const existingIdMessage = await Messages.findOne({
@@ -46,6 +46,6 @@ export const checkRepeatedWebhookMessage = async (req, res, next) => {
 		next(error);
 	}
 	const firstFiveWords = message.split(" ").slice(0, 5).join(" ");
-	console.log(`2. Ok Non duplicate for --> ${name}: "${firstFiveWords}...".`);
+	//console.log(`2. Ok Non duplicate for --> ${name}: "${firstFiveWords}...".`);
 	next();
 };

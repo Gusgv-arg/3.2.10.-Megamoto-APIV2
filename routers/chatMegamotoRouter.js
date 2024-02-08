@@ -10,6 +10,7 @@ import { checkNoMessage } from "../middlewares/checkNoMessage.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { checkIndividualBotSwitch } from "../middlewares/checkIndividualBotswitch.js";
 import { quantityToProcess } from "../middlewares/quantityToProcess.js";
+import { checkNewProspect } from "../middlewares/checkNewProspect.js";
 
 const chatMegamotoRouter = express.Router();
 
@@ -18,6 +19,7 @@ chatMegamotoRouter.post(
 	checkGeneralBotSwitch,
 	checkBotOrigin,
 	checkIndividualBotSwitch,
+	checkNewProspect,
 	checkNoMessage,
 	checkRepeatedWebhookMessage,
 	validateRequestData,

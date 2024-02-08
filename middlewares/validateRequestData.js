@@ -19,7 +19,7 @@ export const validateRequestData = (req, res, next) => {
 		(data && data.prospect && data.prospect.phones[0] || data.interaction.proactive === "true" || data.interaction.via === "instagram")
 	) { 
 		const firstFiveWords = message.split(" ").slice(0, 5).join(" ");
-		console.log(`3. Valid Data --> ${name}: "${firstFiveWords}...".`);
+		//console.log(`3. Valid Data --> ${name}: "${firstFiveWords}...".`);
 		res.status(200).send("Data received!")
 		next();
 	} else {
