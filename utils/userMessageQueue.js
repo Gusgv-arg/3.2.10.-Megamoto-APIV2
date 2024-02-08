@@ -87,7 +87,7 @@ export class UserMessageQueue {
 			senderPage = messageToProcess.data.prospect.accountId;
 			receivedMessage =
 				messageToProcess.data.interaction.output.message.content;
-			channel = "instagram"; // For posting zenvia you can whatsapp or facebook only????????
+			channel = "instagram";
 		} else if (messageToProcess.origin === "facebook") {
 			name = messageToProcess.data.message.visitor.name;
 			senderId = messageToProcess.data.message.from;

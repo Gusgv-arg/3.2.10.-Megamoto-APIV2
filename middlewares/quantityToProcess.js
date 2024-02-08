@@ -19,10 +19,11 @@ export const quantityToProcess = (req, res, next) => {
 		console.log("Clientes procesados", clients);
 		next();
 	} else {
-		// Si se ha alcanzado el límite de clientes a procesar
+		// Cortar si se ha alcanzado el límite de clientes a procesar
 		console.log(
 			`Maximum of ${clientsToProcess} clients to process reached. Exiting process!`
 		);
+		res.status(200).send("Received")
 		return;
 	}
 };

@@ -10,12 +10,12 @@ export const checkIndividualBotSwitch = async (req, res, next) => {
 		const lead = await Leads.findOne({ id_user: prospectId });
 
 		if (lead !== null && lead.botSwitch === "OFF") {
-			res.status(200).send("Received");
-			console.log(`Exit the process. BotSwitch is turned OFF for: ${name}`);
-
+			
 			//ACA VER SI A FUTURO NO QUIERO GRABAR LOS MENSAJES ENTRE EL CLIENTE Y VENDEDOR
 			//Y SI QUISIERA HACER EL SWITCH INDIVIDUAL TENDRIA Q CAMBIAR LA LOGICA PORQ ESTE MIDDLEWARE SIEMPRE LO SACARIA ESTANDO EL SWITCH EN OFF
-
+			
+			console.log(`Exit the process. BotSwitch is turned OFF for: ${name}`);
+			res.status(200).send("Received");
 			return;
 		} else {
 			next();

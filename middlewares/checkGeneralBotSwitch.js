@@ -67,7 +67,7 @@ export const checkGeneralBotSwitch = async (req, res, next) => {
 			// General Bot Switch is off
 		} else {
 			console.log(
-				"General Bot Switch is turned OFF. MegaBot has been stopped!"
+				"Exiting the process, General Bot Switch is turned OFF. MegaBot is stopped!"
 			);
 			res.status(200).send("Received");
 			return;

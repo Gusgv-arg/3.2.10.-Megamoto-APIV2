@@ -16,33 +16,24 @@ export const determineOrigin = (req, res, next) => {
 	if (data.interaction.proactive === true) {
 		origin = "Respuesta Agente";
 		console.log(`4. Origin: Agent Message --> ${name}: "${firstTenWords}...".`);
-	} else if (
-		data.interaction?.via === "whatsApp" &&
-		typeof data.interaction?.output.message.content === "string"
-	) {
+	} else if (data.interaction?.via === "whatsApp") {
 		origin = "whatsapp";
 		//console.log(`4. Origin: Whatsapp from --> ${name}: "${firstFiveWords}".`);
-	} else if (
-		data.interaction?.via === "instagram" &&
-		typeof data.interaction?.output.message.content === "string"
-	) {
+	} else if (data.interaction?.via === "instagram") {
 		origin = "instagram";
 		//console.log(`4. Origin: Instagram from --> ${name}: "${firstFiveWords}". Object Instagram ver el senderId --> ${data}`);
-	} else if (
-		data?.channel === "facebook" &&
-		typeof data.message.contents[0].text === "string"
-	) {
+	} else if (data?.channel === "facebook") {
 		origin = "facebook";
 		//console.log(`4. Origin: Facebook from --> ${name}: "${firstFiveWords}".`);
 	} else {
-		origin = "orígen desconocido o el mensaje no es texto!!!!!";
 		console.log(
-			"`4. Data with an origin not processed in API",
+			"`4. Exit the process. Data with an origin not processed in API",
 			data,
 			data.prospect.contactMediums
 		);
+		res.status(200).send("Received")
+		return
 	}
-
 	req.origin = origin;
 	next();
 };

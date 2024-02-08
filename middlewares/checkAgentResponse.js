@@ -11,6 +11,7 @@ export const checkAgentResponse = async (req, res, next) => {
 			console.log(
 				`5. Exit process --> Agent responded to ${name} and he is not in Leads DB`
 			);
+			res.status(200).send("Received")
 			return;
 		} else {
 			// If lead exists in DB next()

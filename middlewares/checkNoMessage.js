@@ -41,20 +41,6 @@ export const checkNoMessage = async (req, res, next) => {
 		return;
 	}
 
-	// Exit if the data object has no interaction and message property
-	if (
-		!req.body.hasOwnProperty("interaction") &&
-		!req.body.hasOwnProperty("message")
-	) {
-		console.log("El objeto data NO tiene la propiedad interaction y message");
-		console.log(data);
-		//console.log("data.prospect.leads", data?.prospect.leads);
-		//console.log("data.prospect.contactMediums", data?.prospect.contactMediums);
-		console.log("1. Exiting process. API does not manage this notification.");
-		res.status(200).send("Received");
-		return;
-	}
-
 	// If there is no message in users notification and its in Leads DB advice the user to text
 	if (
 		message === "No message" &&
@@ -71,15 +57,15 @@ export const checkNoMessage = async (req, res, next) => {
 				content: noMessageResponse,
 			});
 
-			res.status(200).send("Received");
 			// Exit the process
+			res.status(200).send("Received");
 			console.log(
 				`1. Exiting the process. No message from: ${name}. Requested the user to send a text message.`
 			);
 			return;
 		} catch (error) {
-			console.log("There was an error in checkNoMessage.js");
 			// Pass the error to the centralized error handling middleware
+			console.log("There was an error in checkNoMessage.js");
 			next(error);
 		}
 	} else if (
@@ -87,8 +73,8 @@ export const checkNoMessage = async (req, res, next) => {
 		data?.interaction?.proactive === false &&
 		lead === null
 	) {
-		res.status(200).send("Received");
 		// Exit the process
+		res.status(200).send("Received");
 		console.log(
 			`1. Exiting the process. No message from: ${name} because he is not in Leads DB.`
 		);
