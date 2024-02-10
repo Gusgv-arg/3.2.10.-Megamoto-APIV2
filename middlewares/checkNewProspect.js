@@ -1,16 +1,17 @@
 export const checkNewProspect = (req, res, next) => {
 	const prospectCreatedDate = new Date(req.body.prospect.created.slice(0, 10));
+	const name = req.body.prospect?.firstName;
 
-	console.log("prospect date:", prospectCreatedDate);
+	console.log(`\n${name} was created on the ${prospectCreatedDate}`);
 
-	const targetDate = new Date("2024-02-01");
-
-	if (prospectCreatedDate >= targetDate) {
-		console.log(`Prospect was created after ${targetDate}, so the process continues.`);
+	const targetDate = new Date("2024-02-08");
+	
+	if (prospectCreatedDate >= targetDate || name === "Gustavo Gomez Villafañe" || name === "Gg") {
+		console.log(`Process continues for ${name}, created after ${targetDate}`);
 		next();
 	} else {
 		res.status(200).send("Received");
-		console.log(`Exit the process. Prospect was created before: ${targetDate}`);
+		console.log(`Exit the process for ${name}. Created before: ${targetDate}`);
 		return;
 	}
 }

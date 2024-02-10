@@ -49,7 +49,7 @@ export class UserMessageQueue {
 					`14. Error processing message for user ${newMessage.name}: ${error}`
 				);
 				// Handle error, possibly re-queue the message
-				next(error);
+				throw error;
 			}
 		}
 
@@ -105,7 +105,7 @@ export class UserMessageQueue {
 			channel = "Respuesta Agente";
 		}
 
-		// Create a new object for sending it to the assistant
+		// Create a new object for sending it to the queue
 		const newMessage = {
 			name: name,
 			senderId: senderId,

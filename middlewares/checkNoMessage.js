@@ -14,7 +14,7 @@ export const checkNoMessage = async (req, res, next) => {
 			? data.message.contents[0].text
 			: "No message";
 
-	const name = data.prospect?.firstName;
+	const name = data.prospect?.firstName || data.message.visitor.name
 	const prospectId = data.prospect?.id;
 	const channel =
 		data.interaction?.via === "whatsApp" ? "whatsapp" : data.interaction?.via;
@@ -51,7 +51,7 @@ export const checkNoMessage = async (req, res, next) => {
 			// Post a message to the user to send a text message
 			const url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
 
-			const noMessageResponse = `¡Gracias ${name} por tu contacto!👋 Para atenderte más rápido escribí tu consulta en texto así nuestro Asistente Virtual, MegaBot, podrá responder tus dudas y derivarte con un vendedor.😀`;
+			const noMessageResponse = `¡Gracias ${name} por tu contacto!👋 Por el momento no puedo interpretar imágenes o audios. Te pido que me escribas y así puedo responder a tus dudas y derivarte más rápido con un vendedor. !Saludos de MegaBot! 😀`;
 
 			const response = await axios.post(url, {
 				content: noMessageResponse,

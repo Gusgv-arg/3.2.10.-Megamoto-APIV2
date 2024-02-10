@@ -6,7 +6,7 @@ dotenv.config();
 
 // Middleware for error handling
 export const errorHandler = async (err, req, res, next) => {
-	logError(err.message, "Unhandled error");
+	logError(err.message, "Unhandled error!! -->");
 
 	/* const prospectId = req.body.prospect.id;
 	const channel = "whatsapp"; //ACA TENGO Q VER COMO RECIBIR EL CHANNEL!!!!!!!

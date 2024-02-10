@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { saveUserMessageInDb } from "./saveUserMessageInDb.js";
 import Leads from "../models/leads.js";
 import axios from "axios";
+import { matchkeyWords } from "./matchKeyWords.js";
 
 dotenv.config();
 
@@ -51,11 +52,30 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			);
 			return { threadId };
 		} else {
-			// Pass in the user question into the existing thread
-			await openai.beta.threads.messages.create(threadId, {
-				role: "user",
-				content: newMessage.receivedMessage,
-			});
+			// Check if there are key words
+			const instructions = matchkeyWords(newMessage)
+
+			if (instructions!=="") {
+				console.log("Instructions:", instructions)
+
+				// Pass in the user question with specific instrucions for prices into existing thread
+				await openai.beta.threads.messages.create(
+					threadId,
+					{
+						role: "user",
+						content: newMessage.receivedMessage,
+					},
+					{
+						instructions: instructions,
+					}
+				);
+			} else {
+				// Pass in the user question into the existing thread
+				await openai.beta.threads.messages.create(threadId, {
+					role: "user",
+					content: newMessage.receivedMessage,
+				});
+			}
 		}
 	} else {
 		// Create a new thread because its a new customer
@@ -64,7 +84,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		//console.log(`6. New thread created --> ${newMessage.name}.`);
 
 		// Create a First Greet, pass it to the new thread, and post directly to Zenvia without running the assistant
-		let greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Te pido me seas lo más preciso posible para entenderte mejor y evitar errores 🙏. Para que un vendedor pueda atenderte más rápido decime que moto estas buscando, como queres pagar, un teléfono y de donde sos. 😀`;
+		let greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. A veces cometo errores por lo que te pido disculpas de antemano 🙏. Todo será reconfirmado por un vendedor que para atenderte más rápido necesita saber que moto estas buscando, como queres pagar, un teléfono y de donde sos. 😀`;
 
 		await openai.beta.threads.messages.create(threadId, {
 			role: "user",

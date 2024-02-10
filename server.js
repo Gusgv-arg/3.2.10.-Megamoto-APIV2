@@ -10,6 +10,8 @@ import jsonRouter from "./routers/jsonRouter.js";
 import BotSwitch from "./models/botSwitch.js";
 import excelRouter from "./routers/excelRouter.js";
 import prospectRouter from "./routers/prospectsRouter.js";
+import createBotSwitchInstance from "./utils/createBotSwitchInstance.js";
+import { dbFunctionsRouter } from "./routers/dbFunctionsRouter.js";
 
 dotenv.config();
 
@@ -48,12 +50,15 @@ try {
 	}
 } catch (error) {
 	console.error("Error initializing bot switch:", error.message);
+	console.log("Retrying to create botSwitchInstance...");
+    await createBotSwitchInstance();
 }
 
 app.use("/test", test);
 app.use("/json", jsonRouter);
 app.use("/excel", excelRouter);
 app.use("/prospects", prospectRouter);
+app.use("/dbfunctions", dbFunctionsRouter);
 app.use("/megamoto", chatMegamotoRouter);
 
 // Middleware de manejo de errores

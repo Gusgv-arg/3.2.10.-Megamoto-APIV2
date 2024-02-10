@@ -52,8 +52,8 @@ export const handleMessageToZenvia = async (
 		// Posts the message to Zenvia
 		/* const prospectId = senderId;
 		
-		const url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
-
+		let url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
+		
 		const response = await axios.post(url, { content: messageGpt });
 
 		const firstFiveWords = messageGpt.split(" ").slice(0, 5).join(" ");
