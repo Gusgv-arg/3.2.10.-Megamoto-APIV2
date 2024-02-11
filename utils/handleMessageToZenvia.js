@@ -29,7 +29,7 @@ export const handleMessageToZenvia = async (
 		);		
 
 		// Para que solo me conteste a mi
-		if (name === "Gustavo Gomez Villafañe" || name === "Gg") {
+		/* if (name === "Gustavo Gomez Villafañe" || name === "Gg") {
 			const prospectId = senderId;
 			const url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
 			
@@ -46,11 +46,11 @@ export const handleMessageToZenvia = async (
 					`13. Error sending message from ${name}: "${firstFiveWords}..." to Zenvia.`
 				);
 			}
-		}
+		} */
 		
 		// PARA QUE LE CONTESTE A TODOS--------------------------------------------
 		// Posts the message to Zenvia
-		/* const prospectId = senderId;
+		const prospectId = senderId;
 		
 		let url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
 		
@@ -62,7 +62,7 @@ export const handleMessageToZenvia = async (
 			console.log(`13. GPT response to ${name}: "${firstFiveWords}..." sent successfully to Zenvia.`);
 		} else {
 			console.log(`13. Error sending message from ${name}: "${firstFiveWords}..." to Zenvia.`);
-		} */
+		}
 	
 	} catch (error) {
 		console.log("13. Error in handleMessageToZenvia:", error.message);

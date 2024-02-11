@@ -11,9 +11,11 @@ import { errorHandler } from "../utils/errorHandler.js";
 import { checkIndividualBotSwitch } from "../middlewares/checkIndividualBotswitch.js";
 import { quantityToProcess } from "../middlewares/quantityToProcess.js";
 import { checkNewProspect } from "../middlewares/checkNewProspect.js";
+import { sendMessageToUser } from "../controllers/sendMessageController.js";
 
 const chatMegamotoRouter = express.Router();
 
+// Receives data from Zenvia webhook
 chatMegamotoRouter.post(
 	"/webhook-megamoto",
 	checkGeneralBotSwitch,
@@ -29,5 +31,8 @@ chatMegamotoRouter.post(
 	webhookController,
 	errorHandler
 );
+
+// Sends a message to a user in Zenvia
+chatMegamotoRouter.post("/message_to_user", sendMessageToUser)
 
 export default chatMegamotoRouter;

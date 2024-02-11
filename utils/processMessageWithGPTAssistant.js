@@ -53,10 +53,10 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			return { threadId };
 		} else {
 			// Check if there are key words
-			const instructions = matchkeyWords(newMessage)
+			const instructions = matchkeyWords(newMessage);
 
-			if (instructions!=="") {
-				console.log("Instructions:", instructions)
+			if (instructions !== "") {
+				console.log("Instructions:", instructions);
 
 				// Pass in the user question with specific instrucions for prices into existing thread
 				await openai.beta.threads.messages.create(
@@ -84,13 +84,19 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		//console.log(`6. New thread created --> ${newMessage.name}.`);
 
 		// Create a First Greet, pass it to the new thread, and post directly to Zenvia without running the assistant
-		let greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. A veces cometo errores por lo que te pido disculpas de antemano 🙏. Todo será reconfirmado por un vendedor que para atenderte más rápido necesita saber que moto estas buscando, como queres pagar, un teléfono y de donde sos. 😀`;
+		let greeting1 = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Te pido que seas lo más preciso posible pero tené en cuenta que a veces cometo errores 🙏. Todo será reconfirmado por un vendedor que para atenderte más rápido necesita saber que moto estas buscando, como queres pagar, tu DNI si vas a pagar financiado, un teléfono, y de donde sos. 😀`;
 
-		await openai.beta.threads.messages.create(threadId, {
-			role: "user",
-			content: `Para ordenar nuestra conversación voy a recibir este mensaje como si MegaBot me hubiera respondido: ${greeting}. Luego de mi respuesta a este último mensaje podrás responder tú.`,
-		});
+		const greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Por favor informame con precisión: \n1. Modelo que buscas.\n2. Teléfono. \n3. Localidad. \n4. Método de pago. \n5. DNI si vas a pagar financiado. \nEstoy en etapa de prueba y puedo equivocarme; luego de que me envíes los datos, un vendedor te contactará para confirmar la propuesta. \n!Saludos y gracias por el contacto! 😀`
 
+		await openai.beta.threads.messages.create(
+			threadId,
+			{ role: "user", content: "hola" },
+			{
+				role: "assistant",
+				content: greeting,
+			}
+			);
+			
 		// Save the received message from the USER to the database
 		const role = "user";
 		await saveUserMessageInDb(
