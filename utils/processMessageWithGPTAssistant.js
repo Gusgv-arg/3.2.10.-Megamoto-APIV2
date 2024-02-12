@@ -52,30 +52,11 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			);
 			return { threadId };
 		} else {
-			// Check if there are key words
-			const instructions = matchkeyWords(newMessage);
-
-			if (instructions !== "") {
-				console.log("Instructions:", instructions);
-
-				// Pass in the user question with specific instrucions for prices into existing thread
-				await openai.beta.threads.messages.create(
-					threadId,
-					{
-						role: "user",
-						content: newMessage.receivedMessage,
-					},
-					{
-						instructions: instructions,
-					}
-				);
-			} else {
-				// Pass in the user question into the existing thread
-				await openai.beta.threads.messages.create(threadId, {
-					role: "user",
-					content: newMessage.receivedMessage,
-				});
-			}
+			// Pass in the user question into the existing thread
+			await openai.beta.threads.messages.create(threadId, {
+				role: "user",
+				content: newMessage.receivedMessage,
+			});
 		}
 	} else {
 		// Create a new thread because its a new customer
@@ -86,17 +67,17 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		// Create a First Greet, pass it to the new thread, and post directly to Zenvia without running the assistant
 		let greeting1 = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Te pido que seas lo más preciso posible pero tené en cuenta que a veces cometo errores 🙏. Todo será reconfirmado por un vendedor que para atenderte más rápido necesita saber que moto estas buscando, como queres pagar, tu DNI si vas a pagar financiado, un teléfono, y de donde sos. 😀`;
 
-		const greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Por favor informame con precisión: \n1. Modelo que buscas.\n2. Teléfono. \n3. Localidad. \n4. Método de pago. \n5. DNI si vas a pagar financiado. \nEstoy en etapa de prueba y puedo equivocarme; luego de que me envíes los datos, un vendedor te contactará para confirmar la propuesta. \n!Saludos y gracias por el contacto! 😀`
+		const greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Para que un vendedor pueda atenderte más rápido por favor informame: 1) Modelo. 2) Teléfono. 3) Localidad. 4) Método de pago. 5) DNI (si vas a pagar financiado). Estoy en etapa de prueba y puedo equivocarme; luego de que me envíes los datos, un vendedor te contactará para confirmar la propuesta. ¡Saludos y gracias por el contacto! 😀`;
 
 		await openai.beta.threads.messages.create(
 			threadId,
-			{ role: "user", content: "hola" },
+			{ role: "user", content: newMessage.receivedMessage },
 			{
 				role: "assistant",
 				content: greeting,
 			}
-			);
-			
+		);
+
 		// Save the received message from the USER to the database
 		const role = "user";
 		await saveUserMessageInDb(
@@ -119,14 +100,30 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 
 	do {
 		try {
-			// Run the assistant normally
-			run = await openai.beta.threads.runs.create(
-				threadId,
-				{
-					assistant_id: assistantId,
-				},
-				{ max_tokens: 50, temperature: 0 }
-			);
+			// Check if there are key words and if so pass it to the run
+			const instructions = matchkeyWords(newMessage);
+
+			if (instructions === "") {
+				// Run the assistant normally
+				run = await openai.beta.threads.runs.create(
+					threadId,
+					{
+						assistant_id: assistantId,
+					},
+					{ max_tokens: 50, temperature: 0 }
+				);
+			} else {
+				console.log("Run con aditional instructions!!!!");
+				run = await openai.beta.threads.runs.create(
+					threadId,
+					{
+						assistant_id: assistantId,
+						//instructions: instructions,
+						additional_instructions: instructions,
+					},
+					{ max_tokens: 50, temperature: 0 }
+				);
+			}
 
 			runStatus = await openai.beta.threads.runs.retrieve(threadId, run.id);
 
@@ -146,7 +143,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			if (currentAttempt >= maxAttempts) {
 				console.error("7. Exceeded maximum attempts. Exiting the loop.");
 				const errorMessage =
-					"Te pido disculpas 🙏, en este momento no puedo procesar tu solicitud ☹️. Por favor intentá mas tarde. Saludos de MegaBot!! 🙂";
+					"Te pido disculpas 🙏, en este momento no puedo procesar tu solicitud ☹️. Por favor intentá mas tarde. ¡Saludos de MegaBot! 🙂";
 
 				// Exit the loop if maximum attempts are exceeded and send an error message to the user
 				return { errorMessage, threadId };

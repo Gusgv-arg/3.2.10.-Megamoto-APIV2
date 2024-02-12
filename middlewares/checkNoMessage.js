@@ -19,6 +19,9 @@ export const checkNoMessage = async (req, res, next) => {
 	const channel =
 		data.interaction?.via === "whatsApp" ? "whatsapp" : data.interaction?.via;
 	const agentInternalNote = data?.interaction?.output?.comment;
+	const meaninglessSymbols = /^(?:[^\w\s]| )+$/;
+	const matchMeaninglessSymbols = message.match(meaninglessSymbols)
+
 	let lead;
 
 	try {
@@ -79,6 +82,14 @@ export const checkNoMessage = async (req, res, next) => {
 			`1. Exiting the process. No message from: ${name} because he is not in Leads DB.`
 		);
 		return;
+	} else if(matchMeaninglessSymbols){
+		// Exit the process
+		res.status(200).send("Received");
+		console.log(
+			`1. Exiting the process. Meaningless symbol in message from: ${name}.`
+		);
+		return;
+		
 	}
 
 	next();
