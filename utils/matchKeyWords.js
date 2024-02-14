@@ -9,7 +9,7 @@ export const matchkeyWords = (newMessage) => {
 		/(zanella|honda|mondial|yamaha|smash|gilera|kawasaki)/i;
 		const keywordsUsed = /(usado|usados|usada|usadas)/i;
 		const keywordsOnlyNumbers =
-		/^(?!100$|110$|125$|135$|150$|180$|200$|250$|300$|390$|400$|450$|500$|502$|600$|650$|750$|752$|202$|251$|1000$|1200$|1300$)\d+$/;
+		/^(?!100$|125$|135$|150$|180$|200$|250$|300$|390$|400$|450$|500$|502$|600$|650$|750$|752$|202$|251$|1000$|1200$|1300$)\d+$/;
 		const keywordsModels =
 		/\b(?:100|125|135|150|180|200|250|300|390|400|450|500|502|600|650|750|752|202|251|1000|1200|1300)\b/;
 		const keywordsModel110 = /\b(?:110)\b/;
@@ -35,7 +35,7 @@ export const matchkeyWords = (newMessage) => {
 		);
 
 		const priceInstructions =
-			"Informa el precio de acuerdo a tu fuente de información sobre Megamoto utilizando las columnas modelo y sinónimos; y como siempre aclara que el precio incluye patentamiento, que el mismo no incluye el impuesto a los sellos de CABA y que es a confirmar por un vendedor.";
+			"Si el cliente consulta precio, informa el precio de acuerdo a tu fuente de información sobre Megamoto utilizando las columnas modelo y sinónimos; y como siempre aclara que el precio incluye patentamiento, que el mismo no incluye el impuesto a los sellos de CABA y que es a confirmar por un vendedor. Nunca informes precios de más de tres modelos; si alguien solicita más cantidad responde que un vendedor se encargará de hacerlo. ";
 
 		instructions = instructions + priceInstructions;
 	}
@@ -45,7 +45,7 @@ export const matchkeyWords = (newMessage) => {
 		);
 
 		const financeInstructions =
-			"Solicita el DNI al cliente y explícale que un vendedor hará la verificación para saber si califica para un crédito. Ten en cuenta que NO estas autorizado para verificar si un cliente califica o no para un crédito o para hacer un cálculo de cuota, esto es trabajo del vendedor.";
+			"Si el cliente pretende financiar solicitale el DNI y explícale que un vendedor hará la verificación para saber si califica para un crédito. Ten en consideración que NO estas autorizado para verificar si un cliente califica o no para un crédito o para hacer un cálculo de cuota, esto es trabajo del vendedor.";
 
 		instructions = instructions + financeInstructions;
 	}
@@ -55,7 +55,7 @@ export const matchkeyWords = (newMessage) => {
 		);
 
 		const competitorInstructions =
-			"Aclara al cliente que Megamoto comercializa las marcas Benelli, Suzuki, Motomel, Keeway y Sym y ofrece al cliente alternativas de modelos que comercializa Megamoto disponibles en tu fuente de información sobre Megamoto.";
+			"Aclara al cliente que Megamoto comercializa las marcas Benelli, Suzuki, Motomel, Keeway y Sym y ofrece al cliente alternativas de modelos (sin los precios) que comercializa Megamoto disponibles en tu fuente de información sobre Megamoto.";
 
 		instructions = instructions + competitorInstructions;
 	}
@@ -73,7 +73,7 @@ export const matchkeyWords = (newMessage) => {
 		console.log(`En el msje de ${newMessage.name} se detectaron solo números`);
 
 		const numbersInstructions =
-			"El cliente envió o bien su teléfono o su DNI. Responde solicitando aquellos datos que el cliente no hay proporcionado de acuerdo a tus objetivos (modelo de moto, localidad, método de pago, teléfono y DNI si va a pagar financiado).";
+			"El cliente envió o bien su teléfono o su DNI. Agradece, y responde solicitando aquellos datos que el cliente no haya proporcionado de acuerdo a tus objetivos (modelo de moto, localidad, método de pago, y DNI si va a pagar financiado).";
 
 		instructions = instructions + numbersInstructions;
 	}
@@ -89,24 +89,34 @@ export const matchkeyWords = (newMessage) => {
 	}
 	if (matchModel110) {
 		console.log(`En el msje de ${newMessage.name} aparece la palabra 110`);
-		const model110Instructions = `Si el cliente no especifica un modelo específico de 110, responde con esta frase: "Nuestro modelo más económico de 110 es la BLITZ 110 V8 START a $ 955.658. El precio es con patentamiento incluido, no incluye impuesto a los sellos de CABA y es a confirmar por un vendedor".`;
+		
+		const model110Instructions = `Si el cliente no especifica un modelo específico de 110, responde con esta frase: "Nuestro modelo más económico de 110 es la BLITZ 110 V8 START a $ 955.658. El precio es con patentamiento incluido, no incluye impuesto a los sellos de CABA y es a confirmar por un vendedor". Si no informó la localidad, haz la consulta por su localidad; y si ya envió la misma, consulta por el método de pago y el DNI si va a pagar financiado.`;
+
 		instructions = instructions + model110Instructions;
 	}
 	if (matchBicicleta) {
 		console.log(`En el msje de ${newMessage.name} aparece la palabra ${matchBicicleta[0]}`);
+		
 		const bicicletaInstructions = "Responde que Megamoto comercializa bicicletas de las marcas Scott, Orbea, Tecnial y Shiro; y solicita al cliente que te envíe los detalles de lo que está buscando y que un vendedor lo estará contactando.";
+		
 		instructions = instructions + bicicletaInstructions;
+		
 		return {bici: "bici", bicicletaInstructions}
 	}
 	if (matchTrabajo) {
 		console.log(`En el msje de ${newMessage.name} aparece la palabra ${matchTrabajo[0]}`);
-		const trabajoInstructions = "Si el cliente está buscando trabajo responde que en estos momentos Megamoto no está contratando personal pero puede enviarnos su currículum por esta vía o a megamoto@megamoto.com.ar";
+		
+		const trabajoInstructions = "Si el cliente está buscando trabajo responde que en estos momentos Megamoto no está contratando personal pero puede enviar su currículum por esta vía o a megamoto@megamoto.com.ar";
+		
 		instructions = instructions + trabajoInstructions;
+
 		return {trabajo: "trabajo", trabajoInstructions}
 	}
 	if (matchEnvios) {
 		console.log(`En el msje de ${newMessage.name} aparece la palabra ${matchEnvios[0]}`);
+		
 		const enviosInstructions = "Si el cliente consulta por envíos al interior del país, responde que sí es posible. Los detalles sobre la metodología y costos asociados lo informará el vendedor.";
+		
 		instructions = instructions + enviosInstructions;		
 	}
 

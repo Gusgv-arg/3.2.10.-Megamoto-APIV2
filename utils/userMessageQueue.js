@@ -11,6 +11,7 @@ export class UserMessageQueue {
 
 	async processQueue(senderId) {
 		const queue = this.queues.get(senderId);
+		console.log("Queue:", queue);
 		if (!queue || queue.processing) return;
 
 		queue.processing = true;
@@ -42,16 +43,21 @@ export class UserMessageQueue {
 							: response.errorMessage,
 						response.threadId,
 						newMessage.messageId,
-						newMessage.channel,						
+						newMessage.channel
 					);
 				}
 			} catch (error) {
 				console.error(
 					`14. Error processing message for user ${newMessage.name}: ${error}`
 				);
-				// Handle error, possibly re-queue the message.
-				await sendErrorMessage(newMessage);
-				throw new Error(error)	
+				// Send error message to the user
+				const errorMessage = await sendErrorMessage(newMessage);
+
+				// Change flag to allow next message processing
+				queue.processing = false;				
+
+				// Return to webhookController that has res.
+				return errorMessage;
 			}
 		}
 
@@ -60,7 +66,6 @@ export class UserMessageQueue {
 	}
 
 	enqueueMessage(messageToProcess) {
-		//console.log("Message dentro de enqueue", messageToProcess);
 		let name;
 		let senderId;
 		let messageId;
