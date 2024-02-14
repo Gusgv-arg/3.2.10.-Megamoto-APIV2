@@ -54,7 +54,7 @@ export const checkNoMessage = async (req, res, next) => {
 			// Post a message to the user to send a text message
 			const url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
 
-			const noMessageResponse = `¡Gracias ${name} por tu contacto!👋 Por el momento no puedo interpretar imágenes o audios. Te pido que me escribas y así puedo responder a tus dudas y derivarte más rápido con un vendedor. !Saludos de MegaBot! 😀`;
+			const noMessageResponse = `¡Gracias ${name} por tu contacto!👋 Por el momento no puedo interpretar archivos, imágenes o audios. Te pido que me escribas y así puedo responder a tus dudas y derivarte más rápido con un vendedor. !Saludos de MegaBot! 😀`;
 
 			const response = await axios.post(url, {
 				content: noMessageResponse,

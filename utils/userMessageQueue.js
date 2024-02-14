@@ -1,6 +1,7 @@
 import { handleMessageToZenvia } from "./handleMessageToZenvia.js";
 import { processMessageWithGPTAssistant } from "./processMessageWithGPTAssistant.js";
 import { saveAgentResponseInDb } from "./saveAgentResponseInDb.js";
+import { sendErrorMessage } from "./sendErrorMessage.js";
 
 // Class definition for the Queue
 export class UserMessageQueue {
@@ -48,8 +49,9 @@ export class UserMessageQueue {
 				console.error(
 					`14. Error processing message for user ${newMessage.name}: ${error}`
 				);
-				// Handle error, possibly re-queue the message
-				throw error;
+				// Handle error, possibly re-queue the message.
+				await sendErrorMessage(newMessage);
+				throw new Error(error)	
 			}
 		}
 

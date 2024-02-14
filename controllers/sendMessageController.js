@@ -8,9 +8,9 @@ export const sendMessageToUser = async (req, res) => {
 	const channel = "whatsapp"
     const miProspectId = "6596d62461f4a300081b28cb"
     
-    const prospectId= "6596d62461f4a300081b28cb"
+    const prospectId= ""
     
-    const message = "Prueba envio de mensaje al cliente y apagado del switch";
+    const message = "Estimado Juan Antonio Carripilón, lo contactamos del equipo de soporte de Megamoto para informarle que nuestro Asistente virtual, MegaBot, no tenía información sobre envíos y ya lo hemos corregido. En breve lo contactará un vendedor para seguir con el proceso. Para ganar tiempo ayudaría mucho saber sobre su modelo de interés, método de pago, y DNI en caso de querer financiar. !Que tenga buen día!";
 
     //Aca debería hacer que el switch individual se ponga en off
     

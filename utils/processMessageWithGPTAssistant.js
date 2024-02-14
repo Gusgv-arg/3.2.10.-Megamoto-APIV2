@@ -109,8 +109,15 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 					threadId,
 					{
 						assistant_id: assistantId,
-					},
-					{ max_tokens: 50, temperature: 0 }
+					}
+				);
+			} else if (instructions.bici || instructions.trabajo) {
+				run = await openai.beta.threads.runs.create(
+					threadId,
+					{
+						assistant_id: assistantId,
+						instructions: instructions.bicicletaInstructions ? instructions.bicicletaInstructions : instructions.trabajoInstructions,
+					}
 				);
 			} else {
 				console.log("Run con aditional instructions!!!!");
@@ -120,8 +127,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 						assistant_id: assistantId,
 						//instructions: instructions,
 						additional_instructions: instructions,
-					},
-					{ max_tokens: 50, temperature: 0 }
+					}
 				);
 			}
 
@@ -140,13 +146,14 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				`7. Error running the assistant for --> ${newMessage.name}: "${newMessage.receivedMessage}", ${error.message}`
 			);
 			currentAttempt++;
-			if (currentAttempt >= maxAttempts) {
+			if (currentAttempt >= maxAttempts || error) {
 				console.error("7. Exceeded maximum attempts. Exiting the loop.");
 				const errorMessage =
 					"Te pido disculpas 🙏, en este momento no puedo procesar tu solicitud ☹️. Por favor intentá mas tarde. ¡Saludos de MegaBot! 🙂";
 
 				// Exit the loop if maximum attempts are exceeded and send an error message to the user
 				return { errorMessage, threadId };
+				throw error
 			}
 		}
 	} while (currentAttempt < maxAttempts);

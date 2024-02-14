@@ -1,7 +1,7 @@
 import xlsx from "xlsx";
 import Leads from "../models/leads.js";
 
-export const exportLeadsToExcel = async (req, res) => {
+export const exportLeadsToExcel = async (req, res, next) => {
 	try {
 		// Obtén todos los leads de la base de datos
 		const leads = await Leads.find({});

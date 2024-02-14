@@ -3,16 +3,19 @@ export const matchkeyWords = (newMessage) => {
 
 	const keywordsPrice =
 		/(precio|precios|valor|valores|cuanto sale|cuanto|que sale)/i;
-	const keywordsFinance =
+		const keywordsFinance =
 		/(cuota|cuotas|crédito|financiación|tarjeta|tarjetas|a pagar|financiado|financiar)/i;
-	const keywordsCompetitors =
+		const keywordsCompetitors =
 		/(zanella|honda|mondial|yamaha|smash|gilera|kawasaki)/i;
-	const keywordsUsed = /(usado|usados|usada|usadas)/i;
-	const keywordsOnlyNumbers =
+		const keywordsUsed = /(usado|usados|usada|usadas)/i;
+		const keywordsOnlyNumbers =
 		/^(?!100$|110$|125$|135$|150$|180$|200$|250$|300$|390$|400$|450$|500$|502$|600$|650$|750$|752$|202$|251$|1000$|1200$|1300$)\d+$/;
-	const keywordsModels =
+		const keywordsModels =
 		/\b(?:100|125|135|150|180|200|250|300|390|400|450|500|502|600|650|750|752|202|251|1000|1200|1300)\b/;
-	const keywordsModel110 = /\b(?:110)\b/;
+		const keywordsModel110 = /\b(?:110)\b/;
+		const keywordsBicicleta = /(bici|bicicleta|bicis|bicicletas)/i;
+		const keywordsTrabajo = /(currículum|cv|busco trabajo|busco empleo|búsqueda de trabajo|búsqueda de empleo)/i;
+		const keywordsEnvios = /(envíos|envío|envio|envios|envían|envian)/i;
 
 	const matchPrice = newMessage.receivedMessage.match(keywordsPrice);
 	const matchFinance = newMessage.receivedMessage.match(keywordsFinance);
@@ -22,6 +25,9 @@ export const matchkeyWords = (newMessage) => {
 	const matchNumbers = newMessage.receivedMessage.match(keywordsOnlyNumbers);
 	const matchModels = newMessage.receivedMessage.match(keywordsModels);
 	const matchModel110 = newMessage.receivedMessage.match(keywordsModel110);
+	const matchBicicleta = newMessage.receivedMessage.match(keywordsBicicleta);
+	const matchTrabajo = newMessage.receivedMessage.match(keywordsTrabajo);
+	const matchEnvios = newMessage.receivedMessage.match(keywordsEnvios);
 
 	if (matchPrice) {
 		console.log(
@@ -39,7 +45,7 @@ export const matchkeyWords = (newMessage) => {
 		);
 
 		const financeInstructions =
-			"Solicita el DNI al cliente para que un vendedor pueda verificar si califica para un crédito. Y ten en cuenta que no estas autorizado para verificar si un cliente califica o no para un crédito o para hacer un cálculo de cuota, esto lo realiza el vendedor, por lo que no afrezcas esto al cliente.";
+			"Solicita el DNI al cliente y explícale que un vendedor hará la verificación para saber si califica para un crédito. Ten en cuenta que NO estas autorizado para verificar si un cliente califica o no para un crédito o para hacer un cálculo de cuota, esto es trabajo del vendedor.";
 
 		instructions = instructions + financeInstructions;
 	}
@@ -83,11 +89,25 @@ export const matchkeyWords = (newMessage) => {
 	}
 	if (matchModel110) {
 		console.log(`En el msje de ${newMessage.name} aparece la palabra 110`);
-
 		const model110Instructions = `Si el cliente no especifica un modelo específico de 110, responde con esta frase: "Nuestro modelo más económico de 110 es la BLITZ 110 V8 START a $ 955.658. El precio es con patentamiento incluido, no incluye impuesto a los sellos de CABA y es a confirmar por un vendedor".`;
-
 		instructions = instructions + model110Instructions;
-		
+	}
+	if (matchBicicleta) {
+		console.log(`En el msje de ${newMessage.name} aparece la palabra ${matchBicicleta[0]}`);
+		const bicicletaInstructions = "Responde que Megamoto comercializa bicicletas de las marcas Scott, Orbea, Tecnial y Shiro; y solicita al cliente que te envíe los detalles de lo que está buscando y que un vendedor lo estará contactando.";
+		instructions = instructions + bicicletaInstructions;
+		return {bici: "bici", bicicletaInstructions}
+	}
+	if (matchTrabajo) {
+		console.log(`En el msje de ${newMessage.name} aparece la palabra ${matchTrabajo[0]}`);
+		const trabajoInstructions = "Si el cliente está buscando trabajo responde que en estos momentos Megamoto no está contratando personal pero puede enviarnos su currículum por esta vía o a megamoto@megamoto.com.ar";
+		instructions = instructions + trabajoInstructions;
+		return {trabajo: "trabajo", trabajoInstructions}
+	}
+	if (matchEnvios) {
+		console.log(`En el msje de ${newMessage.name} aparece la palabra ${matchEnvios[0]}`);
+		const enviosInstructions = "Si el cliente consulta por envíos al interior del país, responde que sí es posible. Los detalles sobre la metodología y costos asociados lo informará el vendedor.";
+		instructions = instructions + enviosInstructions;		
 	}
 
 	return instructions;

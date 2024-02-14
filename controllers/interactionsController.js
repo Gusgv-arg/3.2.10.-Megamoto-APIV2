@@ -29,7 +29,7 @@ export const interactionsController = async (req, res) => {
 			if (err) {
 				throw err;
 			}
-			console.log("Prospects data is saved in a xls file.");
+			console.log("Prospects data is saved in a xls file");
 		});
 
 		res.status(200).send(response.data);

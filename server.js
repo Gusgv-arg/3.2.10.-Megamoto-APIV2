@@ -12,6 +12,7 @@ import excelRouter from "./routers/excelRouter.js";
 import prospectRouter from "./routers/prospectsRouter.js";
 import createBotSwitchInstance from "./utils/createBotSwitchInstance.js";
 import { dbFunctionsRouter } from "./routers/dbFunctionsRouter.js";
+import { wordRouter } from "./routers/wordRouter.js";
 
 dotenv.config();
 
@@ -57,6 +58,7 @@ try {
 app.use("/test", test);
 app.use("/json", jsonRouter);
 app.use("/excel", excelRouter);
+app.use("/word", wordRouter);
 app.use("/prospects", prospectRouter);
 app.use("/dbfunctions", dbFunctionsRouter);
 app.use("/megamoto", chatMegamotoRouter);

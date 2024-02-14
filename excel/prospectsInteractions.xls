@@ -485,7 +485,7 @@ const prospects = [
   {
     "id": "65be926acf6911000844df9e",
     "createdAt": "2024-02-03T19:22:18.629Z",
-    "status": "created",
+    "status": "updated",
     "prospectId": "65b87910df8c1b00080224a0",
     "agentId": "5cd0a5b0659d0b0004c1ff9f",
     "agent": {
@@ -496,7 +496,7 @@ const prospects = [
       "email": "joselinmegamoto@gmail.com",
       "appFields": {}
     },
-    "finishedAt": "2024-02-03T19:22:24.558Z",
+    "finishedAt": "2024-02-03T22:59:09.253Z",
     "proactive": true,
     "output": {
       "message": {
@@ -512,6 +512,149 @@ const prospects = [
       }
     },
     "via": "whatsApp"
+  },
+  {
+    "id": "65bec54a6210cc00088d3233",
+    "createdAt": "2024-02-03T22:59:22.390Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-03T22:59:22.390Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Querés vender ?",
+        "content": "Querés vender ?",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65bec54a276a38064b98a134",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bec557870b3800086696fe",
+    "createdAt": "2024-02-03T22:59:35.299Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-03T22:59:35.299Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Financiame un moto",
+        "content": "Financiame un moto",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65bec557c2e436f76ac232f0",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bec561870b3800086699d4",
+    "createdAt": "2024-02-03T22:59:45.805Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-03T22:59:45.805Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Entrego otra moto a mí Nombrr",
+        "content": "Entrego otra moto a mí Nombrr",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65bec5616896065230a7a49a",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65bec56ad9efbb00082a46c5",
+    "createdAt": "2024-02-03T22:59:54.764Z",
+    "status": "created",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-03T22:59:54.764Z",
+    "proactive": false,
+    "output": {
+      "message": {
+        "via": "whatsApp",
+        "body": "Cómo parte de pago",
+        "content": "Cómo parte de pago",
+        "performer": "integration",
+        "delivered": false,
+        "providerId": "65bec56af11d9042d06e7f68",
+        "sender": "+5491131505814",
+        "recipient": "5491152371354",
+        "templateConfig": null
+      }
+    },
+    "via": "whatsApp"
+  },
+  {
+    "id": "65c13a02e29f750008756fc7",
+    "createdAt": "2024-02-05T19:41:54.100Z",
+    "status": "updated",
+    "prospectId": "65b87910df8c1b00080224a0",
+    "agentId": "5cd0a5b0659d0b0004c1ff9f",
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "finishedAt": "2024-02-05T19:41:54.100Z",
+    "proactive": true,
+    "output": {},
+    "via": "other"
   }
 ];
 
