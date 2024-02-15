@@ -4,7 +4,7 @@ export const checkNewProspect = (req, res, next) => {
 
 	console.log(`\n${name} was created on the ${prospectCreatedDate}`);
 
-	const targetDate = new Date("2024-02-12");
+	const targetDate = new Date("2024-02-15");
 	
 	if (prospectCreatedDate >= targetDate || name === "Gustavo Gomez Villafañe" || name === "Gg") {
 		console.log(`Process continues for ${name}, created after ${targetDate}`);

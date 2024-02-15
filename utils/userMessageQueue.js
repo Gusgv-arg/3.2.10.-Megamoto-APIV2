@@ -11,7 +11,7 @@ export class UserMessageQueue {
 
 	async processQueue(senderId) {
 		const queue = this.queues.get(senderId);
-		console.log("Queue:", queue);
+		//console.log("Queue:", queue);
 		if (!queue || queue.processing) return;
 
 		queue.processing = true;

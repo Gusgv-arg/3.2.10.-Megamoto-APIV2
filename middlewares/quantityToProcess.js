@@ -1,4 +1,4 @@
-const clientsToProcess = 10;
+const clientsToProcess = 20;
 let clientsProcessed = 0;
 const clients = new Set(); 
 
