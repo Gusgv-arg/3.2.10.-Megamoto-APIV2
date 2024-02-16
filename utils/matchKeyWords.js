@@ -17,6 +17,7 @@ export const matchkeyWords = (newMessage) => {
 	const keywordsTrabajo =
 		/(currículum|cv|busco trabajo|busco empleo|búsqueda de trabajo|búsqueda de empleo|quiero trabajar)/i;
 	const keywordsEnvios = /(envíos|envío|envio|envios|envían|envian)/i;
+	const keywordsPlace = /(de donde son|donde estan|donde se encuentran|donde|son de)/i;
 
 	const matchPrice = newMessage.receivedMessage.match(keywordsPrice);
 	const matchFinance = newMessage.receivedMessage.match(keywordsFinance);
@@ -29,11 +30,12 @@ export const matchkeyWords = (newMessage) => {
 	const matchBicicleta = newMessage.receivedMessage.match(keywordsBicicleta);
 	const matchTrabajo = newMessage.receivedMessage.match(keywordsTrabajo);
 	const matchEnvios = newMessage.receivedMessage.match(keywordsEnvios);
+	const matchPlace = newMessage.receivedMessage.match(keywordsPlace);
 
 	if (matchModel110) {
 		console.log(`In the message of ${newMessage.name} appears the word 110`);
 
-		const model110Instructions = `Si el cliente no especifica un modelo específico de 110, responde con esta frase: "Nuestro modelo más económico de 110 es la BLITZ 110 V8 START a $ 955.658. El precio es con patentamiento incluido, no incluye impuesto a los sellos de CABA y es a confirmar por un vendedor". Si no informó la localidad, haz la consulta por su localidad; y si ya envió la misma, consulta por el método de pago.`;
+		const model110Instructions = `Si el cliente no especifica un modelo específico de 110, responde con esta frase: "Nuestro modelo más económico de 110 es la BLITZ 110 V8 START a $ 955.658. El precio es con patentamiento incluido, no incluye impuesto a los sellos de CABA y es a confirmar por un vendedor". Si el cliente no ha informado aún su método de pago, completa tu respuesta consultando al cliente por el método de pago.`;
 
 		instructions = instructions + model110Instructions;
 	}
@@ -44,7 +46,7 @@ export const matchkeyWords = (newMessage) => {
 		);
 
 		const priceInstructions =
-			"Si el cliente consulta precio de una moto, informa el mismo de acuerdo a tu fuente de información sobre Megamoto utilizando las columnas modelo y sinónimos; y como siempre aclara al cliente que el precio incluye patentamiento, que no incluye el impuesto a los sellos de CABA y que es a confirmar por un vendedor. Tienes prohibido inforar más de tres precios. Si alguien solicita más cantidad de precios responde que un vendedor se encargará de hacerlo. ";
+			"Si el cliente consulta precio de una moto, informa el mismo de acuerdo a tu fuente de información sobre Megamoto utilizando las columnas modelo y sinónimos; y como siempre aclara al cliente que el precio incluye patentamiento, que no incluye el impuesto a los sellos de CABA y que es a confirmar por un vendedor. Para tu información, el impuesto a los sellos de CABA es del 3% y se cobra a quienes habitan esta ciudad. Tienes prohibido inforar más de tres precios. Si alguien solicita más cantidad de precios responde que un vendedor se encargará de hacerlo. Si el cliente no ha informado aún su método de pago, completa tu respuesta consultando al cliente por el método de pago.";
 
 		instructions = instructions + priceInstructions;
 	}
@@ -85,7 +87,7 @@ export const matchkeyWords = (newMessage) => {
 		);
 
 		const numbersInstructions =
-			"El cliente envió o bien su teléfono o su DNI. Agradece, y responde solicitando aquellos datos que el cliente no haya proporcionado de acuerdo a tus objetivos (modelo de moto, localidad, método de pago, y DNI si va a pagar financiado).";
+			"El cliente envió o bien su teléfono o su DNI. Agradece, y si corresponde a un DNI aclara que un vendedor se encargará de verificar si califica para un crédito. NO estas autorizado a verificar si un cliente califica o no para un crédito o para hacer un cálculo de cuota; esto es trabajo del vendedor. Si el cliente ya ha informado previamente todos los datos de acuerdo a tus objetivos (modelo y método de pago), despídete diciendo que un vendedor lo estará contactando a la brevedad.";
 
 		instructions = instructions + numbersInstructions;
 	}
@@ -128,11 +130,17 @@ export const matchkeyWords = (newMessage) => {
 		console.log(
 			`In the message of ${newMessage.name} appears the word ${matchEnvios[0]}`
 		);
-
 		const enviosInstructions =
 			"Si el cliente consulta por envíos al interior del país, responde que sí es posible. Los detalles sobre la metodología y costos asociados lo informará el vendedor.";
-
 		instructions = instructions + enviosInstructions;
+	}
+	if (matchPlace) {
+		console.log(
+			`In the message of ${newMessage.name} appears the word ${matchPlace[0]}`
+		);
+		const placeInstructions =
+			"El cliente seguramente esté consultando por la ubicación de las sucursales de Megamoto, de ser así responde con la información sobre la ubicación de las mismas.";
+		instructions = instructions + placeInstructions;
 	}
 
 	return instructions;

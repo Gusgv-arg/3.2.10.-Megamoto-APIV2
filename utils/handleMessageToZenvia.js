@@ -46,7 +46,7 @@ export const handleMessageToZenvia = async (
 					`13. Error sending message from ${name}: "${firstFiveWords}..." to Zenvia.`
 				);
 			}
-		}
+		} 
 		
 		// PARA QUE LE CONTESTE A TODOS--------------------------------------------
 		// Posts the message to Zenvia
