@@ -69,7 +69,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 
 		const greeting2 = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Para que un vendedor pueda atenderte más rápido por favor informame: 1) Modelo. 2) Teléfono. 3) Localidad. 4) Método de pago. 5) DNI (si vas a pagar financiado). Estoy en etapa de prueba y puedo equivocarme; luego de que me envíes los datos, un vendedor te contactará para confirmar la propuesta. ¡Saludos y gracias por el contacto! 😀`;
 
-		const greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Mi objetivo es ayudarte a comprar tu moto agilizando la atención por parte de nuestros vendedores. A veces me equivoco; por lo que agradezco tu paciencia. ¿Si queres, comencemos por saber que moto estas buscando? 😀`
+		const greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Estoy para ayudarte a comprar tu moto agilizando la atención por parte de nuestros vendedores. A veces me equivoco; por lo que agradezco tu paciencia. ¿Si queres, comencemos por saber que moto estas buscando? 😀`
 		
 		const form = "https://whatsform.com/cI7aIJ"
 
@@ -115,12 +115,12 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 						assistant_id: assistantId,
 					}
 				);
-			} else if (instructions.bici || instructions.trabajo || instructions.dni) {
+			} else if (instructions.bici || instructions.trabajo || instructions.dni || instructions.cuota || instructions.pago || instructions.model) {
 				run = await openai.beta.threads.runs.create(
 					threadId,
 					{
 						assistant_id: assistantId,
-						instructions: instructions.bicicletaInstructions ? instructions.bicicletaInstructions : instructions.trabajoInstructions ? instructions.trabajoInstructions : instructions.financeInstructions,
+						instructions: instructions.bicicletaInstructions ? instructions.bicicletaInstructions : instructions.trabajoInstructions ? instructions.trabajoInstructions : instructions.financeInstructions? instructions.financeInstructions : instructions.cuotaInstructions ? instructions.cuotaInstructions : instructions.pagoInstructions? instructions.pagoInstructions : instructions.modelInstructions,
 					}
 				);
 			} else {

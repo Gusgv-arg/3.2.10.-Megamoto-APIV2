@@ -50,8 +50,7 @@ export const saveAgentResponseInDb = async (newMessage, threadId) => {
 		console.log(
 			`12. Updated Leads DB with Agent Message to --> ${newMessage.name}: "${firstFiveWords}..."`
 		);
-
-		//return;
+		
 	} catch (error) {
 		logError(
 			error,

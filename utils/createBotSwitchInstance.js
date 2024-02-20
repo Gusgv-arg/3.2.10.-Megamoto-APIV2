@@ -24,7 +24,9 @@ async function createBotSwitchInstance() {
             await createBotSwitchInstance();
         } else {
             console.error("Max retries exceeded. Exiting...");
-            process.exit(1);
+            //process.exit(1);
+            return
+
         }
     }
 }
