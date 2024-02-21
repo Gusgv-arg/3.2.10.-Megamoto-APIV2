@@ -1,12 +1,29 @@
 import { precios } from "../excel/listaDePreciosXFamilia.js";
 
 export const searchPricesPerFamily = (family) => {
-	const prices = precios.filter((item) => item.familia.toLowerCase() === family);
-	//console.log(`Precios de la familia ${family}: ${prices}`);
-    console.log(`Precio de la familia ${family}: ${prices.length > 0 ? prices[0].modelos[0].Modelo : 'No se encontraron precios'}`);
-    
-    //let modelPrices= JSON.stringify(prices[0].modelos);
-    const modelPrices = prices[0].modelos.map(modelo => `${modelo.Modelo} marca ${modelo.Marca} a $ ${modelo.Precio.toLocaleString()}`).join('\n');
-    console.log(modelPrices)
-    return modelPrices
+	let familyLower = family.toLowerCase();
+
+	// Transform Blitz family to 110
+	if (familyLower === "blitz") {
+		familyLower = "110";
+	}
+
+	const prices = precios.filter(
+		(item) => item.familia.toLowerCase() === familyLower
+	);
+	if (prices.length > 0) {
+		const modelPrices = prices[0].modelos
+			.map(
+				(modelo) =>
+					`${modelo.Modelo} marca ${
+						modelo.Marca
+					} a $ ${modelo.Precio.toLocaleString()}`
+			)
+			.join("\n");
+		return modelPrices;
+	} else {
+		const disculpas =
+			"Pide disculpas al cliente diciendo que no pudiste encontrar su modelo y que para poder proporcionarle el precio nos deberá consultar por alguna de las siguientes familias disponibles: 110 o Blitz, 180, 251, 302, 502, 752, Imperiale, Leoncino, TNT, TRK, Keeway, RK, CG, DLX, MAX, Sirius, SKUA, Strato, XMN, AX, AG, GSX, City y Citycom.";
+            return disculpas
+	}
 };

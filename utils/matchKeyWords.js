@@ -1,3 +1,4 @@
+import { checkAllModels } from "./checkAllModels.js";
 import { searchPricesPerFamily } from "./searchPricesPerFamily.js";
 
 export const matchkeyWords = (newMessage) => {
@@ -15,12 +16,10 @@ export const matchkeyWords = (newMessage) => {
 		/(zanella|honda|hond|hnda|mondial|yamaha|smash|gilera|kawasaki|corven)(?!.*\b110\b)/i;
 	const keywordsUsed = /(usado|usados|usada|usadas)/i;
 	const keywordsOnlyNumbers =
-		/^(?!100$|125$|135$|150$|180$|200$|250$|300$|302$|390$|400$|450$|500$|502$|600$|650$|750$|752$|202$|251$|1000$|1200$|1300$)\d+$/;
+		/^(?!100$|125$|135$|149$|150$|180$|200$|250$|300$|302$|390$|400$|450$|500$|502$|600$|650$|750$|752$|202$|251$|1000$|1200$|1300$)\d+$/;
+	const keywordsCilindradas =	/\b(?:100|125|135|149|150|200|202|250|300|390|400|450|500|600|650|750|1000|1200|1300)\b/;
 	const keywordsModels =
-		/\b(?:180|251|302|502|752|imperiale|leoncino|tnt|trk|keeway|rk|blitz|cg|dlx|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom)\b/g;
-	const keywordsCilindradas =
-		/\b(?:100|125|135|150|200|250|300|390|400|450|500|600|650|750|202|1000|1200|1300)\b/;
-	const keywordsModel110 = /\b(?:110)\b/;
+		/\b(?:110|180|251|302|502|752|imperiale|leoncino|tnt|trk|keeway|rk|blitz|cg|dlx|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom)\b/gi;
 	const keywordsBicicleta = /(bici|bicicleta|bicis|bicicletas)/i;
 	const keywordsTrabajo =
 		/(currículum|cv|busco trabajo|busco empleo|búsqueda de trabajo|búsqueda de empleo|quiero trabajar)/i;
@@ -32,25 +31,15 @@ export const matchkeyWords = (newMessage) => {
 	const matchFinance = newMessage.receivedMessage.match(keywordsFinance);
 	const matchCuota = newMessage.receivedMessage.match(keywordsCuota);
 	const matchPago = newMessage.receivedMessage.match(keywordsPago);
-	const matchCompetitors =
-		newMessage.receivedMessage.match(keywordsCompetitors);
+	const matchCompetitors = newMessage.receivedMessage.match(keywordsCompetitors);
 	const matchUsed = newMessage.receivedMessage.match(keywordsUsed);
 	const matchNumbers = newMessage.receivedMessage.match(keywordsOnlyNumbers);
-	const matchModels = newMessage.receivedMessage.matchAll(keywordsModels);
-	const allMatchModels = Array.from(matchModels, m => m[0]);
-	const matchModel110 = newMessage.receivedMessage.match(keywordsModel110);
+	const matchCilindradas = newMessage.receivedMessage.match(keywordsCilindradas);
+	const matchModels = newMessage.receivedMessage.match(keywordsModels);
 	const matchBicicleta = newMessage.receivedMessage.match(keywordsBicicleta);
 	const matchTrabajo = newMessage.receivedMessage.match(keywordsTrabajo);
 	const matchEnvios = newMessage.receivedMessage.match(keywordsEnvios);
 	const matchPlace = newMessage.receivedMessage.match(keywordsPlace);
-
-	if (matchModel110) {
-		console.log(`In the message of ${newMessage.name} appears the word 110`);
-
-		const model110Instructions = `Si el cliente no especifica un modelo específico de 110, responde con esta frase: "Nuestro modelo más económico de 110 es la BLITZ 110 V8 START a $ 955.658. El precio es con patentamiento incluido, no incluye impuesto a los sellos de CABA y es a confirmar por un vendedor". Si el cliente no ha informado aún su método de pago, completa tu respuesta consultando al cliente por el método de pago.`;
-
-		instructions = instructions + model110Instructions;
-	}
 
 	if (matchPrice) {
 		console.log(
@@ -58,7 +47,7 @@ export const matchkeyWords = (newMessage) => {
 		);
 
 		const priceInstructions =
-			"Informa el precio, especificando el NOMBRE COMPLETO del modelo y aclara que incluye patentamiento, que no incluye el impuesto a los sellos de CABA y que deberá confirmarse con un vendedor. Para tu búsqueda utiliza tu fuente de información sobre Megamoto utilizando las columnas modelo y sinónimos. Para tu información, el impuesto a los sellos de CABA es del 3% y se cobra a quienes habitan esta ciudad. Tienes prohibido inforar más de tres precios. Si alguien solicita más cantidad de precios responde que un vendedor se encargará de hacerlo. Si el cliente no ha informado aún su método de pago, completa tu respuesta consultando al cliente por el método de pago.";
+			"Como tú no tienes la lista de precios, y estos te serán provistos mediante instrucciones específicas, si el cliente no envió en este mensaje el modelo del cual quiere saber el precio, pídele que te confirme el modelo para que puedas informarle correctamente en un paso posterior.";
 
 		instructions = instructions + priceInstructions;
 	}
@@ -116,23 +105,29 @@ export const matchkeyWords = (newMessage) => {
 	if (matchNumbers) {
 		console.log(`In the message of ${newMessage.name} there are only numbers`);
 		const numbersInstructions =
-			"El cliente envió o bien su teléfono o su DNI. Agradece, y si corresponde a un DNI aclara que un vendedor se encargará de verificar si califica para un crédito. NO estas autorizado a verificar si un cliente califica o no para un crédito o para hacer un cálculo de cuota; esto es trabajo del vendedor. Si el cliente ya ha informado previamente todos los datos de acuerdo a tus objetivos (modelo y método de pago), despídete diciendo que un vendedor lo estará contactando a la brevedad.";
+			"Si el cliente envió el DNI aclara que un vendedor se encargará de verificar si califica para un crédito y si el cliente informó su modelo de interes despídete diciendo que un vendedor lo estará contactando a la brevedad. NO estas autorizado a verificar si un cliente califica o no para un crédito o para hacer un cálculo de cuota; esto es trabajo del vendedor.";
 		instructions = instructions + numbersInstructions;
 	}
-	if (allMatchModels) {
+	if (matchCilindradas) {
+		console.log(`In the message of ${newMessage.name} appears ${matchCilindradas[0]}. He is refering to cc.`);
+		const cilindradasInstructions =
+			`El cliente seguramente este consultando por modelos que tengan ${matchCilindradas[0]} cilindradas. De ser así, proporciona el listado de todos los modelos que se acerquen mas a las cilindradas solicitadas por el cliente. En este respuesta tienes prohibido informar precios. La información está disponible en tus instrucciones generales.`;
+		instructions = instructions + cilindradasInstructions;
+	}
+
+	if (matchModels) {
 		console.log(
-			`In the message of ${newMessage.name} appears the model ${allMatchModels[0]}`
-		);
-		let allModels = "";
-		console.log(allMatchModels);
-		console.log("matchModel lenght:", allMatchModels.length);
-		const modelsInstructions = allMatchModels.map((model) => {
+			`In the message of ${newMessage.name} appears the model ${matchModels[0]}`
+		);		
+		let allModels = checkAllModels(newMessage, keywordsModels);
+		let allModelsList=""
+		const modelsInstructions = allModels.map((model) => {
 			let oneModel = searchPricesPerFamily(model);
-			allModels = `${allModels} ${oneModel}\n`;
+			allModelsList = `${allModelsList} ${oneModel}\n`;
 		});
-		console.log("allModels:", allModels);
+		console.log("allModels:", allModelsList);
 		
-		const modelInstructions = `Si el cliente está decidiendo el modelo responde con el detalle completo de todos los modelos disponibles para que tenga todas las opciones: ${allModels} y rermina tu respuesta aclarando que los precios incluyen patentamiento, no incluyen el sellado de CABA y deberán ser confirmados por un vendedor. Si el cliente está informando la moto que quiere comprar, confirma el modelo y solo si ha confirmado el mismo pregunta por el método de pago."`;
+		const modelInstructions = `Si el cliente está decidiendo el modelo responde con el detalle completo de todos los modelos disponibles para que tenga todas las opciones: ${allModelsList} y rermina tu respuesta aclarando que los precios incluyen patentamiento, no incluyen el sellado de CABA y deberán ser confirmados por un vendedor. Si el cliente está informando la moto que quiere comprar, confirma el modelo y solo si ha confirmado el mismo pregunta por el método de pago."`;
 		console.log("model instructions-->", modelInstructions);
 		return { model: "model", modelInstructions };
 	}

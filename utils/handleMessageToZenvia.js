@@ -29,7 +29,7 @@ export const handleMessageToZenvia = async (
 		);		
 
 		// Para que solo me conteste a mi
-		if (name === "Gustavo Gomez Villafañe" || name === "Gg" || name === "Pablo Rudki") {
+		if (name === "Gustavo Gomez Villafañe" || name === "Gg" || name === "Pablo Rudkiw") {
 			const prospectId = senderId;
 			const url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
 			

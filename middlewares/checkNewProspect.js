@@ -31,12 +31,13 @@ export const checkNewProspect = async (req, res, next) => {
 		(prospectCreatedTime - receivedTime) / 1000
 	);
 
-	// Pass if targetDate is met && if time of creation and message are < 2 seconds or if it exists in Leads
+	// Pass if targetDate is met && if time of creation and message are < 60 seconds or if it exists in Leads
 	if (
 		(prospectCreatedDate >= targetDate && timeDifferenceInSeconds < 60) ||
 		lead !== null ||
 		name === "Gustavo Gomez Villafañe" ||
-		name === "Gg"
+		name === "Gg" ||
+		name === "Pablo Rudkiw"
 	) {
 		console.log(
 			`Process continues for ${name}, created after ${targetDate} or he is in Leads DB.`
