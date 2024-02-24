@@ -2,7 +2,7 @@ import Leads from "../models/leads.js";
 
 const rejectedMessages = [];
 
-export const checkNewProspect = async (req, res, next) => {
+export const checkNewProspect = async (req, res, next, targetDate) => {
 	const data = req.body;
 	const prospectCreatedDate = new Date(data.prospect.created.slice(0, 10));
 	const name = data.prospect?.firstName;
@@ -17,7 +17,7 @@ export const checkNewProspect = async (req, res, next) => {
 	console.log(`\n${name} was created on the ${data.prospect.created.slice(0, 10)}`);
 
 	// Target date in which the API will allow messages. 
-	const targetDate = new Date("2024-02-20");
+	console.log("Target Date:", targetDate)
 
 	let lead = await Leads.findOne({ id_user: prospectId });
 
@@ -25,8 +25,10 @@ export const checkNewProspect = async (req, res, next) => {
 	// Get time of creation and message
 	const prospectCreatedTime = new Date(data.prospect.created).getTime();
 	console.log("prospectCreatedTime",prospectCreatedDate)
-	const receivedTime = new Date(data.received).getTime();
-	console.log("receivedTime",receivedTime)
+	//const receivedTime = new Date(data.received).getTime();
+	const receivedTime = new Date();
+	const receivedTimeFormatted = new Date(receivedTime).toLocaleString();
+	console.log("receivedTime",receivedTimeFormatted)
 	const timeDifferenceInSeconds = Math.abs(
 		(prospectCreatedTime - receivedTime) / 1000
 	);

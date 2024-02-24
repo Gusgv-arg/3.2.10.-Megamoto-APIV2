@@ -15,12 +15,14 @@ import { sendMessageToUser } from "../controllers/sendMessageController.js";
 
 const chatMegamotoRouter = express.Router();
 
+const targetDate = new Date();
+
 // Receives data from Zenvia webhook
 chatMegamotoRouter.post(
 	"/webhook-megamoto",
 	checkGeneralBotSwitch,
 	checkBotOrigin,
-	checkNewProspect,
+	(req, res, next) => checkNewProspect(req, res, next, targetDate),
 	checkIndividualBotSwitch,
 	checkNoMessage,
 	checkRepeatedWebhookMessage,

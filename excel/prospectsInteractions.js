@@ -1,4 +1,4 @@
-const prospects = [
+const interactions = [
   {
     "id": "65b879100e837f0008269b78",
     "createdAt": "2024-01-30T04:20:32.572Z",

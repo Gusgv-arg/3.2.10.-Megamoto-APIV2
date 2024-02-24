@@ -1,6 +1,6 @@
-import prospects from "../excel/prospectsData.js";
+import prospects from "../excel/prospectsData.js"
 
-export const analyzeProspects = (prospects) => {
+export const analyzeProspects = () => {
 	const resultado = {};
 	prospects.forEach((prospect) => {
 		const { group, status, leads } = prospect;
