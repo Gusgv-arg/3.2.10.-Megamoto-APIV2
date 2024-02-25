@@ -1,29 +1,43 @@
 import XLSX from "xlsx";
 import fs from "fs";
 
+let precios = [];
+
 export const jsonTransformController = async (req, res) => {
-	// Lee el archivo Excel
-	const workbook = XLSX.readFile("excel/LISTA DE PRECIOS 1-2-24 IA.xlsx");
-	const sheet_name_list = workbook.SheetNames;
-	const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+    try {
+        const workbook = XLSX.readFile("excel/LISTA DE PRECIOS 23-2-24 IA.xlsx");
+        const sheet_name_list = workbook.SheetNames;
+        const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
 
-	// Modifica los datos para crear un array en la propiedad "sinónimos"
-	data.forEach(row => {
-        if (typeof row['Sinónimos'] === 'string') {
-            row['Sinónimos'] = row['Sinónimos'].split(',').map(item => item.trim());
-        } else {
-            row['Sinónimos'] = []; // Si no es una cadena, asigna un array vacío
-        }
-    });
+        precios = data.reduce((acc, item) => {
+            const familia = String(item.Familia);
+            const existingFamilia = acc.find(
+                (fam) => fam.familia === familia
+            );
+            if (existingFamilia) {
+                existingFamilia.modelos.push({
+                    modelo: item.Modelo,
+					marca: item.Marca,
+                    precio: item.Precio,
+                });
+            } else {
+                acc.push({
+                    familia: familia,
+                    modelos: [
+                        { modelo: item.Modelo, marca: item.Marca, precio: item.Precio },
+                    ],
+                });
+            }
+            return acc;
+        }, []);
 
-	// Convierte los datos a JSON
-	const json_data = JSON.stringify(data);
+        const json_data = `export const precios = ${JSON.stringify(precios)};`;
 
-	// Guarda el JSON en un archivo
-	fs.writeFileSync("excel/listadePrecios.json", json_data);
+        fs.writeFileSync("excel/listaDePrecios.js", json_data);
 
-	// Imprime un mensaje de confirmación
-	console.log("Archivo JSON generado con éxito.");
-
-	res.send("json generado");
+        console.log("Archivo JSON generado con éxito.");
+        res.status(200).send(json_data);
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
 };

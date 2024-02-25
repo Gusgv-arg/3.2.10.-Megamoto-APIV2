@@ -127,7 +127,7 @@ export const matchkeyWords = (newMessage) => {
 		});
 		console.log("allModels:", allModelsList);
 		
-		const modelInstructions = `Si el cliente está decidiendo el modelo responde con el detalle completo de todos los modelos disponibles para que tenga todas las opciones: ${allModelsList} y rermina tu respuesta aclarando que los precios incluyen patentamiento, no incluyen el sellado de CABA y deberán ser confirmados por un vendedor. Si el cliente está informando la moto que quiere comprar, confirma el modelo y solo si ha confirmado el mismo pregunta por el método de pago."`;
+		const modelInstructions = `Si el cliente está decidiendo el modelo o consultando por precio responde con el detalle completo de todos los modelos disponibles para que tenga todas las opciones: ${allModelsList} y termina tu respuesta aclarando que los precios incluyen patentamiento, no incluyen el sellado de CABA y deberán ser confirmados por un vendedor. Si el cliente está informando la moto que quiere comprar, confirma el modelo y solo si ha confirmado el mismo pregunta por el método de pago."`;
 		console.log("model instructions-->", modelInstructions);
 		return { model: "model", modelInstructions };
 	}

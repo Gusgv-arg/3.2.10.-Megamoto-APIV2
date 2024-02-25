@@ -38,10 +38,8 @@ export const sendMessageToUnclaimed = async (unclaimedToContact) => {
 			await saveUnclaimedInDb(newLead, threadId, greeting);
 			
             // Hacer el post a Zenvia
-            
-			//DESCOMENTAR ESTA LINEA PARA IMPLEMENTAR
-			//const prospectId = newLead.senderId;
             //const prospectId = "6596d62461f4a300081b28cb" //soy yo;
+            const prospectId = newLead.senderId;
             const channel= newLead.source.toLowerCase()
 		
             let url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;

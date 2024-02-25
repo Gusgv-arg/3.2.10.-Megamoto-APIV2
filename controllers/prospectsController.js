@@ -43,7 +43,7 @@ export const prospectsController = async (req, res) => {
 				source: leads[0].source,
 			})
 		);
-		console.log(filteredProspects)
+		//console.log(filteredProspects)
 
 		// Filter and save ALL unclaimed prospects
 		const allUnclaimedProspects = filteredProspects.filter(

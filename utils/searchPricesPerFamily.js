@@ -1,23 +1,23 @@
-import { precios } from "../excel/listaDePreciosXFamilia.js";
+import { precios } from "../excel/listaDePrecios.js";
 
 export const searchPricesPerFamily = (family) => {
+	
 	let familyLower = family.toLowerCase();
 
 	// Transform Blitz family to 110
 	if (familyLower === "blitz") {
 		familyLower = "110";
 	}
-
 	const prices = precios.filter(
-		(item) => item.familia.toLowerCase() === familyLower
+		(item) => item.familia.toLowerCase() === familyLower		
 	);
 	if (prices.length > 0) {
 		const modelPrices = prices[0].modelos
 			.map(
 				(modelo) =>
-					`${modelo.Modelo} marca ${
-						modelo.Marca
-					} a $ ${modelo.Precio.toLocaleString()}`
+					`${modelo.modelo} marca ${
+						modelo.marca
+					} a $ ${modelo.precio.toLocaleString()}`
 			)
 			.join("\n");
 		return modelPrices;

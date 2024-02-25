@@ -10,10 +10,10 @@ export const interactionsController = async (req, res) => {
 	try {
 		//Prospect interactions by id
 		const prospectId = "65b87910df8c1b00080224a0";
-		const url = `https://api.getsirena.com/v1/prospect/${prospectId}/interactions?api-key=${process.env.ZENVIA_API_TOKEN_PROSPECTS}`;
+		//const url = `https://api.getsirena.com/v1/prospect/${prospectId}/interactions?api-key=${process.env.ZENVIA_API_TOKEN_PROSPECTS}`;
 
 		//Prospect interactions all
-		//const url = `https://api.getsirena.com/v1/prospects/interactions?api-key=${process.env.ZENVIA_API_TOKEN_PROSPECTS}`;
+		const url = `https://api.getsirena.com/v1/prospects/interactions?api-key=${process.env.ZENVIA_API_TOKEN_PROSPECTS}`;
 
 		const response = await axios.get(url);
 
@@ -46,7 +46,7 @@ export const interactionsController = async (req, res) => {
 			console.log("Prospects data is saved in a .js file");
 		});
 
-		res.status(200).send(response.data);
+		res.status(200).send("Prospects interactions saved in prospectsInteractions.js");
 	} catch (error) {
 		logError(error, "Hubo un error en el proceso -->");
 		res.status(500).send({ error: error.message });
