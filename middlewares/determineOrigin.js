@@ -22,7 +22,7 @@ export const determineOrigin = (req, res, next) => {
 	} else if (data.interaction?.via === "instagram") {
 		origin = "instagram";
 		//console.log(`4. Origin: Instagram from --> ${name}: "${firstFiveWords}". Object Instagram ver el senderId --> ${data}`);
-	} else if (data?.channel === "facebook") {
+	} else if (data?.channel === "facebook" || data.interaction?.via === "facebook") {
 		origin = "facebook";
 		//console.log(`4. Origin: Facebook from --> ${name}: "${firstFiveWords}".`);
 	} else {

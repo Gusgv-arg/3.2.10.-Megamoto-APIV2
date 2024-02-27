@@ -14,8 +14,9 @@ const openai = new OpenAI({
 
 export const sendMessageToUnclaimed = async (unclaimedToContact) => {
 	
+	console.log("UnclaimedToContact:", unclaimedToContact)
 	// Tomar el array de unclaimed y para c/u
-	unclaimedToContact.forEach(async (newLead) => {
+	/* unclaimedToContact.forEach(async (newLead) => {
 		try {
 			// Crear el thread
 			let threadId;
@@ -40,7 +41,8 @@ export const sendMessageToUnclaimed = async (unclaimedToContact) => {
             // Hacer el post a Zenvia
             //const prospectId = "6596d62461f4a300081b28cb" //soy yo;
             const prospectId = newLead.senderId;
-            const channel= newLead.source.toLowerCase()
+            
+			const channel= newLead.source.toLowerCase()
 		
             let url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
             
@@ -57,5 +59,5 @@ export const sendMessageToUnclaimed = async (unclaimedToContact) => {
 		} catch (error) {
 			logError(error, "Hubo un error en el proceso -->");
 		}
-	});
+	}) */;
 };

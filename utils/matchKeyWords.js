@@ -13,13 +13,14 @@ export const matchkeyWords = (newMessage) => {
 	const keywordsPago =
 		/(efectivo|tarjeta de débito|tarjeta de debito|débito|debito|transferencia|tarjeta|tarjeta de crédito|tarjeta de credito)/i;
 	const keywordsCompetitors =
-		/(zanella|honda|hond|hnda|mondial|yamaha|smash|gilera|kawasaki|corven)(?!.*\b110\b)/i;
+		/(zanella|honda|hond|hnda|mondial|mundial|yamaha|fz|smash|gilera|kawasaki|corven)(?!.*\b110\b)/i;
 	const keywordsUsed = /(usado|usados|usada|usadas)/i;
 	const keywordsOnlyNumbers =
 		/^(?!100$|125$|135$|149$|150$|180$|200$|250$|300$|302$|390$|400$|450$|500$|502$|600$|650$|750$|752$|202$|251$|1000$|1200$|1300$)\d+$/;
-	const keywordsCilindradas =	/\b(?:100|125|135|149|150|200|202|250|300|390|400|450|500|600|650|750|1000|1200|1300)\b/;
+	const keywordsCilindradas =
+		/\b(?:100|125|135|149|150|200|202|250|300|390|400|450|500|600|650|750|1000|1200|1300)(?:c{1,2})\b/gi;	
 	const keywordsModels =
-		/\b(?:110|180|251|302|502|752|imperiale|leoncino|tnt|trk|keeway|rk|blitz|cg|dlx|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom)\b/gi;
+		/\b(?:110|180|251|302|502|752|imperiale|leoncino|tnt|trk|keeway|rk|blitz|blitz 110|cg|dlx|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom)\b/gi;
 	const keywordsBicicleta = /(bici|bicicleta|bicis|bicicletas)/i;
 	const keywordsTrabajo =
 		/(currículum|cv|busco trabajo|busco empleo|búsqueda de trabajo|búsqueda de empleo|quiero trabajar)/i;
@@ -31,10 +32,12 @@ export const matchkeyWords = (newMessage) => {
 	const matchFinance = newMessage.receivedMessage.match(keywordsFinance);
 	const matchCuota = newMessage.receivedMessage.match(keywordsCuota);
 	const matchPago = newMessage.receivedMessage.match(keywordsPago);
-	const matchCompetitors = newMessage.receivedMessage.match(keywordsCompetitors);
+	const matchCompetitors =
+		newMessage.receivedMessage.match(keywordsCompetitors);
 	const matchUsed = newMessage.receivedMessage.match(keywordsUsed);
 	const matchNumbers = newMessage.receivedMessage.match(keywordsOnlyNumbers);
-	const matchCilindradas = newMessage.receivedMessage.match(keywordsCilindradas);
+	const matchCilindradas =
+		newMessage.receivedMessage.match(keywordsCilindradas);
 	const matchModels = newMessage.receivedMessage.match(keywordsModels);
 	const matchBicicleta = newMessage.receivedMessage.match(keywordsBicicleta);
 	const matchTrabajo = newMessage.receivedMessage.match(keywordsTrabajo);
@@ -90,7 +93,7 @@ export const matchkeyWords = (newMessage) => {
 		);
 
 		const competitorInstructions =
-			"Aclara al cliente que Megamoto comercializa las marcas Benelli, Suzuki, Motomel, Keeway y Sym y ofrece al cliente alternativas de modelos (sin los precios) que comercializa Megamoto disponibles en tu fuente de información sobre Megamoto.";
+			"Responde al cliente que Megamoto comercializa las marcas Benelli, Suzuki, Motomel, Keeway y Sym; y termina tu frase tratando de indagar las necesidades del cliente como ser las cilindradas para poder comprender lo que está buscando el cliente.";
 
 		instructions = instructions + competitorInstructions;
 	}
@@ -109,24 +112,26 @@ export const matchkeyWords = (newMessage) => {
 		instructions = instructions + numbersInstructions;
 	}
 	if (matchCilindradas) {
-		console.log(`In the message of ${newMessage.name} appears ${matchCilindradas[0]}. He is refering to cc.`);
-		const cilindradasInstructions =
-			`El cliente seguramente este consultando por modelos que tengan ${matchCilindradas[0]} cilindradas. De ser así, proporciona el listado de todos los modelos que se acerquen mas a las cilindradas solicitadas por el cliente. En este respuesta tienes prohibido informar precios. La información está disponible en tus instrucciones generales.`;
+		console.log(
+			`In the message of ${newMessage.name} appears ${matchCilindradas[0]}. He is refering to cc.`
+		);
+		const cilindradasInstructions = `El cliente seguramente este consultando por modelos que tengan ${matchCilindradas[0]} cilindradas. Responde con al menos tres modelos que más se acerquen a las cilindradas solicitadas por el cliente de acuerdo al listado de modelos que comercializa Megamoto con sus cilindradas.`;
 		instructions = instructions + cilindradasInstructions;
 	}
 
 	if (matchModels) {
 		console.log(
 			`In the message of ${newMessage.name} appears the model ${matchModels[0]}`
-		);		
+		);
 		let allModels = checkAllModels(newMessage, keywordsModels);
-		let allModelsList=""
+		console.log("all models", allModels);
+		let allModelsList = "";
 		const modelsInstructions = allModels.map((model) => {
 			let oneModel = searchPricesPerFamily(model);
 			allModelsList = `${allModelsList} ${oneModel}\n`;
 		});
 		console.log("allModels:", allModelsList);
-		
+
 		const modelInstructions = `Si el cliente está decidiendo el modelo o consultando por precio responde con el detalle completo de todos los modelos disponibles para que tenga todas las opciones: ${allModelsList} y termina tu respuesta aclarando que los precios incluyen patentamiento, no incluyen el sellado de CABA y deberán ser confirmados por un vendedor. Si el cliente está informando la moto que quiere comprar, confirma el modelo y solo si ha confirmado el mismo pregunta por el método de pago."`;
 		console.log("model instructions-->", modelInstructions);
 		return { model: "model", modelInstructions };

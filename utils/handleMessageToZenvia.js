@@ -27,6 +27,7 @@ export const handleMessageToZenvia = async (
 			threadId,
 			messageId
 		);		
+		
 
 		// Para que solo me conteste a mi
 		if (name === "Gustavo Gomez Villafañe" || name === "Gg" || name === "Pablo Rudkiw") {
@@ -46,7 +47,7 @@ export const handleMessageToZenvia = async (
 					`13. Error sending message from ${name}: "${firstFiveWords}..." to Zenvia.`
 				);
 			}
-		}  
+		}    
 		
 		// PARA QUE LE CONTESTE A TODOS--------------------------------------------
 		// Posts the message to Zenvia

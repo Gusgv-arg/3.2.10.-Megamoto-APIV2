@@ -4,7 +4,7 @@ const rejectedMessages = [];
 
 export const checkNewProspect = async (req, res, next, targetDate) => {
 	const data = req.body;
-	const prospectCreatedDate = data.prospect.created;
+	const prospectCreatedDate = new Date(data.prospect.created);
 	const name = data.prospect?.firstName;
 	const prospectId = data.prospect?.id;
 	const message =
