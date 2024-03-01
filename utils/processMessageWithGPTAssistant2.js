@@ -14,7 +14,7 @@ const openai = new OpenAI({
 	apiKey: API_KEY,
 });
 
-export const processMessageWithGPTAssistant = async (newMessage) => {
+export const processMessageWithGPTAssistant2 = async (newMessage) => {
 	const assistantId = process.env.OPENAI_ASSISTANT_ID;
 	let threadId;
 
@@ -108,8 +108,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			// Check if there are key words and if so pass it to the run
 			const instructions = matchkeyWords2(newMessage);
 
-			//if (instructions === "") {
-			if (instructions.quantity === 0) {
+			if (instructions === "") {
 				// Run the assistant normally
 				run = await openai.beta.threads.runs.create(
 					threadId,
@@ -117,25 +116,17 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 						assistant_id: assistantId,
 					}
 				);
-			} else if (instructions.bici || instructions.trabajo || instructions.dni || instructions.cuota || instructions.pago || instructions.model) {
-				run = await openai.beta.threads.runs.create(
-					threadId,
-					{
-						assistant_id: assistantId,
-						instructions: instructions.bicicletaInstructions ? instructions.bicicletaInstructions : instructions.trabajoInstructions ? instructions.trabajoInstructions : instructions.financeInstructions? instructions.financeInstructions : instructions.cuotaInstructions ? instructions.cuotaInstructions : instructions.pagoInstructions? instructions.pagoInstructions : instructions.modelInstructions,
-					}
-				);
 			} else {
-				console.log("Run con aditional instructions!!!!", instructions);
+				// run the assistant with special instructions		
+				console.log("Running assistant with special instructions!!\n", instructions)		
 				run = await openai.beta.threads.runs.create(
 					threadId,
 					{
 						assistant_id: assistantId,
-						//instructions: instructions,
-						additional_instructions: instructions,
+						instructions: instructions,
 					}
 				);
-			}
+			} 			
 
 			runStatus = await openai.beta.threads.runs.retrieve(threadId, run.id);
 

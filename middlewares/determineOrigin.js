@@ -25,6 +25,8 @@ export const determineOrigin = (req, res, next) => {
 	} else if (data?.channel === "facebook" || data.interaction?.via === "facebook") {
 		origin = "facebook";
 		//console.log(`4. Origin: Facebook from --> ${name}: "${firstFiveWords}".`);
+		console.log("FACEBOOK!!!!!!!", data)
+		console.log("FACEBOOK!!!!!!!", data.message)
 	} else {
 		console.log(
 			"`4. Exit the process. Data with an origin not processed in API",

@@ -8,7 +8,8 @@ const messageSchema = new mongoose.Schema(
 		content: { type: String, required: true },
 		id_message: {type: String, required: true},
 		channel: { type: String, required: true },	
-		thread_id: {type: String},			
+		thread_id: {type: String},	
+		instructions: {type: String}		
 	},
 	{
 		timestamps: true,

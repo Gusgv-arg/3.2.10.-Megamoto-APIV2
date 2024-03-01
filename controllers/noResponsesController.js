@@ -50,7 +50,7 @@ export const noResponsesController = async (req, res) => {
 		//console.log(noResponses24WithNames)
 
 		// Send the unclaimedToContact to the function that will Post the message to Zenvia
-		//sendMessageToUnclaimed(noResponses24WithNames)
+		sendMessageToUnclaimed(noResponses24WithNames)
 
 		res.status(200).send(noResponses24WithNames);
 	} catch (error) {

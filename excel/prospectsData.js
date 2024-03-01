@@ -1,5 +1,960 @@
 const prospects = [
   {
+    "id": "65de5823b5eeef00085d349b",
+    "created": "2024-02-27T21:46:11.938Z",
+    "transferredAt": null,
+    "group": "Megamoto 1",
+    "groupId": "628d15e99cb6020018237d2c",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Merlo",
+    "initialGroupId": "628d15e99cb6020018237d2c",
+    "firstName": "Ssj",
+    "nin": [],
+    "userMade": false,
+    "status": "unclaimed",
+    "additionalData": {},
+    "phones": [
+      "+5491123013592"
+    ],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de5823b5eeef00085d34a3",
+        "type": "phone"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T21:46:11.978Z",
+        "source": "WHATSAPP",
+        "utmSource": "WHATSAPP",
+        "providerKey": "wasp",
+        "comments": "",
+        "providerLeadId": "4db16a1f-67d5-445f-b9aa-08be237693f6_5491123013592",
+        "type": "savingPlan"
+      }
+    ],
+    "firstContactedAt": "2024-02-27T21:46:12.333Z"
+  },
+  {
+    "id": "65de5314b73346000850b40d",
+    "created": "2024-02-27T21:24:36.626Z",
+    "transferredAt": null,
+    "group": "Megamoto 2",
+    "groupId": "628d170e9cb6020018237d2f",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Abasto",
+    "initialGroupId": "628d170e9cb6020018237d2f",
+    "firstName": "Alfred",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [
+      "+5491121919323"
+    ],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de5314b73346000850b415",
+        "type": "phone"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T21:24:36.645Z",
+        "source": "WHATSAPP",
+        "medium": "ctwa",
+        "utmSource": "WHATSAPP",
+        "utmMedium": "ctwa",
+        "providerKey": "wasp",
+        "comments": "https://fb.me/1rUAUS0Xz",
+        "providerLeadId": "0e039f4a-4362-439e-908c-4240b4c5d5a8_5491121919323",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "62c588130925d6edf9c038e0",
+      "firstName": "jose",
+      "lastName": "vila",
+      "phone": "+5491131342481",
+      "email": "jo1316@hotmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T21:30:52.565Z",
+    "firstContactedAt": "2024-02-27T21:24:36.944Z"
+  },
+  {
+    "id": "65de507c797fe80008c0edcb",
+    "created": "2024-02-27T21:13:32.743Z",
+    "transferredAt": null,
+    "group": "Megamoto",
+    "groupId": "5cd09261a6f3d300596a39d0",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Merlo",
+    "initialGroupId": "628d15e99cb6020018237d2c",
+    "firstName": "Juan Carlos Saucedo",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [
+      "+5491133738570"
+    ],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de507c797fe80008c0edd3",
+        "type": "phone"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T21:13:32.780Z",
+        "source": "WHATSAPP",
+        "utmSource": "WHATSAPP",
+        "providerKey": "wasp",
+        "comments": "",
+        "providerLeadId": "75318970-6b5b-4b1a-9f17-32c9a608d869_5491133738570",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "65ccfa88f012b09f395e10db",
+      "firstName": "Nahir",
+      "lastName": "Alvarez",
+      "phone": "+5491161514400",
+      "email": "alvarezjoa44@gmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T21:19:47.863Z",
+    "firstContactedAt": "2024-02-27T21:13:33.243Z"
+  },
+  {
+    "id": "65de503f6a10da00086e7475",
+    "created": "2024-02-27T21:12:31.784Z",
+    "transferredAt": null,
+    "group": "Megamoto",
+    "groupId": "5cd09261a6f3d300596a39d0",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Merlo",
+    "initialGroupId": "628d15e99cb6020018237d2c",
+    "firstName": "Gaston",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [
+      "+5491171000516"
+    ],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de503f6a10da00086e747d",
+        "type": "phone"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T21:12:31.822Z",
+        "source": "WHATSAPP",
+        "utmSource": "WHATSAPP",
+        "providerKey": "wasp",
+        "comments": "",
+        "providerLeadId": "5601768d-2c4c-46f4-84d9-403131315b8c_5491171000516",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "65ccfa88f012b09f395e10db",
+      "firstName": "Nahir",
+      "lastName": "Alvarez",
+      "phone": "+5491161514400",
+      "email": "alvarezjoa44@gmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T21:20:08.890Z",
+    "firstContactedAt": "2024-02-27T21:12:32.214Z"
+  },
+  {
+    "id": "65de48b83e6a920008a5ce0a",
+    "created": "2024-02-27T20:40:24.244Z",
+    "transferredAt": null,
+    "group": "Megamoto 1",
+    "groupId": "628d15e99cb6020018237d2c",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Merlo",
+    "initialGroupId": "628d15e99cb6020018237d2c",
+    "firstName": "𝑴  𝑬  𝑳 🦋",
+    "nin": [
+      {
+        "type": "DNI",
+        "_id": "65de48b8a354e10008a3ff02"
+      },
+      {
+        "type": "DNI",
+        "_id": "65de48c2be317000080963a0"
+      },
+      {
+        "type": "DNI",
+        "_id": "65de48c3ae961d000802caf5"
+      },
+      {
+        "type": "DNI",
+        "_id": "65de48c82549cf00082739bc"
+      },
+      {
+        "type": "DNI",
+        "_id": "65de48c987983400088f7a8a"
+      },
+      {
+        "type": "DNI",
+        "_id": "65de48ce27cbf50008334507"
+      },
+      {
+        "type": "DNI",
+        "_id": "65de48ceb46c6f000834f12f"
+      }
+    ],
+    "userMade": false,
+    "status": "unclaimed",
+    "additionalData": {},
+    "phones": [],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de48ceb46c6f000834f130",
+        "type": "instagram",
+        "mediumId": "6871702649601079"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T20:40:24.262Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "providerKey": "instagram",
+        "comments": "",
+        "providerLeadId": "6871702649601079",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T20:40:24.927Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "557825f9-c1f1-40e3-880e-7dc22f0e8cb4",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T20:40:34.950Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "6871702649601079",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T20:40:35.126Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "f815e28f-db76-4e93-901f-e7cc1ca62bae",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T20:40:40.949Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "6871702649601079",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T20:40:41.349Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "b8a32474-8704-4d1b-ba57-fd9ec7741c2e",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T20:40:46.418Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "6871702649601079",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T20:40:46.711Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "fb578e0b-143a-42b4-bccb-c8a5c9eb4b31",
+        "type": "savingPlan"
+      }
+    ],
+    "firstContactedAt": "2024-02-27T20:40:24.790Z"
+  },
+  {
+    "id": "65de46b71a3c180008e85aa9",
+    "created": "2024-02-27T20:31:51.046Z",
+    "transferredAt": null,
+    "group": "Megamoto",
+    "groupId": "5cd09261a6f3d300596a39d0",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Merlo",
+    "initialGroupId": "628d15e99cb6020018237d2c",
+    "firstName": "Adrii",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [
+      "+5491153499461"
+    ],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de46b71a3c180008e85ab1",
+        "type": "phone"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T20:31:51.088Z",
+        "source": "WHATSAPP",
+        "utmSource": "WHATSAPP",
+        "providerKey": "wasp",
+        "comments": "",
+        "providerLeadId": "0e23d57d-b988-49d9-a09b-9596d659c1f2_5491153499461",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "5ed51c5b44ae9e00047330b2",
+      "firstName": "Johanna",
+      "lastName": "Cabrera",
+      "phone": "+5491122934144",
+      "email": "johannacabrera2015@gmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T20:46:31.026Z",
+    "firstContactedAt": "2024-02-27T20:31:51.513Z"
+  },
+  {
+    "id": "65de44815545df0008ee36c3",
+    "created": "2024-02-27T20:22:25.781Z",
+    "transferredAt": null,
+    "group": "Megamoto",
+    "groupId": "5cd09261a6f3d300596a39d0",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Merlo",
+    "initialGroupId": "628d15e99cb6020018237d2c",
+    "firstName": "Luciano",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [
+      "+5491164300773"
+    ],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de44815545df0008ee36cb",
+        "type": "phone"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T20:22:25.802Z",
+        "source": "WHATSAPP",
+        "utmSource": "WHATSAPP",
+        "providerKey": "wasp",
+        "comments": "",
+        "providerLeadId": "e20a441b-4e93-4119-ad49-6264668e1ead_5491164300773",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "65ccfa88f012b09f395e10db",
+      "firstName": "Nahir",
+      "lastName": "Alvarez",
+      "phone": "+5491161514400",
+      "email": "alvarezjoa44@gmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T20:31:10.231Z",
+    "firstContactedAt": "2024-02-27T20:22:26.125Z"
+  },
+  {
+    "id": "65de43162e72190008dcd50f",
+    "created": "2024-02-27T20:16:22.347Z",
+    "transferredAt": null,
+    "group": "Megamoto",
+    "groupId": "5cd09261a6f3d300596a39d0",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Merlo",
+    "initialGroupId": "628d15e99cb6020018237d2c",
+    "firstName": "Cinthia",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [
+      "+5491162487268"
+    ],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de43162e72190008dcd517",
+        "type": "phone"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T20:16:22.402Z",
+        "source": "WHATSAPP",
+        "utmSource": "WHATSAPP",
+        "providerKey": "wasp",
+        "comments": "",
+        "providerLeadId": "9331f41a-5613-4623-baa3-1d6a2cadd4ec_5491162487268",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "5cd0a5b0659d0b0004c1ff9f",
+      "firstName": "Joselín",
+      "lastName": "Sierra",
+      "phone": "+541122702976",
+      "email": "joselinmegamoto@gmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T21:07:29.764Z",
+    "firstContactedAt": "2024-02-27T20:16:22.744Z"
+  },
+  {
+    "id": "65de4153a2d78d00086c0144",
+    "created": "2024-02-27T20:08:51.343Z",
+    "transferredAt": null,
+    "group": "Megamoto 2",
+    "groupId": "628d170e9cb6020018237d2f",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Abasto",
+    "initialGroupId": "628d170e9cb6020018237d2f",
+    "firstName": "Luis Gabriel Olea Gramajo",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de4153a2d78d00086c014b",
+        "type": "facebook",
+        "mediumId": "7295209223892481"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T20:08:51.381Z",
+        "source": "FACEBOOK",
+        "utmSource": "FACEBOOK",
+        "providerKey": "facebook-messenger",
+        "comments": "",
+        "providerLeadId": "7295209223892481",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "62c588130925d6edf9c038e0",
+      "firstName": "jose",
+      "lastName": "vila",
+      "phone": "+5491131342481",
+      "email": "jo1316@hotmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T20:17:01.549Z",
+    "firstContactedAt": "2024-02-27T20:08:51.856Z"
+  },
+  {
+    "id": "65de40f9fe482e0008148a0b",
+    "created": "2024-02-27T20:07:21.325Z",
+    "transferredAt": null,
+    "group": "Megamoto 2",
+    "groupId": "628d170e9cb6020018237d2f",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Abasto",
+    "initialGroupId": "628d170e9cb6020018237d2f",
+    "firstName": "Seba Campanello",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [
+      "+5492613346059"
+    ],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de40f9fe482e0008148a13",
+        "type": "phone"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T20:07:21.345Z",
+        "source": "WHATSAPP",
+        "medium": "ctwa",
+        "utmSource": "WHATSAPP",
+        "utmMedium": "ctwa",
+        "providerKey": "wasp",
+        "comments": "https://www.instagram.com/p/C328iKuNk-q/",
+        "providerLeadId": "3ff040f1-ac95-4af5-b143-79b8fa32a394_5492613346059",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "62c588130925d6edf9c038e0",
+      "firstName": "jose",
+      "lastName": "vila",
+      "phone": "+5491131342481",
+      "email": "jo1316@hotmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T20:11:26.078Z",
+    "firstContactedAt": "2024-02-27T20:07:21.653Z"
+  },
+  {
+    "id": "65de3f27df7db80008a7b086",
+    "created": "2024-02-27T19:59:35.165Z",
+    "transferredAt": null,
+    "group": "Megamoto",
+    "groupId": "5cd09261a6f3d300596a39d0",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Merlo",
+    "initialGroupId": "628d15e99cb6020018237d2c",
+    "firstName": "Monti",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [
+      "+5491151770532"
+    ],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de3f27df7db80008a7b08e",
+        "type": "phone"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T19:59:35.188Z",
+        "source": "WHATSAPP",
+        "utmSource": "WHATSAPP",
+        "providerKey": "wasp",
+        "comments": "",
+        "providerLeadId": "e40da600-2f91-4fc0-965e-ceba394dfdfe_5491151770532",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "65ccfa88f012b09f395e10db",
+      "firstName": "Nahir",
+      "lastName": "Alvarez",
+      "phone": "+5491161514400",
+      "email": "alvarezjoa44@gmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T20:10:42.317Z",
+    "firstContactedAt": "2024-02-27T19:59:35.511Z"
+  },
+  {
+    "id": "65de3dfc760b410008520f73",
+    "created": "2024-02-27T19:54:36.575Z",
+    "transferredAt": null,
+    "group": "Megamoto",
+    "groupId": "5cd09261a6f3d300596a39d0",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Merlo",
+    "initialGroupId": "628d15e99cb6020018237d2c",
+    "firstName": "Iván Daniel",
+    "nin": [
+      {
+        "type": "DNI",
+        "_id": "65de3e00212b4a0008927ba6"
+      },
+      {
+        "type": "DNI",
+        "_id": "65de4a455545df0008eed279"
+      },
+      {
+        "type": "DNI",
+        "_id": "65de4a45ad25f800087abc42"
+      },
+      {
+        "type": "DNI",
+        "_id": "65de4a856682ca0008025762"
+      },
+      {
+        "type": "DNI",
+        "_id": "65de4a860e9692000875100f"
+      },
+      {
+        "type": "DNI",
+        "_id": "65de4ab94533f50008484c7f"
+      },
+      {
+        "type": "DNI",
+        "_id": "65de4ab98f1e100008185bcb"
+      }
+    ],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de4ab98f1e100008185bcc",
+        "type": "instagram",
+        "mediumId": "7182167408564898"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T19:54:36.614Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "providerKey": "instagram",
+        "comments": "",
+        "providerLeadId": "7182167408564898",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T19:54:40.471Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "749ebb59-4e2a-4e4c-aae8-4f5224ea0706",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T20:47:01.801Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "ffa5c988-5094-491e-86b2-8fddbe0c1cb1",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T20:47:01.923Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "7182167408564898",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T20:48:05.370Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "7182167408564898",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T20:48:06.180Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "7cc4ac6c-9a0b-48fb-8a8d-0e81f32b04bf",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T20:48:57.490Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "7182167408564898",
+        "type": "savingPlan"
+      },
+      {
+        "created": "2024-02-27T20:48:57.911Z",
+        "source": "INSTAGRAM",
+        "utmSource": "INSTAGRAM",
+        "comments": "",
+        "providerLeadId": "d48ab4b6-5f1b-4dc6-81e4-4a3dc93e7cda",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "5ed51c5b44ae9e00047330b2",
+      "firstName": "Johanna",
+      "lastName": "Cabrera",
+      "phone": "+5491122934144",
+      "email": "johannacabrera2015@gmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T20:46:04.322Z",
+    "firstContactedAt": "2024-02-27T19:54:36.978Z"
+  },
+  {
+    "id": "65de3bade9b3ef0008174d95",
+    "created": "2024-02-27T19:44:45.619Z",
+    "transferredAt": null,
+    "group": "Megamoto",
+    "groupId": "5cd09261a6f3d300596a39d0",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Merlo",
+    "initialGroupId": "628d15e99cb6020018237d2c",
+    "firstName": "Nacclean",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [
+      "+5491140756222"
+    ],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de3bade9b3ef0008174d9d",
+        "type": "phone"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T19:44:45.660Z",
+        "source": "WHATSAPP",
+        "utmSource": "WHATSAPP",
+        "providerKey": "wasp",
+        "comments": "",
+        "providerLeadId": "bc5605c0-6755-4d79-8ef7-dc6b68f62032_5491140756222",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "65ccfa88f012b09f395e10db",
+      "firstName": "Nahir",
+      "lastName": "Alvarez",
+      "phone": "+5491161514400",
+      "email": "alvarezjoa44@gmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T19:57:19.253Z",
+    "firstContactedAt": "2024-02-27T19:44:46.273Z"
+  },
+  {
+    "id": "65de3b425398e500083bc6e0",
+    "created": "2024-02-27T19:42:58.125Z",
+    "transferredAt": null,
+    "group": "Megamoto 2",
+    "groupId": "628d170e9cb6020018237d2f",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Abasto",
+    "initialGroupId": "628d170e9cb6020018237d2f",
+    "firstName": "Axel",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [
+      "+5491166529111"
+    ],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de3b425398e500083bc6e8",
+        "type": "phone"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T19:42:58.144Z",
+        "source": "WHATSAPP",
+        "medium": "ctwa",
+        "utmSource": "WHATSAPP",
+        "utmMedium": "ctwa",
+        "providerKey": "wasp",
+        "comments": "https://www.instagram.com/p/C3k9qnQtMjY/",
+        "providerLeadId": "2c279efa-3ad9-40ef-bd02-01f6ac5af8fb_5491166529111",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "62c588130925d6edf9c038e0",
+      "firstName": "jose",
+      "lastName": "vila",
+      "phone": "+5491131342481",
+      "email": "jo1316@hotmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T19:50:21.455Z",
+    "firstContactedAt": "2024-02-27T19:43:00.769Z"
+  },
+  {
+    "id": "65de3907258ceb000822e04c",
+    "created": "2024-02-27T19:33:27.085Z",
+    "transferredAt": null,
+    "group": "Megamoto",
+    "groupId": "5cd09261a6f3d300596a39d0",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Merlo",
+    "initialGroupId": "628d15e99cb6020018237d2c",
+    "firstName": "Mike",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [
+      "+5491173605820"
+    ],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de3907258ceb000822e054",
+        "type": "phone"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T19:33:27.105Z",
+        "source": "WHATSAPP",
+        "utmSource": "WHATSAPP",
+        "providerKey": "wasp",
+        "comments": "",
+        "providerLeadId": "e10a9413-831f-4941-8b5f-3f5589d7ff0f_5491173605820",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "5ed51c5b44ae9e00047330b2",
+      "firstName": "Johanna",
+      "lastName": "Cabrera",
+      "phone": "+5491122934144",
+      "email": "johannacabrera2015@gmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T19:40:59.561Z",
+    "firstContactedAt": "2024-02-27T19:33:27.388Z"
+  },
+  {
+    "id": "65de3780d9ce3800082c63f8",
+    "created": "2024-02-27T19:26:56.813Z",
+    "transferredAt": null,
+    "group": "Megamoto 2",
+    "groupId": "628d170e9cb6020018237d2f",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Abasto",
+    "initialGroupId": "628d170e9cb6020018237d2f",
+    "firstName": "Dem",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [
+      "+5491161265116"
+    ],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de3780d9ce3800082c6400",
+        "type": "phone"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T19:26:56.851Z",
+        "source": "WHATSAPP",
+        "medium": "ctwa",
+        "utmSource": "WHATSAPP",
+        "utmMedium": "ctwa",
+        "providerKey": "wasp",
+        "comments": "https://www.instagram.com/p/C328iKuNk-q/",
+        "providerLeadId": "cc34f9f1-6588-4790-9789-827ba9e83368_5491161265116",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "62c588130925d6edf9c038e0",
+      "firstName": "jose",
+      "lastName": "vila",
+      "phone": "+5491131342481",
+      "email": "jo1316@hotmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T19:30:50.170Z",
+    "firstContactedAt": "2024-02-27T19:26:57.559Z"
+  },
+  {
+    "id": "65de3644b5541f000807e41e",
+    "created": "2024-02-27T19:21:40.433Z",
+    "transferredAt": null,
+    "group": "Megamoto 2",
+    "groupId": "628d170e9cb6020018237d2f",
+    "account": "Megamoto",
+    "accountId": "5cc1d395ac14ff0059c1e78c",
+    "initialGroup": "Megamoto Abasto",
+    "initialGroupId": "628d170e9cb6020018237d2f",
+    "firstName": "N José Pinto",
+    "nin": [],
+    "userMade": false,
+    "status": "followUp",
+    "additionalData": {},
+    "phones": [],
+    "emails": [],
+    "contactMediums": [
+      {
+        "_id": "65de3644b5541f000807e425",
+        "type": "facebook",
+        "mediumId": "7392296944147527"
+      }
+    ],
+    "leads": [
+      {
+        "created": "2024-02-27T19:21:40.452Z",
+        "source": "FACEBOOK",
+        "utmSource": "FACEBOOK",
+        "providerKey": "facebook-messenger",
+        "comments": "",
+        "providerLeadId": "7392296944147527",
+        "type": "savingPlan"
+      }
+    ],
+    "agent": {
+      "id": "62c588130925d6edf9c038e0",
+      "firstName": "jose",
+      "lastName": "vila",
+      "phone": "+5491131342481",
+      "email": "jo1316@hotmail.com",
+      "appFields": {}
+    },
+    "assigned": "2024-02-27T19:31:18.592Z",
+    "firstContactedAt": "2024-02-27T19:21:40.864Z"
+  },
+  {
     "id": "65de341a560a3d00081b9a04",
     "created": "2024-02-27T19:12:26.310Z",
     "transferredAt": null,
@@ -122935,801 +123890,6 @@ const prospects = [
     ],
     "archivingReason": "inactive",
     "firstContactedAt": "2024-01-28T22:07:58.219Z"
-  },
-  {
-    "id": "65b6c9978da8510008a53f25",
-    "created": "2024-01-28T21:39:35.163Z",
-    "transferredAt": null,
-    "group": "Megamoto 1",
-    "groupId": "628d15e99cb6020018237d2c",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Merlo",
-    "initialGroupId": "628d15e99cb6020018237d2c",
-    "firstName": "Nare Y Geri",
-    "nin": [],
-    "userMade": false,
-    "status": "archived",
-    "additionalData": {},
-    "phones": [
-      "+5493624376118"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6c9978da8510008a53f2d",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T21:39:35.206Z",
-        "source": "WHATSAPP",
-        "utmSource": "WHATSAPP",
-        "providerKey": "wasp",
-        "comments": "",
-        "providerLeadId": "c4bbf5f4-7fe5-40fd-8108-2c30d832075c_5493624376118",
-        "type": "savingPlan"
-      }
-    ],
-    "archivingReason": "inactive",
-    "firstContactedAt": "2024-01-28T21:39:35.599Z"
-  },
-  {
-    "id": "65b6c8452a135b0008fae09f",
-    "created": "2024-01-28T21:33:57.975Z",
-    "transferredAt": null,
-    "group": "Megamoto 1",
-    "groupId": "628d15e99cb6020018237d2c",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Merlo",
-    "initialGroupId": "628d15e99cb6020018237d2c",
-    "firstName": "...",
-    "nin": [],
-    "userMade": false,
-    "status": "archived",
-    "additionalData": {},
-    "phones": [
-      "+5493751225392"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6c8452a135b0008fae0a7",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T21:33:58.014Z",
-        "source": "WHATSAPP",
-        "utmSource": "WHATSAPP",
-        "providerKey": "wasp",
-        "comments": "",
-        "providerLeadId": "e857113d-335b-44d6-b9b5-e0d94de5afe2_5493751225392",
-        "type": "savingPlan"
-      }
-    ],
-    "archivingReason": "inactive",
-    "firstContactedAt": "2024-01-28T21:33:58.358Z"
-  },
-  {
-    "id": "65b6c719c24c6e0008c6485b",
-    "created": "2024-01-28T21:28:57.295Z",
-    "transferredAt": null,
-    "group": "Megamoto 2",
-    "groupId": "628d170e9cb6020018237d2f",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Abasto",
-    "initialGroupId": "628d170e9cb6020018237d2f",
-    "firstName": "👩‍💻👨‍💻👩‍💻👨‍🎤👩‍🎤",
-    "nin": [],
-    "userMade": false,
-    "status": "followUp",
-    "additionalData": {},
-    "phones": [
-      "+5491169789529"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6c719c24c6e0008c64863",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T21:28:57.316Z",
-        "source": "WHATSAPP",
-        "campaign": "120204663387340267",
-        "medium": "ctwa",
-        "utmSource": "WHATSAPP",
-        "utmCampaign": "120204663387340267",
-        "utmMedium": "ctwa",
-        "providerKey": "wasp",
-        "comments": "Chatea con nosotros -   - https://fb.me/39F6jxsMx",
-        "providerLeadId": "e7e7b78c-ecd0-4475-86ed-e346cd246b6e_5491169789529",
-        "type": "savingPlan"
-      }
-    ],
-    "agent": {
-      "id": "6275818bf8856740659015fd",
-      "firstName": "Dario",
-      "lastName": "Pérez Acosta",
-      "phone": "+541149730000",
-      "email": "perezdario1503@gmail.com",
-      "appFields": {},
-      "legacyId": "megamoto@megamoto.com.ar"
-    },
-    "assigned": "2024-01-29T12:31:30.619Z",
-    "firstContactedAt": "2024-01-28T21:28:57.947Z"
-  },
-  {
-    "id": "65b6c5edcc14f5000803d2e7",
-    "created": "2024-01-28T21:23:57.274Z",
-    "transferredAt": null,
-    "group": "Megamoto 1",
-    "groupId": "628d15e99cb6020018237d2c",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Merlo",
-    "initialGroupId": "628d15e99cb6020018237d2c",
-    "firstName": "Francisco Chiosso",
-    "nin": [],
-    "userMade": false,
-    "status": "archived",
-    "additionalData": {},
-    "phones": [
-      "+5491167150831"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6c5edcc14f5000803d2ef",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T21:23:57.314Z",
-        "source": "WHATSAPP",
-        "utmSource": "WHATSAPP",
-        "providerKey": "wasp",
-        "comments": "",
-        "providerLeadId": "ced124aa-385f-4f6f-a79a-31097a9d94a5_5491167150831",
-        "type": "savingPlan"
-      }
-    ],
-    "archivingReason": "inactive",
-    "firstContactedAt": "2024-01-28T21:23:57.812Z"
-  },
-  {
-    "id": "65b6c51ab6b6ab0008c39609",
-    "created": "2024-01-28T21:20:26.985Z",
-    "transferredAt": null,
-    "group": "Megamoto 1",
-    "groupId": "628d15e99cb6020018237d2c",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Merlo",
-    "initialGroupId": "628d15e99cb6020018237d2c",
-    "firstName": "~● Del ●~",
-    "nin": [],
-    "userMade": false,
-    "status": "archived",
-    "additionalData": {},
-    "phones": [
-      "+5492944682850"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6c51ab6b6ab0008c39611",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T21:20:27.006Z",
-        "source": "WHATSAPP",
-        "utmSource": "WHATSAPP",
-        "providerKey": "wasp",
-        "comments": "",
-        "providerLeadId": "5c863583-f084-4b8a-9ce6-343f92ff40c6_5492944682850",
-        "type": "savingPlan"
-      }
-    ],
-    "archivingReason": "inactive",
-    "firstContactedAt": "2024-01-28T21:20:27.382Z"
-  },
-  {
-    "id": "65b6c29f140cdc0008894f39",
-    "created": "2024-01-28T21:09:51.620Z",
-    "transferredAt": null,
-    "group": "Megamoto 1",
-    "groupId": "628d15e99cb6020018237d2c",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Merlo",
-    "initialGroupId": "628d15e99cb6020018237d2c",
-    "firstName": "Gloria",
-    "nin": [],
-    "userMade": false,
-    "status": "archived",
-    "additionalData": {},
-    "phones": [
-      "+5491150200212"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6c29f140cdc0008894f41",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T21:09:51.659Z",
-        "source": "WHATSAPP",
-        "utmSource": "WHATSAPP",
-        "providerKey": "wasp",
-        "comments": "",
-        "providerLeadId": "c865f71d-e1a0-48ed-9861-0ee1bf5c312b_5491150200212",
-        "type": "savingPlan"
-      }
-    ],
-    "archivingReason": "inactive",
-    "firstContactedAt": "2024-01-28T21:09:51.977Z"
-  },
-  {
-    "id": "65b6bda73424430008b226cf",
-    "created": "2024-01-28T20:48:39.590Z",
-    "transferredAt": null,
-    "group": "Megamoto 2",
-    "groupId": "628d170e9cb6020018237d2f",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Abasto",
-    "initialGroupId": "628d170e9cb6020018237d2f",
-    "firstName": "Cardenas Sanches",
-    "nin": [],
-    "userMade": false,
-    "status": "followUp",
-    "additionalData": {},
-    "phones": [],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6bda73424430008b226d6",
-        "type": "facebook",
-        "mediumId": "7147435208602101"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T20:48:39.613Z",
-        "source": "FACEBOOK",
-        "utmSource": "FACEBOOK",
-        "providerKey": "facebook-messenger",
-        "comments": "",
-        "providerLeadId": "7147435208602101",
-        "type": "savingPlan"
-      }
-    ],
-    "agent": {
-      "id": "6275818bf8856740659015fd",
-      "firstName": "Dario",
-      "lastName": "Pérez Acosta",
-      "phone": "+541149730000",
-      "email": "perezdario1503@gmail.com",
-      "appFields": {},
-      "legacyId": "megamoto@megamoto.com.ar"
-    },
-    "assigned": "2024-01-29T12:31:36.466Z",
-    "firstContactedAt": "2024-01-28T20:48:40.014Z"
-  },
-  {
-    "id": "65b6bc3c370154000861cdec",
-    "created": "2024-01-28T20:42:36.568Z",
-    "transferredAt": null,
-    "group": "Megamoto 2",
-    "groupId": "628d170e9cb6020018237d2f",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Abasto",
-    "initialGroupId": "628d170e9cb6020018237d2f",
-    "firstName": "Exequiel",
-    "nin": [],
-    "userMade": false,
-    "status": "archived",
-    "additionalData": {},
-    "phones": [
-      "+5491139142735"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6bc3c370154000861cdf4",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T20:42:36.609Z",
-        "source": "WHATSAPP",
-        "campaign": "120204663387340267",
-        "medium": "ctwa",
-        "utmSource": "WHATSAPP",
-        "utmCampaign": "120204663387340267",
-        "utmMedium": "ctwa",
-        "providerKey": "wasp",
-        "comments": "Chatea con nosotros -   - https://fb.me/3XjqTHueu",
-        "providerLeadId": "ab4e9000-3b38-4962-95fc-850f11fda4fb_5491139142735",
-        "type": "savingPlan"
-      }
-    ],
-    "agent": {
-      "id": "6275818bf8856740659015fd",
-      "firstName": "Dario",
-      "lastName": "Pérez Acosta",
-      "phone": "+541149730000",
-      "email": "perezdario1503@gmail.com",
-      "appFields": {},
-      "legacyId": "megamoto@megamoto.com.ar"
-    },
-    "assigned": "2024-01-29T12:31:42.963Z",
-    "archivingReason": "noCalificaCredito",
-    "firstContactedAt": "2024-01-28T20:42:37.196Z"
-  },
-  {
-    "id": "65b6bc3828ff6300087c1046",
-    "created": "2024-01-28T20:42:32.991Z",
-    "transferredAt": null,
-    "group": "Megamoto 1",
-    "groupId": "628d15e99cb6020018237d2c",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Merlo",
-    "initialGroupId": "628d15e99cb6020018237d2c",
-    "firstName": "Santi Avalos",
-    "nin": [],
-    "userMade": false,
-    "status": "archived",
-    "additionalData": {},
-    "phones": [
-      "+5491134996362"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6bc3828ff6300087c104e",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T20:42:33.015Z",
-        "source": "WHATSAPP",
-        "utmSource": "WHATSAPP",
-        "providerKey": "wasp",
-        "comments": "",
-        "providerLeadId": "9903d728-20ce-4b9d-b0f7-eb9155cc3454_5491134996362",
-        "type": "savingPlan"
-      }
-    ],
-    "archivingReason": "inactive",
-    "firstContactedAt": "2024-01-28T20:42:33.422Z"
-  },
-  {
-    "id": "65b6bafedf54090009523354",
-    "created": "2024-01-28T20:37:18.741Z",
-    "transferredAt": null,
-    "group": "Megamoto 1",
-    "groupId": "628d15e99cb6020018237d2c",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Merlo",
-    "initialGroupId": "628d15e99cb6020018237d2c",
-    "firstName": "❤️m.j.m❤️",
-    "nin": [],
-    "userMade": false,
-    "status": "archived",
-    "additionalData": {},
-    "phones": [
-      "+5491125288577"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6bafedf5409000952335c",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T20:37:18.767Z",
-        "source": "WHATSAPP",
-        "utmSource": "WHATSAPP",
-        "providerKey": "wasp",
-        "comments": "",
-        "providerLeadId": "8216c97c-e06e-4881-840a-64d191d8330d_5491125288577",
-        "type": "savingPlan"
-      }
-    ],
-    "archivingReason": "inactive",
-    "firstContactedAt": "2024-01-28T20:37:19.151Z"
-  },
-  {
-    "id": "65b6b94828ff6300087b95e9",
-    "created": "2024-01-28T20:30:01.013Z",
-    "transferredAt": null,
-    "group": "Megamoto 2",
-    "groupId": "628d170e9cb6020018237d2f",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Abasto",
-    "initialGroupId": "628d170e9cb6020018237d2f",
-    "firstName": "8537-  Acuña",
-    "nin": [],
-    "userMade": false,
-    "status": "archived",
-    "additionalData": {},
-    "phones": [
-      "+5491158467411"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6b94928ff6300087b95f1",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T20:30:01.035Z",
-        "source": "WHATSAPP",
-        "campaign": "120204272580780267",
-        "medium": "ctwa",
-        "utmSource": "WHATSAPP",
-        "utmCampaign": "120204272580780267",
-        "utmMedium": "ctwa",
-        "providerKey": "wasp",
-        "comments": "Chatea con nosotros - https://www.instagram.com/p/C2QC7R0tZ8N/",
-        "providerLeadId": "5eed908b-6373-410b-aded-58532d74a4bd_5491158467411",
-        "type": "savingPlan"
-      }
-    ],
-    "agent": {
-      "id": "6275818bf8856740659015fd",
-      "firstName": "Dario",
-      "lastName": "Pérez Acosta",
-      "phone": "+541149730000",
-      "email": "perezdario1503@gmail.com",
-      "appFields": {},
-      "legacyId": "megamoto@megamoto.com.ar"
-    },
-    "assigned": "2024-01-29T12:31:48.373Z",
-    "archivingReason": "noCalificaCredito",
-    "firstContactedAt": "2024-01-28T20:30:01.420Z"
-  },
-  {
-    "id": "65b6b93686509400087df53c",
-    "created": "2024-01-28T20:29:42.879Z",
-    "transferredAt": null,
-    "group": "Megamoto 2",
-    "groupId": "628d170e9cb6020018237d2f",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Abasto",
-    "initialGroupId": "628d170e9cb6020018237d2f",
-    "firstName": "Alejandro",
-    "nin": [],
-    "userMade": false,
-    "status": "followUp",
-    "additionalData": {},
-    "phones": [
-      "+5491139427182"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6b93686509400087df544",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T20:29:42.911Z",
-        "source": "WHATSAPP",
-        "utmSource": "WHATSAPP",
-        "providerKey": "wasp",
-        "comments": "",
-        "providerLeadId": "8d98c7c5-2a4c-4f6c-b771-a0d3bfba07e7_5491139427182",
-        "type": "savingPlan"
-      }
-    ],
-    "agent": {
-      "id": "6275818bf8856740659015fd",
-      "firstName": "Dario",
-      "lastName": "Pérez Acosta",
-      "phone": "+541149730000",
-      "email": "perezdario1503@gmail.com",
-      "appFields": {},
-      "legacyId": "megamoto@megamoto.com.ar"
-    },
-    "assigned": "2024-01-29T12:31:53.851Z",
-    "firstContactedAt": "2024-01-28T20:29:43.461Z"
-  },
-  {
-    "id": "65b6b8fe0cb05b0008e6116b",
-    "created": "2024-01-28T20:28:46.272Z",
-    "transferredAt": null,
-    "group": "Megamoto 2",
-    "groupId": "628d170e9cb6020018237d2f",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Abasto",
-    "initialGroupId": "628d170e9cb6020018237d2f",
-    "firstName": "Alan",
-    "nin": [],
-    "userMade": false,
-    "status": "followUp",
-    "additionalData": {},
-    "phones": [
-      "+5491123312415"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6b8fe0cb05b0008e61173",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T20:28:46.326Z",
-        "source": "WHATSAPP",
-        "campaign": "120204272580780267",
-        "medium": "ctwa",
-        "utmSource": "WHATSAPP",
-        "utmCampaign": "120204272580780267",
-        "utmMedium": "ctwa",
-        "providerKey": "wasp",
-        "comments": "Chatea con nosotros - https://www.instagram.com/p/C2QC7R0tZ8N/",
-        "providerLeadId": "2dd634c1-85d6-4c58-8dfe-126fc459764f_5491123312415",
-        "type": "savingPlan"
-      }
-    ],
-    "agent": {
-      "id": "6275818bf8856740659015fd",
-      "firstName": "Dario",
-      "lastName": "Pérez Acosta",
-      "phone": "+541149730000",
-      "email": "perezdario1503@gmail.com",
-      "appFields": {},
-      "legacyId": "megamoto@megamoto.com.ar"
-    },
-    "assigned": "2024-01-29T12:32:08.747Z",
-    "firstContactedAt": "2024-01-28T20:28:46.708Z"
-  },
-  {
-    "id": "65b6b8f586509400087de7fc",
-    "created": "2024-01-28T20:28:37.573Z",
-    "transferredAt": null,
-    "group": "Megamoto 2",
-    "groupId": "628d170e9cb6020018237d2f",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Abasto",
-    "initialGroupId": "628d170e9cb6020018237d2f",
-    "firstName": "Naty 🤩",
-    "nin": [],
-    "userMade": false,
-    "status": "archived",
-    "additionalData": {},
-    "phones": [
-      "+5491136686463"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6b8f586509400087de804",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T20:28:37.596Z",
-        "source": "WHATSAPP",
-        "campaign": "120204663387340267",
-        "medium": "ctwa",
-        "utmSource": "WHATSAPP",
-        "utmCampaign": "120204663387340267",
-        "utmMedium": "ctwa",
-        "providerKey": "wasp",
-        "comments": "Chatea con nosotros -   - https://fb.me/w9AK2KqY6",
-        "providerLeadId": "81e8a355-c712-4c84-ae8f-9aaf8538bd9e_5491136686463",
-        "type": "savingPlan"
-      }
-    ],
-    "agent": {
-      "id": "6275818bf8856740659015fd",
-      "firstName": "Dario",
-      "lastName": "Pérez Acosta",
-      "phone": "+541149730000",
-      "email": "perezdario1503@gmail.com",
-      "appFields": {},
-      "legacyId": "megamoto@megamoto.com.ar"
-    },
-    "assigned": "2024-01-29T12:32:15.038Z",
-    "archivingReason": "noCalificaCredito",
-    "firstContactedAt": "2024-01-28T20:28:37.941Z"
-  },
-  {
-    "id": "65b6b7e63912350008fc101d",
-    "created": "2024-01-28T20:24:06.742Z",
-    "transferredAt": null,
-    "group": "Megamoto 1",
-    "groupId": "628d15e99cb6020018237d2c",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Merlo",
-    "initialGroupId": "628d15e99cb6020018237d2c",
-    "firstName": "Diego 🏍️🏍️",
-    "nin": [],
-    "userMade": false,
-    "status": "archived",
-    "additionalData": {},
-    "phones": [
-      "+5491134656100"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6b7e63912350008fc1025",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T20:24:06.765Z",
-        "source": "WHATSAPP",
-        "utmSource": "WHATSAPP",
-        "providerKey": "wasp",
-        "comments": "",
-        "providerLeadId": "79f650b2-fead-4227-9a8e-28e76575c704_5491134656100",
-        "type": "savingPlan"
-      }
-    ],
-    "archivingReason": "inactive",
-    "firstContactedAt": "2024-01-28T20:24:07.172Z"
-  },
-  {
-    "id": "65b6b683839e850008e8086c",
-    "created": "2024-01-28T20:18:11.168Z",
-    "transferredAt": null,
-    "group": "Megamoto 1",
-    "groupId": "628d15e99cb6020018237d2c",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Merlo",
-    "initialGroupId": "628d15e99cb6020018237d2c",
-    "firstName": "Kary💞",
-    "nin": [],
-    "userMade": false,
-    "status": "archived",
-    "additionalData": {},
-    "phones": [
-      "+5491134548478"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6b683839e850008e80874",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T20:18:11.203Z",
-        "source": "WHATSAPP",
-        "utmSource": "WHATSAPP",
-        "providerKey": "wasp",
-        "comments": "",
-        "providerLeadId": "c7a59a35-e1ab-4577-bef0-16b58e5c19d6_5491134548478",
-        "type": "savingPlan"
-      }
-    ],
-    "archivingReason": "inactive",
-    "firstContactedAt": "2024-01-28T20:18:12.853Z"
-  },
-  {
-    "id": "65b6b61272a69000088fc11c",
-    "created": "2024-01-28T20:16:18.386Z",
-    "transferredAt": null,
-    "group": "Megamoto 1",
-    "groupId": "628d15e99cb6020018237d2c",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Merlo",
-    "initialGroupId": "628d15e99cb6020018237d2c",
-    "firstName": ".",
-    "nin": [],
-    "userMade": false,
-    "status": "archived",
-    "additionalData": {},
-    "phones": [
-      "+5493855762939"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6b61272a69000088fc124",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T20:16:18.420Z",
-        "source": "WHATSAPP",
-        "utmSource": "WHATSAPP",
-        "providerKey": "wasp",
-        "comments": "",
-        "providerLeadId": "881f5a30-1287-40c7-999a-895f4d017893_5493855762939",
-        "type": "savingPlan"
-      }
-    ],
-    "archivingReason": "inactive",
-    "firstContactedAt": "2024-01-28T20:16:18.905Z"
-  },
-  {
-    "id": "65b6ae424a38330008576b3a",
-    "created": "2024-01-28T19:42:58.749Z",
-    "transferredAt": null,
-    "group": "Megamoto",
-    "groupId": "5cd09261a6f3d300596a39d0",
-    "account": "Megamoto",
-    "accountId": "5cc1d395ac14ff0059c1e78c",
-    "initialGroup": "Megamoto Merlo",
-    "initialGroupId": "628d15e99cb6020018237d2c",
-    "firstName": "Tian",
-    "nin": [],
-    "userMade": false,
-    "status": "followUp",
-    "additionalData": {},
-    "phones": [
-      "+5492966521580"
-    ],
-    "emails": [],
-    "contactMediums": [
-      {
-        "_id": "65b6ae424a38330008576b42",
-        "type": "phone"
-      }
-    ],
-    "leads": [
-      {
-        "created": "2024-01-28T19:42:58.784Z",
-        "source": "WHATSAPP",
-        "utmSource": "WHATSAPP",
-        "providerKey": "wasp",
-        "comments": "",
-        "providerLeadId": "ec0a05db-f11c-4254-8e64-d3f7d1f57dd2_5492966521580",
-        "type": "savingPlan"
-      }
-    ],
-    "agent": {
-      "id": "5cd0a5b0659d0b0004c1ff9f",
-      "firstName": "Joselín",
-      "lastName": "Sierra",
-      "phone": "+541122702976",
-      "email": "joselinmegamoto@gmail.com",
-      "appFields": {}
-    },
-    "assigned": "2024-01-31T19:36:37.237Z",
-    "firstContactedAt": "2024-01-28T19:42:59.102Z"
   }
 ];
 
