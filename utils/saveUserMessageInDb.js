@@ -34,8 +34,8 @@ export const saveUserMessageInDb = async (
 		// If the lead does not exist for that thread, create it and return
 		if (lead === null) {
 			// Obtain current date and hour
-			const currentDateTime = new Date().toLocaleString();
-
+			const currentDateTime = new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+			
 			lead = await Leads.create({
 				name: name,
 				id_user: senderId,
@@ -48,8 +48,8 @@ export const saveUserMessageInDb = async (
 			return;
 		}
 		// Obtain current date and hour
-		const currentDateTime = new Date().toLocaleString();
-
+		const currentDateTime = new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+		
 		// Concatenate the new message to the existing content
 		const newContent = `${lead.content}\n${currentDateTime} - ${name}: ${userMessage}`;
 
