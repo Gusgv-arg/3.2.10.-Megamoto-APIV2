@@ -29,32 +29,27 @@ export const exportLeadsToExcel = async (name) => {
 			createdAt: lead.createdAt,
 		}));
 		
-		// Crea un nuevo libro de trabajo
 		const wb = xlsx.utils.book_new();
-		
-		// Convierte los datos a hoja de trabajo
-		const ws = xlsx.utils.json_to_sheet(leadsForXlsx);
-		
-		// Añade la hoja de trabajo al libro
-		xlsx.utils.book_append_sheet(wb, ws, "Leads");
-		
-		// Escribe el libro en un archivo .xlsx
-		xlsx.writeFile(wb, 'excel/Leads.xlsx');
-		console.log("Leads DB exported to Leads.xls");
-		
-		// Obtiene la ruta del directorio actual de forma compatible con ES Modules
-		const __dirname = path.dirname(fileURLToPath(import.meta.url));
-		const filePath = path.join(__dirname, '../excel/Leads.xlsx');
-		
-		const dirDeploy = "https://github.com/Gusgv-arg/3.2.10.-Megamoto-APIV2/tree/main/excel/Leads.xlsx"
-
-		// Mandar el mail
-		//sendLeadsByMail(filePath, name) // Para enviar desde localhost
-		sendLeadsByMail(dirDeploy, name) // Para enviar desde producción
-		
-        //res.status(200).sendFile(filePath);
-		//res.status(200).send("Leads.xls created!");
-		//res.status(200).send("Archivo Leads enviado por mail a Gustavo Glunz");
+        const ws = xlsx.utils.json_to_sheet(leadsForXlsx);
+        xlsx.utils.book_append_sheet(wb, ws, "Leads");
+        
+        // Define un nombre de archivo temporal para el archivo Excel
+        const tempFilePath = 'excel/Leads.xlsx';
+        xlsx.writeFile(wb, tempFilePath);
+        console.log("Leads DB exported to Leads.xlsx");
+        
+        // Obtiene la ruta completa del archivo temporal
+        const __dirname = path.dirname(fileURLToPath(import.meta.url));
+        const filePath = path.join(__dirname, '../', tempFilePath);
+        
+        // Envía el archivo por correo electrónico
+        await sendLeadsByMail(filePath, name);
+        
+        // Elimina el archivo temporal después de enviarlo por correo
+        fs.unlink(filePath, (err) => {
+            if (err) throw err;
+            console.log('Leads.xlsx was deleted after email was sent');
+        });
 
 	} catch (error) {
 		console.error("An error occurred while exporting leads to Excel:", error);
