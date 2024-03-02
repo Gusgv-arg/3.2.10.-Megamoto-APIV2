@@ -43,13 +43,7 @@ export const exportLeadsToExcel = async (name) => {
         const filePath = path.join(__dirname, '../', tempFilePath);
         
         // Envía el archivo por correo electrónico
-        await sendLeadsByMail(filePath, name);
-        
-        // Elimina el archivo temporal después de enviarlo por correo
-        fs.unlink(filePath, (err) => {
-            if (err) throw err;
-            console.log('Leads.xlsx was deleted after email was sent');
-        });
+        await sendLeadsByMail(filePath, name);                
 
 	} catch (error) {
 		console.error("An error occurred while exporting leads to Excel:", error);

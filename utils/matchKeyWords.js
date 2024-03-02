@@ -26,9 +26,7 @@ export const matchkeyWords = (newMessage) => {
 	const keywordsTrabajo =
 		/(currículum|cv|busco trabajo|busco empleo|búsqueda de trabajo|búsqueda de empleo|quiero trabajar)/i;
 	const keywordsEnvios = /(envíos|envío|envio|envios|envían|envian)/i;
-	const keywordsPlace =
-		/(de donde son|donde estan|donde se encuentran|donde|son de)/i;
-
+	
 	const matchCompetitors =
 		newMessage.receivedMessage.match(keywordsCompetitors);
 	const matchModels = newMessage.receivedMessage.match(keywordsModels);
@@ -43,8 +41,7 @@ export const matchkeyWords = (newMessage) => {
 	const matchBicicleta = newMessage.receivedMessage.match(keywordsBicicleta);
 	const matchTrabajo = newMessage.receivedMessage.match(keywordsTrabajo);
 	const matchEnvios = newMessage.receivedMessage.match(keywordsEnvios);
-	const matchPlace = newMessage.receivedMessage.match(keywordsPlace);
-
+	
 	let instructionsQuantity = 0;
 
 	const competitorInstructions =
@@ -168,15 +165,7 @@ export const matchkeyWords = (newMessage) => {
 		instructionsQuantity++;
 		const enviosInstructions = `${instructionsQuantity}. Si el cliente consulta por envíos al interior del país, responde que sí es posible. Los detalles sobre la metodología y costos asociados lo informará el vendedor.\n`;
 		instructions = instructions + enviosInstructions;
-	}
-	if (matchPlace) {
-		console.log(
-			`In the message of ${newMessage.name} appears the word ${matchPlace[0]}`
-		);
-		instructionsQuantity++;
-		const placeInstructions = `${instructionsQuantity}. El cliente seguramente esté consultando por la ubicación de las sucursales de Megamoto, de ser así responde con la información sobre la ubicación de las dos sucursales que tiene Megamoto.\n`;
-		instructions = instructions + placeInstructions;
-	}
+	}	
 
 	let moreThanOneInstruction;
 
