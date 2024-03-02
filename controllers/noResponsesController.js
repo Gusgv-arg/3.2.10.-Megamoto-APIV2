@@ -3,7 +3,7 @@ import axios from "axios";
 import { logError } from "../utils/logError.js";
 import { sendMessageToUnclaimed } from "../utils/sendMessageToUnclaimed.js";
 import { excludeProactive } from "../utils/excludeProactive.js";
-import { searchProspectsNames } from "../utils/searchProspectsnames.js";
+import { searchProspectsNames } from "../utils/searchProspectsNames.js";
 
 dotenv.config();
 
