@@ -36,7 +36,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			.split(" ")
 			.slice(0, 5)
 			.join(" ");
-		console.log(`6. Existing thread for --> ${newMessage.name}, ID: ${newMessage.senderId}, Message: ${firstFiveWords}. Changed firstCustomerMessage property to false.`);
+		//console.log(`6. Existing thread for --> ${newMessage.name}, ID: ${newMessage.senderId}, Message: ${firstFiveWords}. Changed firstCustomerMessage property to false.`);
 
 		// Check if it is an Agent response
 		if (newMessage.channel === "Respuesta Agente") {

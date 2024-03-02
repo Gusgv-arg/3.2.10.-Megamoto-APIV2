@@ -4,7 +4,7 @@ import Leads from "../models/leads.js";
 export const checkIndividualBotSwitch = async (req, res, next) => {
 	const data = req.body;
 	const prospectId = data.prospect?.id;
-	const name = data.prospect?.firstName || data?.message?.visitor?.name;
+	const name = data.prospect?.firstName? data.prospect.firstName : data.message.visitor.name;
 
 	try {
 		const lead = await Leads.findOne({ id_user: prospectId });

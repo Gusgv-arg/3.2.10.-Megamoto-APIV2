@@ -5,7 +5,7 @@ import { logError } from "../utils/logError.js";
 // Function to check and save repeted messages sent by the webhook
 export const checkRepeatedWebhookMessage = async (req, res, next) => {
 	const data = req.body;
-	const name = data.prospect?.firstName || data.message.visitor.name;
+	const name = data.prospect?.firstName? data.prospect.firstName : data.message.visitor.name;
 	const message =
 		data.interaction.output.message && data.interaction.output.message.content
 			? data.interaction.output.message.content

@@ -13,8 +13,7 @@ export const checkNoMessage = async (req, res, next) => {
 			: data.message?.contents[0].text
 			? data.message.contents[0].text
 			: "No message";
-
-	const name = data.prospect?.firstName || data.message.visitor.name
+	const name = data.prospect?.firstName? data.prospect.firstName : data.message.visitor.name;
 	const prospectId = data.prospect?.id;
 	const channel =
 		data.interaction?.via === "whatsApp" ? "whatsapp" : data.interaction?.via;

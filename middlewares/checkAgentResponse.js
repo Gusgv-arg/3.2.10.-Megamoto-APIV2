@@ -1,7 +1,8 @@
 import Leads from "../models/leads.js";
 
 export const checkAgentResponse = async (req, res, next) => {
-	const name = req.body.prospect?.firstName || req.body.message.visitor.name;
+	const data = req.body
+	const name = data.prospect?.firstName? data.prospect.firstName : data.message.visitor.name;
 
 	if (req.origin === "Respuesta Agente") {
 		const idUser = req.body.prospect.id;

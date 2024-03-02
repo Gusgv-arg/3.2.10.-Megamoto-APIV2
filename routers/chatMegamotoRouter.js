@@ -12,6 +12,7 @@ import { checkIndividualBotSwitch } from "../middlewares/checkIndividualBotswitc
 import { quantityToProcess } from "../middlewares/quantityToProcess.js";
 import { checkNewProspect } from "../middlewares/checkNewProspect.js";
 import { sendMessageToUser } from "../controllers/sendMessageController.js";
+import { adminOrders } from "../middlewares/adminOrders.js";
 
 const chatMegamotoRouter = express.Router();
 
@@ -21,6 +22,7 @@ const targetDate = new Date("2024-03-01");
 chatMegamotoRouter.post(
 	"/webhook-megamoto",
 	checkGeneralBotSwitch,
+	adminOrders,
 	checkBotOrigin,
 	(req, res, next) => checkNewProspect(req, res, next, targetDate),
 	checkIndividualBotSwitch,

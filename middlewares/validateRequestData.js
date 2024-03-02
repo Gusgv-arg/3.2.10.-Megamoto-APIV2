@@ -30,15 +30,15 @@ export const validateRequestData = (req, res, next) => {
 			data.interaction.output.message.hasOwnProperty("content"))
 	) {
 		const firstFiveWords = message.split(" ").slice(0, 5).join(" ");
-		console.log(`5. Valid Data --> ${data.prospect.firstName}: "${firstFiveWords}...".`);
+		//console.log(`5. Valid Data --> ${data.prospect.firstName}: "${firstFiveWords}...".`);
 		next();
 	} else if (
 		req.origin === "facebook" &&
-		data.message.visitor.hasOwnProperty("name") &&
-		data.message.hasOwnProperty("from") &&
-		data.message.hasOwnProperty("id") &&
-		data.message.hasOwnProperty("to") &&
-		data.message.contents[0].hasOwnProperty("text")
+		data.interaction.output.message.visitor.hasOwnProperty("name") &&
+		data.interaction.output.message.hasOwnProperty("from") &&
+		data.interaction.output.message.hasOwnProperty("id") &&
+		data.interaction.output.message.hasOwnProperty("to") &&
+		data.interaction.output.message.contents[0].hasOwnProperty("text")
 	) {
 		const firstFiveWords = message.split(" ").slice(0, 5).join(" ");
 		//console.log(`5. Valid Data --> ${name}: "${firstFiveWords}...".`);

@@ -18,7 +18,8 @@ export const checkGeneralBotSwitch = async (req, res, next) => {
 			: data.message?.contents[0].text
 			? data.message.contents[0].text
 			: "No message";
-	const name = data?.prospect?.firstName || data?.message?.visitor?.name;
+	
+	const name = data.prospect?.firstName? data.prospect.firstName : data.message.visitor.name;
 
 	try {
 		let botSwitchInstance = await BotSwitch.findOne();

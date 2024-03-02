@@ -42,7 +42,7 @@ export const webhookGptController = async (req, res) => {
 	if (existingIdMessage) {
 		console.log("ERROR DEL WEBHOOK, MENSAJE YA ENVIADO ANTES!!:", existingIdMessage);
 		let nombre = ""
-		if (data.message.visitor.name){
+		if (data?.message?.visitor?.name){
 			 nombre = data.message.visitor.name
 		}
 

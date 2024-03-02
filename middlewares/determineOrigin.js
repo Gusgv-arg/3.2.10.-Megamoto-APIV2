@@ -1,6 +1,6 @@
 export const determineOrigin = (req, res, next) => {
 	const data = req.body;
-	const name = data.prospect?.firstName || data.message.visitor.name;
+	const name = data.prospect?.firstName? data.prospect.firstName : data.message.visitor.name;
 	const message =
 		data.interaction.output.message && data.interaction.output.message.content
 			? data.interaction.output.message.content
@@ -15,10 +15,10 @@ export const determineOrigin = (req, res, next) => {
 
 	if (data.interaction.proactive === true) {
 		origin = "Respuesta Agente";
-		console.log(`4. Origin: Agent Message --> ${name}: "${firstTenWords}...".`);
+		//console.log(`4. Origin: Agent Message --> ${name}: "${firstTenWords}...".`);
 	} else if (data.interaction?.via === "whatsApp") {
 		origin = "whatsapp";
-		console.log(`4. Origin: Whatsapp from --> ${name}: "${firstFiveWords}".`);
+		//console.log(`4. Origin: Whatsapp from --> ${name}: "${firstFiveWords}".`);
 	} else if (data.interaction?.via === "instagram") {
 		origin = "instagram";
 		//console.log(`4. Origin: Instagram from --> ${name}: "${firstFiveWords}". Object Instagram ver el senderId --> ${data}`);
@@ -26,7 +26,7 @@ export const determineOrigin = (req, res, next) => {
 		origin = "facebook";
 		//console.log(`4. Origin: Facebook from --> ${name}: "${firstFiveWords}".`);
 		console.log("FACEBOOK!!!!!!!", data)
-		console.log("FACEBOOK!!!!!!!", data.message)
+		console.log("FACEBOOK MESSAGE!!!!!!!", data.interaction.output.message)
 	} else {
 		console.log(
 			"`4. Exit the process. Data with an origin not processed in API",
