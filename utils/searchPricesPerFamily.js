@@ -3,11 +3,7 @@ import { precios } from "../excel/listaDePrecios.js";
 export const searchPricesPerFamily = (family) => {
 	
 	let familyLower = family.toLowerCase();
-
-	// Transform Blitz family to 110
-	if (familyLower === "blitz") {
-		familyLower = "110";
-	}
+	
 	const prices = precios.filter(
 		(item) => item.familia.toLowerCase() === familyLower		
 	);

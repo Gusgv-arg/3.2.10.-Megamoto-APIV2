@@ -1,6 +1,5 @@
 import { handleMessageToZenvia } from "./handleMessageToZenvia.js";
 import { processMessageWithGPTAssistant } from "./processMessageWithGPTAssistant.js";
-import { processMessageWithGPTAssistant2 } from "./processMessageWithGPTAssistant2.js";
 import { saveAgentResponseInDb } from "./saveAgentResponseInDb.js";
 import { sendErrorMessage } from "./sendErrorMessage.js";
 
@@ -25,7 +24,7 @@ export class UserMessageQueue {
 				// PARA REPENSAR EL PROCESO
 
 				// Process the message with the Assistant
-				const response = await processMessageWithGPTAssistant2(newMessage);
+				const response = await processMessageWithGPTAssistant(newMessage);
 
 				// Check if it's an agent's response
 				if (newMessage.channel === "Respuesta Agente") {

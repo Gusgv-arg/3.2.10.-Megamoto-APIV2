@@ -15,7 +15,7 @@ import { sendMessageToUser } from "../controllers/sendMessageController.js";
 
 const chatMegamotoRouter = express.Router();
 
-const targetDate = new Date("2024-02-26");
+const targetDate = new Date("2024-03-01");
 
 // Receives data from Zenvia webhook
 chatMegamotoRouter.post(

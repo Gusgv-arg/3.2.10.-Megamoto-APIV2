@@ -4,7 +4,6 @@ import { saveUserMessageInDb } from "./saveUserMessageInDb.js";
 import Leads from "../models/leads.js";
 import axios from "axios";
 import { matchkeyWords } from "./matchKeyWords.js";
-import { matchkeyWords2 } from "./matchKeyWords2.js";
 
 dotenv.config();
 
@@ -24,7 +23,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		existingThread = await Leads.findOne({
 			id_user: newMessage.senderId,
 			thread_id: { $exists: true },
-		});
+		});		
 	} catch (error) {
 		console.error("6. Error fetching thread from the database:", error);
 		throw error;
@@ -37,7 +36,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			.split(" ")
 			.slice(0, 5)
 			.join(" ");
-		//console.log(`6. Existing thread for --> ${newMessage.name}, ID: ${newMessage.senderId}, Message: ${firstFiveWords}. Changed firstCustomerMessage property to false.`);
+		console.log(`6. Existing thread for --> ${newMessage.name}, ID: ${newMessage.senderId}, Message: ${firstFiveWords}. Changed firstCustomerMessage property to false.`);
 
 		// Check if it is an Agent response
 		if (newMessage.channel === "Respuesta Agente") {
@@ -106,10 +105,9 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 	do {
 		try {
 			// Check if there are key words and if so pass it to the run
-			const instructions = matchkeyWords2(newMessage);
+			const instructions = matchkeyWords(newMessage);
 
-			//if (instructions === "") {
-			if (instructions.quantity === 0) {
+			if (instructions === "") {
 				// Run the assistant normally
 				run = await openai.beta.threads.runs.create(
 					threadId,
@@ -117,25 +115,17 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 						assistant_id: assistantId,
 					}
 				);
-			} else if (instructions.bici || instructions.trabajo || instructions.dni || instructions.cuota || instructions.pago || instructions.model) {
-				run = await openai.beta.threads.runs.create(
-					threadId,
-					{
-						assistant_id: assistantId,
-						instructions: instructions.bicicletaInstructions ? instructions.bicicletaInstructions : instructions.trabajoInstructions ? instructions.trabajoInstructions : instructions.financeInstructions? instructions.financeInstructions : instructions.cuotaInstructions ? instructions.cuotaInstructions : instructions.pagoInstructions? instructions.pagoInstructions : instructions.modelInstructions,
-					}
-				);
 			} else {
-				console.log("Run con aditional instructions!!!!", instructions);
+				// run the assistant with special instructions		
+				console.log("Running assistant with special instructions!!\n", instructions)		
 				run = await openai.beta.threads.runs.create(
 					threadId,
 					{
 						assistant_id: assistantId,
-						//instructions: instructions,
-						additional_instructions: instructions,
+						instructions: instructions,
 					}
 				);
-			}
+			} 			
 
 			runStatus = await openai.beta.threads.runs.retrieve(threadId, run.id);
 

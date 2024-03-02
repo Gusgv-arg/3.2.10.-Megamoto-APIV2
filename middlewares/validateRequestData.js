@@ -30,7 +30,7 @@ export const validateRequestData = (req, res, next) => {
 			data.interaction.output.message.hasOwnProperty("content"))
 	) {
 		const firstFiveWords = message.split(" ").slice(0, 5).join(" ");
-		//console.log(`3. Valid Data --> ${name}: "${firstFiveWords}...".`);
+		console.log(`5. Valid Data --> ${data.prospect.firstName}: "${firstFiveWords}...".`);
 		next();
 	} else if (
 		req.origin === "facebook" &&
@@ -41,7 +41,7 @@ export const validateRequestData = (req, res, next) => {
 		data.message.contents[0].hasOwnProperty("text")
 	) {
 		const firstFiveWords = message.split(" ").slice(0, 5).join(" ");
-		//console.log(`3. Valid Data --> ${name}: "${firstFiveWords}...".`);
+		//console.log(`5. Valid Data --> ${name}: "${firstFiveWords}...".`);
 		next();
 	} else {
 		console.log("3. Invalid data from Zenvia", data);

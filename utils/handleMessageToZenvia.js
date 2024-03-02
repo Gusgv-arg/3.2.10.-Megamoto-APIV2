@@ -63,8 +63,7 @@ export const handleMessageToZenvia = async (
 			console.log(`13. GPT response to ${name}: "${firstFiveWords}..." sent successfully to Zenvia.`);
 		} else {
 			console.log(`13. Error sending message from ${name}: "${firstFiveWords}..." to Zenvia.`);
-		} */
-	
+		} */	
 	} catch (error) {
 		console.log("13. Error in handleMessageToZenvia:", error.message);
 		throw new Error(error.message);

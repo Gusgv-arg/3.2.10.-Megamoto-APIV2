@@ -9,7 +9,7 @@ export const checkAgentResponse = async (req, res, next) => {
 		if (lead === null) {
 			// If lead does not exist, exit the process sending response to Zenvia an no next()
 			console.log(
-				`5. Exit process --> Agent responded to ${name} and he is not in Leads DB`
+				`6. Exit process --> Agent responded to ${name} and he is not in Leads DB`
 			);
 			res.status(200).send("Received")
 			return;

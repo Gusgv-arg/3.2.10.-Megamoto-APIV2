@@ -18,7 +18,7 @@ export const determineOrigin = (req, res, next) => {
 		console.log(`4. Origin: Agent Message --> ${name}: "${firstTenWords}...".`);
 	} else if (data.interaction?.via === "whatsApp") {
 		origin = "whatsapp";
-		//console.log(`4. Origin: Whatsapp from --> ${name}: "${firstFiveWords}".`);
+		console.log(`4. Origin: Whatsapp from --> ${name}: "${firstFiveWords}".`);
 	} else if (data.interaction?.via === "instagram") {
 		origin = "instagram";
 		//console.log(`4. Origin: Instagram from --> ${name}: "${firstFiveWords}". Object Instagram ver el senderId --> ${data}`);

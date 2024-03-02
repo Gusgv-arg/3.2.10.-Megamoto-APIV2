@@ -5,11 +5,11 @@ export const precios = [
 	},
 	{
 		familia: "251",
-		modelos: [{ modelo: "251S", marca: "Benelli", precio: 5274076 }],
+		modelos: [{ modelo: "251 S", marca: "Benelli", precio: 5274076 }],
 	},
 	{
 		familia: "302",
-		modelos: [{ modelo: "302S", marca: "Benelli", precio: 7991265 }],
+		modelos: [{ modelo: "302 S", marca: "Benelli", precio: 7991265 }],
 	},
 	{
 		familia: "502",
@@ -17,7 +17,7 @@ export const precios = [
 	},
 	{
 		familia: "752",
-		modelos: [{ modelo: "752S", marca: "Benelli", precio: 15789626 }],
+		modelos: [{ modelo: "752 S", marca: "Benelli", precio: 15789626 }],
 	},
 	{
 		familia: "IMPERIALE",
@@ -45,9 +45,9 @@ export const precios = [
 	{
 		familia: "TRK",
 		modelos: [
-			{ modelo: "TRK251 ABS", marca: "Benelli", precio: 6195228 },
-			{ modelo: "TRK502 NEW", marca: "Benelli", precio: 12423397 },
-			{ modelo: "TRK502-X NEW", marca: "Benelli", precio: 14033236 },
+			{ modelo: "TRK 251 ABS", marca: "Benelli", precio: 6195228 },
+			{ modelo: "TRK 502 NEW", marca: "Benelli", precio: 12423397 },
+			{ modelo: "TRK 502-X NEW", marca: "Benelli", precio: 14033236 },
 		],
 	},
 	{
@@ -61,7 +61,7 @@ export const precios = [
 		modelos: [{ modelo: "RK 150", marca: "Keeway", precio: 2002926 }],
 	},
 	{
-		familia: "110",
+		familia: "Blitz",
 		modelos: [
 			{ modelo: "BLITZ 110 V8 START", marca: "Motomel", precio: 1049946 },
 			{
@@ -150,15 +150,15 @@ export const precios = [
 	},
 	{
 		familia: "AX",
-		modelos: [{ modelo: "AX100", marca: "Suzuki", precio: 1586256 }],
+		modelos: [{ modelo: "AX 100", marca: "Suzuki", precio: 1586256 }],
 	},
 	{
 		familia: "GN",
-		modelos: [{ modelo: "GN125", marca: "Suzuki", precio: 2271696 }],
+		modelos: [{ modelo: "GN 125", marca: "Suzuki", precio: 2271696 }],
 	},
 	{
 		familia: "GSX",
-		modelos: [{ modelo: "GSX125", marca: "Suzuki", precio: 2394606 }],
+		modelos: [{ modelo: "GSX 125", marca: "Suzuki", precio: 2394606 }],
 	},
 	{
 		familia: "CITYCOM",
