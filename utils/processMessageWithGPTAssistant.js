@@ -65,11 +65,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		//console.log(`6. New thread created --> ${newMessage.name}.`);
 
 		// Create a First Greet, pass it to the new thread, and post directly to Zenvia without running the assistant
-		let greeting1 = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Te pido que seas lo más preciso posible pero tené en cuenta que a veces cometo errores 🙏. Todo será reconfirmado por un vendedor que para atenderte más rápido necesita saber que moto estas buscando, como queres pagar, tu DNI si vas a pagar financiado, un teléfono, y de donde sos. 😀`;
-
-		const greeting2 = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Para que un vendedor pueda atenderte más rápido por favor informame: 1) Modelo. 2) Teléfono. 3) Localidad. 4) Método de pago. 5) DNI (si vas a pagar financiado). Estoy en etapa de prueba y puedo equivocarme; luego de que me envíes los datos, un vendedor te contactará para confirmar la propuesta. ¡Saludos y gracias por el contacto! 😀`;
-
-		const greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto. Estoy para ayudarte a comprar tu moto agilizando la atención por parte de nuestros vendedores. A veces me equivoco; por lo que agradezco tu paciencia. ¿Comenzamos por saber que moto estas buscando? 😀`
+		const greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer errores. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀`
 		
 		const form = "https://whatsform.com/cI7aIJ"
 

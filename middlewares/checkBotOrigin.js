@@ -1,5 +1,6 @@
 export const checkBotOrigin = (req, res, next) => {
 	const data = req.body;
+//	console.log(data)
 	const name = data.prospect?.firstName? data.prospect.firstName : data.message.visitor.name;
 	/* if (data.interaction.proactive === true) {
 		console.log("data con proactive = true", "Nombre:", name, "\nBot:",data.interaction?.bot, "\nAgent:", data.interaction?.agent?.firstName, "\nPerformer:", data.interaction.output.message.performer );
@@ -7,8 +8,8 @@ export const checkBotOrigin = (req, res, next) => {
 		console.log("data.interaction.output.message", data.interaction.output.message);
 	} */
 	if (
-		data.interaction?.bot === true ||
-		data.interaction?.agent?.lastName === "Bot 🤖" ||
+		data.interaction?.bot === true && name !=="Gg" ||
+		data.interaction?.agent?.lastName === "Bot 🤖" && name !=="Gg" ||
 		(data.interaction.proactive === true &&
 			!data.interaction.hasOwnProperty("agent"))  // Si viene interaction.agent es un vendedor
 	) {

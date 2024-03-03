@@ -5,8 +5,6 @@ import { searchModelsByCC } from "./searchModelsByCC.js";
 export const matchkeyWords = (newMessage) => {
 	let instructions = "";
 
-	const keywordsPrice =
-		/(precio|precios|que valor|valores|cuanto sale|cuanto vale|que sale|que vale|cual es el valor)/i;
 	const keywordsFinance =
 		/(préstamo|prestamo|financiación|financiado|financiar|sin interes|sin intereses)(?!.*(?:tarjeta de crédito|tarjeta de débito|transferencia|tarjeta))/i;
 	const keywordsCuota =
@@ -21,18 +19,23 @@ export const matchkeyWords = (newMessage) => {
 	const keywordsCilindradas =
 		/\b(100|110|125|135|149|150|200|202|250|300|390|400|450|500|600|650|750|1000|1200|1300)(?![0-9])([a-zA-Z?!.]*)/gi;
 	const keywordsModels =
-		/\b(180|251|302|502|752|imperiale|leoncino|tnt|trk|keeway|rk|blitz|blitz 110|cg|dlx|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom|motocargo|cargo)(?=\D|$)/gi;
+		/(\b180|251|302|502|752|imperiale|leoncino|tnt|trk|keeway|rk|blitz|blitz 110|cg|dlx|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom|motocargo|cargo)(?=\D|$)/gi;
+	const characterModels =
+		/imperiale|leoncino|tnt|trk|keeway|rk|blitz|cg|dlx|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom|motocargo|cargo /gi;
+	const numericModels = /(?<![0-9])(180|251|302|502|752)(?![0-9])/gm
 	const keywordsBicicleta = /(bici|bicicleta|bicis|bicicletas)/i;
 	const keywordsTrabajo =
 		/(currículum|cv|busco trabajo|busco empleo|búsqueda de trabajo|búsqueda de empleo|quiero trabajar)/i;
 	const keywordsEnvios = /(envíos|envío|envio|envios|envían|envian)/i;
-	
+
 	const matchCompetitors =
 		newMessage.receivedMessage.match(keywordsCompetitors);
 	const matchModels = newMessage.receivedMessage.match(keywordsModels);
+	const matchCharacterModels = newMessage.receivedMessage.match(characterModels);
+	const matchNumericModels = newMessage.receivedMessage.match(numericModels);
+	
 	const matchCilindradas =
 		newMessage.receivedMessage.match(keywordsCilindradas);
-	const matchPrice = newMessage.receivedMessage.match(keywordsPrice);
 	const matchCuota = newMessage.receivedMessage.match(keywordsCuota);
 	const matchFinance = newMessage.receivedMessage.match(keywordsFinance);
 	const matchPago = newMessage.receivedMessage.match(keywordsPago);
@@ -41,7 +44,7 @@ export const matchkeyWords = (newMessage) => {
 	const matchBicicleta = newMessage.receivedMessage.match(keywordsBicicleta);
 	const matchTrabajo = newMessage.receivedMessage.match(keywordsTrabajo);
 	const matchEnvios = newMessage.receivedMessage.match(keywordsEnvios);
-	
+
 	let instructionsQuantity = 0;
 
 	const competitorInstructions =
@@ -55,12 +58,30 @@ export const matchkeyWords = (newMessage) => {
 		instructions = instructions + competitorInstructions;
 	}
 
-	if (matchModels) {
+	if (matchCharacterModels) {
 		console.log(
-			`In the message of ${newMessage.name} appears the model ${matchModels[0]}`
+			`In the message of ${newMessage.name} appears the model ${matchCharacterModels[0]}`
 		);
 
-		let allModels = checkAllModels(newMessage, keywordsModels);
+		let allModels = checkAllModels(newMessage, characterModels);
+		console.log("all models", allModels);
+		let allModelsList = "";
+		const modelsInstructions = allModels.map((model) => {
+			let oneModel = searchPricesPerFamily(model);
+			allModelsList = `${allModelsList} ${oneModel}\n`;
+		});
+		console.log("allModels:", allModelsList);
+		instructionsQuantity++;
+		const modelInstructions = `${instructionsQuantity}. Envía al cliente el detalle completo de todos los modelos disponibles para que tenga todas las opciones: ${allModelsList}\nCompleta tu respuesta aclarando que los precios incluyen patentamiento, no incluyen el sellado de CABA y deberán ser confirmados por un vendedor. Si el cliente aún no eligió el modelo específico de acuerdo al listado, pregunta si puede informarte su modelo de elección. Si el cliente ya eligió del listado, termina tu respuesta preguntando por el método de pago.\n`;
+		console.log("model instructions-->", modelInstructions);
+		instructions = instructions + modelInstructions;
+	}
+	if (matchNumericModels) {
+		console.log(
+			`In the message of ${newMessage.name} appears the model ${matchNumericModels[0]}`
+		);
+
+		let allModels = checkAllModels(newMessage, numericModels);
 		console.log("all models", allModels);
 		let allModelsList = "";
 		const modelsInstructions = allModels.map((model) => {
@@ -81,18 +102,8 @@ export const matchkeyWords = (newMessage) => {
 		instructionsQuantity++;
 		const modelsByCC = searchModelsByCC(matchCilindradas[0]);
 
-		const cilindradasInstructions = `${instructionsQuantity}. Lo más probable es que el cliente está consultando por modelos con esas cilindradas. Responde con estas opciones que comercializa Megamoto:\n${modelsByCC}`;
+		const cilindradasInstructions = `${instructionsQuantity}. Responde al cliente con las opciones que comercializa Megamoto de acuerdo a las cilindradas que está buscando:\n${modelsByCC}`;
 		instructions = instructions + cilindradasInstructions;
-	}
-
-	if (matchPrice) {
-		console.log(
-			`In the message of ${newMessage.name} appears the word ${matchPrice[0]}`
-		);
-
-		instructionsQuantity++;
-		const priceInstructions = `${instructionsQuantity}. Es mandatorio que solicites al cliente que envíe un nuevo mensaje con el modelo de interes. Esto servirá para que luego de la respuesta del cliente con el nombre del modelo, puedas recibir la información del precio e informar al cliente.\n`;
-		instructions = instructions + priceInstructions;
 	}
 
 	if (matchFinance) {
@@ -165,7 +176,7 @@ export const matchkeyWords = (newMessage) => {
 		instructionsQuantity++;
 		const enviosInstructions = `${instructionsQuantity}. Si el cliente consulta por envíos al interior del país, responde que sí es posible. Los detalles sobre la metodología y costos asociados lo informará el vendedor.\n`;
 		instructions = instructions + enviosInstructions;
-	}	
+	}
 
 	let moreThanOneInstruction;
 

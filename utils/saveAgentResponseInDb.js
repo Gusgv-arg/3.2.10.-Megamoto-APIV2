@@ -43,7 +43,10 @@ export const saveAgentResponseInDb = async (newMessage, threadId) => {
 		// Update the lead content and turn botSwitch to OFF
 		lead.content = newContent;
 		lead.botSwitch = "OFF"
-
+		
+		if(lead.name==="Gg"){
+			lead.botSwitch = "ON"
+		}
 		// Save the updated lead
 		await lead.save();
 

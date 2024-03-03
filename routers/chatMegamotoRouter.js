@@ -16,7 +16,7 @@ import { adminOrders } from "../middlewares/adminOrders.js";
 
 const chatMegamotoRouter = express.Router();
 
-const targetDate = new Date("2024-03-01");
+const targetDate = new Date("2024-03-03");
 
 // Receives data from Zenvia webhook
 chatMegamotoRouter.post(
