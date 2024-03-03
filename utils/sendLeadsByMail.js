@@ -37,7 +37,7 @@ export const sendLeadsByMail = async (filePath, name) => {
 		if (name === "gusgvillafane@gmail.com") {
 			prospectId = "6596d62461f4a300081b28cb";
 		} else if(name==="gustavoglunz@gmail.com"){
-			prospectId = "6596d62461f4a300081b28cb";            
+			prospectId = "640f3ca9d5b0fcf829d24a3b";            
         }
 
 		const url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
