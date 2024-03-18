@@ -21,8 +21,8 @@ const targetDate = new Date("2024-03-03");
 // Receives data from Zenvia webhook
 chatMegamotoRouter.post(
 	"/webhook-megamoto",
-	checkGeneralBotSwitch,
 	adminOrders,
+	checkGeneralBotSwitch,
 	checkBotOrigin,
 	(req, res, next) => checkNewProspect(req, res, next, targetDate),
 	checkIndividualBotSwitch,
