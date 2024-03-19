@@ -14,7 +14,7 @@ export const checkIndividualBotSwitch = async (req, res, next) => {
 			//ACA VER SI A FUTURO NO QUIERO GRABAR LOS MENSAJES ENTRE EL CLIENTE Y VENDEDOR
 			//Y SI QUISIERA HACER EL SWITCH INDIVIDUAL TENDRIA Q CAMBIAR LA LOGICA PORQ ESTE MIDDLEWARE SIEMPRE LO SACARIA ESTANDO EL SWITCH EN OFF
 			
-			console.log(`Exit the process. BotSwitch is turned OFF for: ${name}`);
+			console.log(`Exit the process. Individual BotSwitch is turned OFF for: ${name}`);
 			res.status(200).send("Received");
 			return;
 		} else {

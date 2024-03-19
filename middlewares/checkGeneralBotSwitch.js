@@ -25,14 +25,16 @@ export const checkGeneralBotSwitch = async (req, res, next) => {
 
 	try {
 		let botSwitchInstance = await BotSwitch.findOne();
-		// Next() if general switch is ON or message is not megabot on/off
+		// Next() if general switch is ON or message is not megabot on/off or name is different from me and "Gg" or origin is an Agent response to a user that is in Leads DB
 		if (
 			(botSwitchInstance.generalSwitch === "ON" &&
 				message.toLowerCase() !== "megabot off" &&
 				message.toLowerCase() !== "megabot on") ||
 			name === "Gustavo Gomez Villafañe" ||
-			name === "Gg"
+			name === "Gg" || req.origin === "Respuesta Agente"
 		) {
+			const lastDateSwitchON = botSwitchInstance.updatedAt
+			req.lastDateSwitchON = lastDateSwitchON
 			next();
 		} else if (
 			message.toLowerCase() === "megabot off" ||

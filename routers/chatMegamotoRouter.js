@@ -22,15 +22,15 @@ const targetDate = new Date("2024-03-03");
 chatMegamotoRouter.post(
 	"/webhook-megamoto",
 	adminOrders,
+	determineOrigin,
+	checkAgentResponse,
 	checkGeneralBotSwitch,
 	checkBotOrigin,
-	(req, res, next) => checkNewProspect(req, res, next, targetDate),
+	checkNewProspect,
 	checkIndividualBotSwitch,
 	checkNoMessage,
 	checkRepeatedWebhookMessage,
-	determineOrigin,
 	validateRequestData,
-	checkAgentResponse,
 	//quantityToProcess,
 	webhookController,
 	errorHandler
