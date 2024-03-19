@@ -18,16 +18,20 @@ export const checkGeneralBotSwitch = async (req, res, next) => {
 			: data.message?.contents[0].text
 			? data.message.contents[0].text
 			: "No message";
-	
-	const name = data.prospect?.firstName? data.prospect.firstName : data.message.visitor.name;
+
+	const name = data.prospect?.firstName
+		? data.prospect.firstName
+		: data.message.visitor.name;
 
 	try {
 		let botSwitchInstance = await BotSwitch.findOne();
 		// Next() if general switch is ON or message is not megabot on/off
 		if (
-			botSwitchInstance.generalSwitch === "ON" &&
-			message.toLowerCase() !== "megabot off" &&
-			message.toLowerCase() !== "megabot on"
+			(botSwitchInstance.generalSwitch === "ON" &&
+				message.toLowerCase() !== "megabot off" &&
+				message.toLowerCase() !== "megabot on") ||
+			name === "Gustavo Gomez Villafañe" ||
+			name === "Gg"
 		) {
 			next();
 		} else if (
