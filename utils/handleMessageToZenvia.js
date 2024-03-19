@@ -12,7 +12,8 @@ export const handleMessageToZenvia = async (
 	messageGpt,
 	threadId,
 	messageId,
-	channel
+	channel,
+	specialInstructions
 ) => {
 	try {
 		const role = "assistant";
@@ -25,7 +26,8 @@ export const handleMessageToZenvia = async (
 			messageGpt,
 			channel,
 			threadId,
-			messageId
+			messageId,
+			specialInstructions
 		);
 		
 		// Posts the message to Zenvia

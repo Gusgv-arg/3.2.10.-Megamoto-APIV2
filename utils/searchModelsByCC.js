@@ -12,7 +12,11 @@ export const searchModelsByCC = (keywordsCilindradas) => {
 		const modelOptions = models
 			.map(
 				(modelo) =>
-					`${modelo.modelo} marca ${modelo.marca} a $ ${modelo.precio.toLocaleString()}. <a href="${modelo.url}">Catálogo</a>\n`
+					`${modelo.modelo} marca ${
+						modelo.marca
+					} a $ ${modelo.precio.toLocaleString()}. <a href="${
+						modelo.url
+					}">Catálogo</a>\n`
 			)
 			.join("\n");
 		console.log("model options cc", modelOptions);
@@ -28,7 +32,13 @@ export const searchModelsByCC = (keywordsCilindradas) => {
 		const modelOptions = models
 			.map(
 				(modelo) =>
-					`El modelo más cercano en cilindradas que vende Megamoto es: ${modelo.modelo} marca ${modelo.marca} a $ ${modelo.precio.toLocaleString()}. <a href="${modelo.url}">Catálogo</a>\n`
+					`El modelo más cercano en cilindradas que vende Megamoto es: ${
+						modelo.modelo
+					} marca ${
+						modelo.marca
+					} a $ ${modelo.precio.toLocaleString()}. <a href="${
+						modelo.url
+					}">Catálogo</a>\n`
 			)
 			.join("\n");
 

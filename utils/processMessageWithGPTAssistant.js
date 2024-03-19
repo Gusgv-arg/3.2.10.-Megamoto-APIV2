@@ -23,7 +23,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		existingThread = await Leads.findOne({
 			id_user: newMessage.senderId,
 			thread_id: { $exists: true },
-		});		
+		});
 	} catch (error) {
 		console.error("6. Error fetching thread from the database:", error);
 		throw error;
@@ -65,9 +65,9 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		//console.log(`6. New thread created --> ${newMessage.name}.`);
 
 		// Create a First Greet, pass it to the new thread, and post directly to Zenvia without running the assistant
-		const greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer errores. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀`
-		
-		const form = "https://whatsform.com/cI7aIJ"
+		const greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer errores. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀`;
+
+		const form = "https://whatsform.com/cI7aIJ";
 
 		await openai.beta.threads.messages.create(
 			threadId,
@@ -97,31 +97,31 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 	let currentAttempt = 0;
 	let runStatus;
 	let run;
+	let specialInstructions;
 
 	do {
 		try {
 			// Check if there are key words and if so pass it to the run
 			const instructions = matchkeyWords(newMessage);
 
+			specialInstructions = instructions;
+
 			if (instructions === "") {
 				// Run the assistant normally
-				run = await openai.beta.threads.runs.create(
-					threadId,
-					{
-						assistant_id: assistantId,
-					}
-				);
+				run = await openai.beta.threads.runs.create(threadId, {
+					assistant_id: assistantId,
+				});
 			} else {
-				// run the assistant with special instructions		
-				console.log("Running assistant with special instructions!!\n", instructions)		
-				run = await openai.beta.threads.runs.create(
-					threadId,
-					{
-						assistant_id: assistantId,
-						instructions: instructions,
-					}
+				// run the assistant with special instructions
+				console.log(
+					"Running assistant with special instructions!!\n",
+					instructions
 				);
-			} 			
+				run = await openai.beta.threads.runs.create(threadId, {
+					assistant_id: assistantId,
+					instructions: instructions,
+				});
+			}
 
 			runStatus = await openai.beta.threads.runs.retrieve(threadId, run.id);
 
@@ -144,7 +144,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 					"Te pido disculpas 🙏, en este momento no puedo procesar tu solicitud ☹️. Por favor intentá mas tarde. ¡Saludos de MegaBot! 🙂";
 
 				// Exit the loop if maximum attempts are exceeded and send an error message to the user
-				return { errorMessage, threadId };				
+				return { errorMessage, threadId };
 			}
 		}
 	} while (currentAttempt < maxAttempts);
@@ -174,6 +174,6 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			newMessage.channel,
 			threadId
 		);
-		return { messageGpt, threadId };
+		return { messageGpt, threadId, specialInstructions };
 	}
 };

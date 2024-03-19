@@ -43,7 +43,8 @@ export class UserMessageQueue {
 							: response.errorMessage,
 						response.threadId,
 						newMessage.messageId,
-						newMessage.channel
+						newMessage.channel,
+						response.specialInstructions
 					);
 				}
 			} catch (error) {

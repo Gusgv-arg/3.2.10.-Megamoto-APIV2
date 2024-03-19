@@ -24,14 +24,13 @@ chatMegamotoRouter.post(
 	adminOrders,
 	determineOrigin,
 	checkAgentResponse,
-	checkGeneralBotSwitch,
 	checkBotOrigin,
+	checkGeneralBotSwitch,
 	checkNewProspect,
 	checkIndividualBotSwitch,
 	checkNoMessage,
 	checkRepeatedWebhookMessage,
 	validateRequestData,
-	//quantityToProcess,
 	webhookController,
 	errorHandler
 );

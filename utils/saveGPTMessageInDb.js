@@ -9,7 +9,8 @@ export const saveGPTMessageInDb = async (
 	messageGpt,
 	channel,
 	threadId,
-	messageId
+	messageId,
+	specialInstructions
 ) => {
 	// Save the sent message to the database
 	try {
@@ -21,7 +22,8 @@ export const saveGPTMessageInDb = async (
 			content: messageGpt,
 			id_message: messageId,
 			channel: channel,
-			thread_id: threadId,			
+			thread_id: threadId,
+			instructions: specialInstructions			
 		});
 
 		//console.log(`10. Store GPT response in Messages DB --> ${name}: "${messageGpt}"`);
