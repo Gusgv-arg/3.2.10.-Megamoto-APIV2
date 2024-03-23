@@ -12,7 +12,7 @@ export const adminOrders = async (req, res, next) => {
 
 	const name = data.prospect?.firstName
 		? data.prospect.firstName
-		: data.message.visitor.name;
+		: data.message?.visitor?.name? data.message.visitor.name : "No name" ;
 
 	if (
 		(name === "Gustavo Gomez Villafañe" &&

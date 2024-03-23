@@ -104,7 +104,8 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			// Check if there are key words and if so pass it to the run
 			const instructions = matchkeyWords(newMessage);
 
-			specialInstructions = instructions;
+			//Variable created to save in Messages DB
+			specialInstructions = instructions; 
 
 			if (instructions === "") {
 				// Run the assistant normally
@@ -119,7 +120,8 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				);
 				run = await openai.beta.threads.runs.create(threadId, {
 					assistant_id: assistantId,
-					instructions: instructions,
+					//instructions: instructions,
+					additional_instructions: instructions,
 				});
 			}
 

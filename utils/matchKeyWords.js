@@ -1,6 +1,20 @@
 import { checkAllModels } from "./checkAllModels.js";
 import { searchPricesPerFamily } from "./searchPricesPerFamily.js";
 import { searchModelsByCC } from "./searchModelsByCC.js";
+import {
+	bicicletaInstructions,
+	cilindradasInstructions,
+	competitorInstructions,
+	cuotaInstructions,
+	enviosInstructions,
+	financeInstructions,
+	modelInstructions1,
+	modelInstructions2,
+	numbersInstructions,
+	pagoInstructions,
+	trabajoInstructions,
+	usedInstructions,
+} from "./instructions.js";
 
 export const matchkeyWords = (newMessage) => {
 	let instructions = "";
@@ -15,14 +29,15 @@ export const matchkeyWords = (newMessage) => {
 		/zanella|honda|hond|hnda|mondial|mundial|yamaha|fz|smash|gilera|kawasaki|corven/i;
 	const keywordsUsed = /(usado|usados|usada|usadas)/i;
 	const keywordsOnlyNumbers =
-		/^(?!100$|110$|125$|135$|149$|150$|180$|200$|202$|250$|251$|300$|302$|390$|400$|450$|500$|502$|600$|650$|750$|752$|1000$|1200$|1300$)\d+$/;
+		/^(?!100$|110$|125$|135$|149$|150$|180$|200$|202$|250$|251$|300$|302$|390$|400$|450$|500$|502$|600$|650$|750$|752$|1000$|1200$|1300$)\d{7,}$/;
+
+	//const keywordsCilindradas =
+	/\b(100|110|125|135|149|150|200|250|300|390|400|450|500|600|650|750|1000|1200|1300)(?![0-9])([a-zA-Z?!.]*)/gi;
 	const keywordsCilindradas =
-		/\b(100|110|125|135|149|150|200|202|250|300|390|400|450|500|600|650|750|1000|1200|1300)(?![0-9])([a-zA-Z?!.]*)/gi;
-	const keywordsModels =
-		/(\b180|251|302|502|752|imperiale|leoncino|tnt|trk|keeway|rk|blitz|blitz 110|cg|dlx|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom|motocargo|cargo)(?=\D|$)/gi;
+		/(?:\b)(100|110|125|135|149|150|200|250|300|390|400|450|500|600|650|750|1000|1200|1300)(?![0-9])/g;
 	const characterModels =
-		/imperiale|leoncino|tnt|trk|keeway|rk|blitz|cg|dlx|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom|motocargo|cargo /gi;
-	const numericModels = /(?<![0-9])(180|251|302|502|752)(?![0-9])/gm
+		/imperiale|benelli 400|benelli 251|benelli 500|trail|benelli 15|benelli 600|benelli 502|leoncino|tnt|trk|light|rk|keeyway 150|blitz|v8|one|plus|tunning|tuning|tunnin|tunin|cg|s2|dlx|deluxe|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom|sym 300|motocargo|cargo|xtreme|x-treme|motomel 125|motomel 150|new generation|motomel 150|silver|motomel 250|adventure|euro|alpino|tarpan|suzuki 100|suzuki 125/gi;
+	const numericModels = /(?<![0-9])(180|190|202|251|302|502|752)(?![0-9])/gm;
 	const keywordsBicicleta = /(bici|bicicleta|bicis|bicicletas)/i;
 	const keywordsTrabajo =
 		/(currículum|cv|busco trabajo|busco empleo|búsqueda de trabajo|búsqueda de empleo|quiero trabajar)/i;
@@ -30,10 +45,10 @@ export const matchkeyWords = (newMessage) => {
 
 	const matchCompetitors =
 		newMessage.receivedMessage.match(keywordsCompetitors);
-	const matchModels = newMessage.receivedMessage.match(keywordsModels);
-	const matchCharacterModels = newMessage.receivedMessage.match(characterModels);
+	const matchCharacterModels =
+		newMessage.receivedMessage.match(characterModels);
 	const matchNumericModels = newMessage.receivedMessage.match(numericModels);
-	
+
 	const matchCilindradas =
 		newMessage.receivedMessage.match(keywordsCilindradas);
 	const matchCuota = newMessage.receivedMessage.match(keywordsCuota);
@@ -46,9 +61,7 @@ export const matchkeyWords = (newMessage) => {
 	const matchEnvios = newMessage.receivedMessage.match(keywordsEnvios);
 
 	let instructionsQuantity = 0;
-
-	const competitorInstructions =
-		"Sin excepción, responde al cliente que Megamoto comercializa las marcas Benelli, Suzuki, Motomel, Keeway y Sym. Si el cliente no informó las cilindradas que está buscando termina tu respuesta consultando por las mismas; y si las ha informado responde con 3 alternativas que más se acerquen (tienes esta información en el listado de modelos y cilindradas). Esta indicación está por sobre el resto ya que es importante que sepa que Megamoto no vende esa marca.\n";
+	let modelInstructions = "";
 
 	if (matchCompetitors) {
 		console.log(
@@ -72,9 +85,8 @@ export const matchkeyWords = (newMessage) => {
 		});
 		console.log("allModels:", allModelsList);
 		instructionsQuantity++;
-		const modelInstructions = `${instructionsQuantity}. Envía al cliente el detalle completo de todos los modelos disponibles para que tenga todas las opciones: ${allModelsList}\nCompleta tu respuesta aclarando que los precios incluyen patentamiento, no incluyen el sellado de CABA y deberán ser confirmados por un vendedor. Si el cliente aún no eligió el modelo específico de acuerdo al listado, pregunta si puede informarte su modelo de elección. Si el cliente ya eligió del listado, termina tu respuesta preguntando por el método de pago.\n`;
-		console.log("model instructions-->", modelInstructions);
-		instructions = instructions + modelInstructions;
+		instructions =
+			instructions + modelInstructions1 + allModelsList + modelInstructions2;
 	}
 	if (matchNumericModels) {
 		console.log(
@@ -90,20 +102,26 @@ export const matchkeyWords = (newMessage) => {
 		});
 		console.log("allModels:", allModelsList);
 		instructionsQuantity++;
-		const modelInstructions = `${instructionsQuantity}. Envía al cliente el detalle completo de todos los modelos disponibles para que tenga todas las opciones: ${allModelsList}\nCompleta tu respuesta aclarando que los precios incluyen patentamiento, no incluyen el sellado de CABA y deberán ser confirmados por un vendedor. Si el cliente aún no eligió el modelo específico de acuerdo al listado, pregunta si puede informarte su modelo de elección. Si el cliente ya eligió del listado, termina tu respuesta preguntando por el método de pago.\n`;
-		console.log("model instructions-->", modelInstructions);
-		instructions = instructions + modelInstructions;
+		instructions =
+			instructions + modelInstructions1 + allModelsList + modelInstructions2;
 	}
 
 	if (matchCilindradas) {
 		console.log(
 			`In the message of ${newMessage.name} appears ${matchCilindradas[0]}. He is refering to cc.`
 		);
-		instructionsQuantity++;
-		const modelsByCC = searchModelsByCC(matchCilindradas[0]);
+		console.log("matchcilindros", matchCilindradas[0]);
+		const modelsByCC = searchModelsByCC(parseInt(matchCilindradas[0], 10));
 
-		const cilindradasInstructions = `${instructionsQuantity}. Responde al cliente con las opciones que comercializa Megamoto de acuerdo a las cilindradas que está buscando:\n${modelsByCC}`;
-		instructions = instructions + cilindradasInstructions;
+		if (modelInstructions === "") {
+			instructionsQuantity++;
+			instructions =
+				instructions +
+				instructionsQuantity +
+				". " +
+				cilindradasInstructions +
+				modelsByCC;
+		}
 	}
 
 	if (matchFinance) {
@@ -111,16 +129,16 @@ export const matchkeyWords = (newMessage) => {
 			`In the message of ${newMessage.name} appears the word ${matchFinance[0]}`
 		);
 		instructionsQuantity++;
-		const financeInstructions = `${instructionsQuantity}. El cliente está expresando que pretende la financiación como método de pago, solicita el DNI y explíca que un vendedor hará la verificación para saber si califica para un crédito. NO estas autorizado a verificar si un cliente califica o no para un crédito o para hacer un cálculo de cuota; esto es trabajo del vendedor.\n`;
-		instructions = instructions + financeInstructions;
+		instructions =
+			instructions + instructionsQuantity + ". " + financeInstructions;
 	}
 	if (matchCuota) {
 		console.log(
 			`In the message of ${newMessage.name} appears the word ${matchCuota[0]}`
 		);
 		instructionsQuantity++;
-		const cuotaInstructions = `${instructionsQuantity}. El cliente está expresando que pretende pagar en cuotas. Pregunta al cliente si se trata de un préstamo o un pago con la tarjeta de crédito (esto será necesario para saber si necesitas solicitar el DNI).\n`;
-		instructions = instructions + cuotaInstructions;
+		instructions =
+			instructions + instructionsQuantity + ". " + cuotaInstructions;
 	}
 
 	if (matchPago) {
@@ -128,54 +146,44 @@ export const matchkeyWords = (newMessage) => {
 			`In the message of ${newMessage.name} appears the word ${matchPago[0]}`
 		);
 		instructionsQuantity++;
-		const pagoInstructions = `${instructionsQuantity}. El cliente está expresando su método de pago para el cual no hace falta saber su DNI (no expliques esto al cliente). Si el cliente ya informó el modelo de interes, puedes despedirte diciendole al cliente que será contactado en breve por un vendedor.\n`;
-		instructions = instructions + pagoInstructions;
+		instructions =
+			instructions + instructionsQuantity + ". " + pagoInstructions;
 	}
 
 	if (matchNumbers) {
 		console.log(`In the message of ${newMessage.name} there are only numbers`);
 		instructionsQuantity++;
-
-		const numbersInstructions = `${instructionsQuantity}. Si el cliente envió el DNI aclara que un vendedor se encargará de verificar si califica para un crédito y si el cliente informó su modelo de interes puedes despedirte diciendo que un vendedor lo estará contactando a la brevedad. NO estas autorizado a verificar si un cliente califica o no para un crédito o para hacer un cálculo de cuota; esto es trabajo del vendedor.\n`;
-
-		instructions = instructions + numbersInstructions;
+		instructions = instructions + instructionsQuantity + ". " + numbersInstructions;
 	}
 
 	if (matchUsed) {
 		console.log(
 			`In the message of ${newMessage.name} appears the word ${matchUsed[0]}`
 		);
-		instructionsQuantity++;
-
-		const usedInstructions = `${instructionsQuantity}. Si el cliente consulta por una moto usada, responde que Megamoto vende motos nuevas e intenta convencerlo sobre la conveniencia de comprar una moto nueva ya que en la actualidad no existe mucha diferencia de precios entre la usada y la nueva. También puedes hacer mención sobre la posibilidad de financiación para comprar una moto nueva.\n`;
-
-		instructions = instructions + usedInstructions;
+		instructionsQuantity++;	
+		instructions = instructions + instructionsQuantity + ". " + usedInstructions;
 	}
 
 	if (matchBicicleta) {
 		console.log(
 			`In the message of ${newMessage.name} appears the word ${matchBicicleta[0]}`
 		);
-		instructionsQuantity++;
-
-		const bicicletaInstructions = `${instructionsQuantity}. Responde que Megamoto comercializa bicicletas de las marcas Scott, Orbea, Tecnial y Shiro; y solicita al cliente que te envíe los detalles de lo que está buscando y que un vendedor lo estará contactando.\n`;
-		instructions = instructions + bicicletaInstructions;
+		instructionsQuantity++;		
+		instructions = instructions + instructionsQuantity + ". " + bicicletaInstructions;
 	}
 	if (matchTrabajo) {
 		console.log(
 			`In the message of ${newMessage.name} appears the word ${matchTrabajo[0]}`
 		);
-		instructionsQuantity++;
-		const trabajoInstructions = `${instructionsQuantity}. Si el cliente está buscando trabajo responde que en estos momentos Megamoto no está contratando personal pero puede enviar su currículum por esta vía o a megamoto@megamoto.com.ar\n`;
-		instructions = instructions + trabajoInstructions;
+		instructionsQuantity++;		
+		instructions = instructions + instructionsQuantity + ". " + trabajoInstructions;
 	}
 	if (matchEnvios) {
 		console.log(
 			`In the message of ${newMessage.name} appears the word ${matchEnvios[0]}`
 		);
-		instructionsQuantity++;
-		const enviosInstructions = `${instructionsQuantity}. Si el cliente consulta por envíos al interior del país, responde que sí es posible. Los detalles sobre la metodología y costos asociados lo informará el vendedor.\n`;
-		instructions = instructions + enviosInstructions;
+		instructionsQuantity++;		
+		instructions = instructions + instructionsQuantity + ". " + enviosInstructions;
 	}
 
 	let moreThanOneInstruction;
@@ -183,15 +191,14 @@ export const matchkeyWords = (newMessage) => {
 	if (instructionsQuantity === 1) {
 		return instructions;
 	} else if (instructionsQuantity > 1) {
-		/* if (matchCompetitors){
-			instructions = competitorInstructions 
-			return instructions
-		} */
-		let moreThanOneInstruction = `Debes responder considerando estos ${instructionsQuantity} aspectos. Si uno de ellos implica aclarar que Megamoto no vende la marca solicitada, tendrás que enfocarte exclusivamente en este para evitar potenciales problemas con el cliente:\n`;
+		if (matchCompetitors) {
+			instructions = competitorInstructions;
+			return instructions;
+		}
+		let moreThanOneInstruction = `Debes responder considerando estos ${instructionsQuantity} aspectos:\n`;
 		return `${moreThanOneInstruction}${instructions}`;
 	} else {
 		return instructions;
 	}
-
 	return instructions;
 };
