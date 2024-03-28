@@ -119,7 +119,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 					instructions
 				);
 				run = await openai.beta.threads.runs.create(threadId, {
-					assistant_id: assistantId,
+					assistant_id: assistantId,					
 					//instructions: instructions,
 					additional_instructions: instructions,
 				});

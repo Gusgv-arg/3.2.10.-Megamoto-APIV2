@@ -36,7 +36,7 @@ export const matchkeyWords = (newMessage) => {
 	const keywordsCilindradas =
 		/(?:\b)(100|110|125|135|149|150|200|250|300|390|400|450|500|600|650|750|1000|1200|1300)(?![0-9])/g;
 	const characterModels =
-		/imperiale|benelli 400|benelli 251|benelli 500|trail|benelli 15|benelli 600|benelli 502|leoncino|tnt|trk|light|rk|keeyway 150|blitz|v8|one|plus|tunning|tuning|tunnin|tunin|cg|s2|dlx|deluxe|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom|sym 300|motocargo|cargo|xtreme|x-treme|motomel 125|motomel 150|new generation|motomel 150|silver|motomel 250|adventure|euro|alpino|tarpan|suzuki 100|suzuki 125/gi;
+		/(?:\b|\d)(imperiale|benelli 400|benelli 251|benelli 500|trail|benelli 15|benelli 600|benelli 502|leoncino|tnt|trk|light|rk|keeyway 150|blitz|v8|one|plus|tunning|tuning|tunnin|tunin|cg|s2|dlx|deluxe|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom|sym 300|motocargo|cargo|xtreme|x-treme|motomel 125|motomel 150|new generation|motomel 150|silver|motomel 250|adventure|euro|alpino|tarpan|suzuki 100|suzuki 125)(?:\b|\d)/gi;
 	const numericModels = /(?<![0-9])(180|190|202|251|302|502|752)(?![0-9])/gm;
 	const keywordsBicicleta = /(bici|bicicleta|bicis|bicicletas)/i;
 	const keywordsTrabajo =
@@ -153,37 +153,42 @@ export const matchkeyWords = (newMessage) => {
 	if (matchNumbers) {
 		console.log(`In the message of ${newMessage.name} there are only numbers`);
 		instructionsQuantity++;
-		instructions = instructions + instructionsQuantity + ". " + numbersInstructions;
+		instructions =
+			instructions + instructionsQuantity + ". " + numbersInstructions;
 	}
 
 	if (matchUsed) {
 		console.log(
 			`In the message of ${newMessage.name} appears the word ${matchUsed[0]}`
 		);
-		instructionsQuantity++;	
-		instructions = instructions + instructionsQuantity + ". " + usedInstructions;
+		instructionsQuantity++;
+		instructions =
+			instructions + instructionsQuantity + ". " + usedInstructions;
 	}
 
 	if (matchBicicleta) {
 		console.log(
 			`In the message of ${newMessage.name} appears the word ${matchBicicleta[0]}`
 		);
-		instructionsQuantity++;		
-		instructions = instructions + instructionsQuantity + ". " + bicicletaInstructions;
+		instructionsQuantity++;
+		instructions =
+			instructions + instructionsQuantity + ". " + bicicletaInstructions;
 	}
 	if (matchTrabajo) {
 		console.log(
 			`In the message of ${newMessage.name} appears the word ${matchTrabajo[0]}`
 		);
-		instructionsQuantity++;		
-		instructions = instructions + instructionsQuantity + ". " + trabajoInstructions;
+		instructionsQuantity++;
+		instructions =
+			instructions + instructionsQuantity + ". " + trabajoInstructions;
 	}
 	if (matchEnvios) {
 		console.log(
 			`In the message of ${newMessage.name} appears the word ${matchEnvios[0]}`
 		);
-		instructionsQuantity++;		
-		instructions = instructions + instructionsQuantity + ". " + enviosInstructions;
+		instructionsQuantity++;
+		instructions =
+			instructions + instructionsQuantity + ". " + enviosInstructions;
 	}
 
 	let moreThanOneInstruction;
