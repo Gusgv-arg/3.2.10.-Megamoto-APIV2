@@ -13,6 +13,7 @@ import prospectRouter from "./routers/prospectsRouter.js";
 import createBotSwitchInstance from "./utils/createBotSwitchInstance.js";
 import { dbFunctionsRouter } from "./routers/dbFunctionsRouter.js";
 import { wordRouter } from "./routers/wordRouter.js";
+import pricesRouter from "./routers/pricesRouter.js";
 
 dotenv.config();
 
@@ -58,6 +59,7 @@ try {
 app.use("/test", test);
 app.use("/json", jsonRouter);
 app.use("/excel", excelRouter);
+app.use("/prices", pricesRouter);
 app.use("/word", wordRouter);
 app.use("/prospects", prospectRouter);
 app.use("/dbfunctions", dbFunctionsRouter);
