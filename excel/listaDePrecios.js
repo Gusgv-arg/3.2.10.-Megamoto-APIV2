@@ -1,14 +1,4 @@
-export const precios = [
-	{
-		modelo: "prueba que no encuentra en excel",
-		familia: "180",
-		marca: "Benelli",
-		precio: 3669431,
-		sinonimos: [""],
-		cilindradas: 180,
-		url: "https://www.benelli.com/ar-es/products/180s",
-		vigencia: "29/01/2024",
-	},
+export const precios = [	
 	{
 		modelo: "180 S",
 		familia: "180",

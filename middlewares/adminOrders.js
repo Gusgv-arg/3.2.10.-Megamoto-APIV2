@@ -1,8 +1,9 @@
 import axios from "axios";
 import { exportLeadsToExcel } from "../utils/exportLeadsToExcel.js";
+import { updateDbPricesFromExcel } from "../utils/updatesDbPricesFromExcel.js";
 
 export const adminOrders = async (req, res, next) => {
-	const data = req.body
+	const data = req.body;
 	const message =
 		data.interaction?.output?.message && data.interaction.output.message.content
 			? data.interaction.output.message.content
@@ -12,7 +13,9 @@ export const adminOrders = async (req, res, next) => {
 
 	const name = data.prospect?.firstName
 		? data.prospect.firstName
-		: data.message?.visitor?.name? data.message.visitor.name : "No name" ;
+		: data.message?.visitor?.name
+		? data.message.visitor.name
+		: "No name";
 
 	if (
 		(name === "Gustavo Gomez Villafañe" &&
@@ -34,9 +37,16 @@ export const adminOrders = async (req, res, next) => {
 			message.toLowerCase() === "megabot leads") ||
 		(name === "Gg" && message.toLowerCase() === "megabot leads")
 	) {
-		
-		const leads = await exportLeadsToExcel(name)
-
+		const leads = await exportLeadsToExcel(name);
+		// Exit the process
+		res.status(200).send("Received");
+		return;
+	} else if (
+		(name === "Gustavo Gomez Villafañe" &&
+			message.toLowerCase() === "megabot precios") ||
+		(name === "Gg" && message.toLowerCase() === "megabot precios")
+	) {
+		const prices = await updateDbPricesFromExcel(name)
 		// Exit the process
 		res.status(200).send("Received");
 		return;

@@ -16,7 +16,7 @@ import {
 	usedInstructions,
 } from "./instructions.js";
 
-export const matchkeyWords = (newMessage) => {
+export const matchkeyWords = async (newMessage) => {
 	let instructions = "";
 
 	const keywordsFinance =
@@ -36,7 +36,7 @@ export const matchkeyWords = (newMessage) => {
 	const keywordsCilindradas =
 		/(?:\b)(100|110|125|135|149|150|200|250|300|390|400|450|500|600|650|750|1000|1200|1300)(?![0-9])/g;
 	const characterModels =
-		/(?:\b|\d)(imperiale|benelli 400|benelli 251|benelli 500|trail|benelli 15|benelli 600|benelli 502|leoncino|tnt|trk|light|rk|keeyway 150|blitz|v8|one|plus|tunning|tuning|tunnin|tunin|cg|s2|dlx|deluxe|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom|sym 300|motocargo|cargo|xtreme|x-treme|motomel 125|motomel 150|new generation|motomel 150|silver|motomel 250|adventure|euro|alpino|tarpan|suzuki 100|suzuki 125)(?:\b|\d)/gi;
+		/(?:\b|\d)(imperiale|benelli 400|benelli400|benelli 251|benelli 500|trail|benelli 15|benelli 600|benelli 502|leoncino|tnt|trk|light|rk|keeyway 150|blitz|v8|one|plus|tunning|tuning|tunnin|tunin|cg|s2|dlx|deluxe|max|sirius|skua|strato|xmn|ax|gn|gsx|city|citycom|sym 300|motocargo|cargo|xtreme|x-treme|motomel 125|motomel 150|new generation|motomel 150|silver|motomel 250|adventure|euro|alpino|tarpan|suzuki 100|suzuki 125)(?:\b|\d)/gi;
 	const numericModels = /(?<![0-9])(180|190|202|251|302|502|752)(?![0-9])/gm;
 	const keywordsBicicleta = /(bici|bicicleta|bicis|bicicletas)/i;
 	const keywordsTrabajo =
@@ -77,13 +77,14 @@ export const matchkeyWords = (newMessage) => {
 		);
 
 		let allModels = checkAllModels(newMessage, characterModels);
-		console.log("all models", allModels);
+		//console.log("all models", allModels);
 		let allModelsList = "";
-		const modelsInstructions = allModels.map((model) => {
-			let oneModel = searchPricesPerFamily(model);
-			allModelsList = `${allModelsList} ${oneModel}\n`;
-		});
-		console.log("allModels:", allModelsList);
+		
+		for (const model of allModels) { 
+            let oneModel = await searchPricesPerFamily(model); 
+            allModelsList = `${allModelsList} ${oneModel}\n`;
+        }
+		//console.log("allModels:", allModelsList);
 		instructionsQuantity++;
 		instructions =
 			instructions + modelInstructions1 + allModelsList + modelInstructions2;
@@ -94,13 +95,14 @@ export const matchkeyWords = (newMessage) => {
 		);
 
 		let allModels = checkAllModels(newMessage, numericModels);
-		console.log("all models", allModels);
+		//console.log("all models", allModels);
 		let allModelsList = "";
-		const modelsInstructions = allModels.map((model) => {
-			let oneModel = searchPricesPerFamily(model);
-			allModelsList = `${allModelsList} ${oneModel}\n`;
-		});
-		console.log("allModels:", allModelsList);
+		
+		for (const model of allModels) { 
+            let oneModel = await searchPricesPerFamily(model); 
+            allModelsList = `${allModelsList} ${oneModel}\n`;
+        }
+		//console.log("allModels:", allModelsList);
 		instructionsQuantity++;
 		instructions =
 			instructions + modelInstructions1 + allModelsList + modelInstructions2;
@@ -111,7 +113,7 @@ export const matchkeyWords = (newMessage) => {
 			`In the message of ${newMessage.name} appears ${matchCilindradas[0]}. He is refering to cc.`
 		);
 		console.log("matchcilindros", matchCilindradas[0]);
-		const modelsByCC = searchModelsByCC(parseInt(matchCilindradas[0], 10));
+		const modelsByCC = await searchModelsByCC(parseInt(matchCilindradas[0], 10));
 
 		if (modelInstructions === "") {
 			instructionsQuantity++;

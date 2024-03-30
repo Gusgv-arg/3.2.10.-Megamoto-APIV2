@@ -102,7 +102,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 	do {
 		try {
 			// Check if there are key words and if so pass it to the run
-			const instructions = matchkeyWords(newMessage);
+			const instructions = await matchkeyWords(newMessage);
 
 			//Variable created to save in Messages DB
 			specialInstructions = instructions; 

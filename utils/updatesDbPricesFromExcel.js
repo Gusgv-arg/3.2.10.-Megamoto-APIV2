@@ -2,6 +2,8 @@ import XLSX from "xlsx";
 import fs from "fs";
 import Prices from "../models/prices.js";
 import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
 
 // Función para leer el archivo Excel desde Google Drive
 async function leerExcel(archivoURL) {
@@ -16,7 +18,8 @@ async function leerExcel(archivoURL) {
 }
 
 // Función para actualizar los precios y agregar la propiedad vigencia
-export const updateDbPricesFromExcel = async (req, res) => {
+//export const updateDbPricesFromExcel = async (req, res) => {
+export const updateDbPricesFromExcel = async (name) => {
 	try {
 		// URL del archivo de precios compartido en Google Drive
 		const archivoExcelURL =
@@ -33,6 +36,8 @@ export const updateDbPricesFromExcel = async (req, res) => {
 		// Actualiza el modelo Prices con la información del Excel
 		let updates = 0;
 		let noPrice = "";
+		let updatedModels = [];
+
 		// Procesa los registros de dataExcel omitiendo el encabezado
 		for (let i = 1; i < dataExcel.length; i++) {
 			const entrada = dataExcel[i];
@@ -49,6 +54,7 @@ export const updateDbPricesFromExcel = async (req, res) => {
 						{ precio: precio, vigencia: vigencia },
 						{ new: true, upsert: true }
 					);
+					updatedModels.push({ modelo, precio });
 					updates++;
 				} catch (error) {
 					console.error("Error al actualizar o crear el documento:", error);
@@ -74,23 +80,48 @@ export const updateDbPricesFromExcel = async (req, res) => {
 			console.error("Error al desactivar registros antiguos:", error);
 		}
 
-        // Busca los registros con isActive en false
-        let registrosDesactivados
-        try {
-            registrosDesactivados = await Prices.find({ vigencia: { $ne: fechaActual }, isActive: false });
-            console.log("Registros desactivados:", registrosDesactivados);
-        } catch (error) {
-            console.error("Error al buscar registros desactivados:", error);
-        }
-		res
+		// Busca los registros con isActive en false
+		let registrosDesactivados;
+		try {
+			registrosDesactivados = await Prices.find({
+				vigencia: { $ne: fechaActual },
+				isActive: false,
+			});
+			console.log("Registros desactivados:", registrosDesactivados);
+		} catch (error) {
+			console.error("Error al buscar registros desactivados:", error);
+		}
+
+		// Notify the user in Zenvia
+		const channel = "whatsapp";
+		let prospectId;
+		if (name === "Gustavo Gomez Villafañe") {
+			prospectId = "6596d62461f4a300081b28cb";
+		} else if (name === "Gg") {
+			prospectId = "640f3ca9d5b0fcf829d24a3b";
+		}
+
+		const url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
+
+		const response = await axios.post(url, {
+			content: `- Hay ${
+				dataExcel.length - 1
+			} registros en el Excel y se actualizaron ${updates} modelos en MegaBot.\n- Listado de modelos actualizados:\n ${updatedModels.map(
+				(model) => " " + model.modelo + ": $" + model.precio
+			)}\n- Faltó actualizar en MegaBot: ${noPrice}  modelo/s.\n- ${registrosDesactivados.length} registros desactivados en MegaBot porque no están en el Excel: ${registrosDesactivados.map(
+				(registro) => registro.modelo
+			)}`,
+		});
+
+		/* res
 			.status(200)
 			.send(
 				`Hay ${
 					dataExcel.length - 1
-				} registros en el Excel y se actualizaron ${updates} modelos.
-                Faltó actualizar en MegaBot: ${noPrice}.
-                ${registrosDesactivados.length} registros desactivados porque no están en el Excel: ${registrosDesactivados.map((registro)=>registro.modelo)}`
-			);		
+				} registros en el Excel y se actualizaron ${updates} modelos.\nListado de modelos actualizados: ${updatedModels.map((model)=>" " + model.modelo +": "+ model.precio)}
+                Faltó actualizar en MegaBot: ${noPrice}  modelo/s.\n
+                ${registrosDesactivados.length} registros desactivados en MegaBot porque no están en el Excel: ${registrosDesactivados.map((registro)=>registro.modelo)}`
+			);	 */
 	} catch (error) {
 		res.status(500).send({ error: error.message });
 	}
