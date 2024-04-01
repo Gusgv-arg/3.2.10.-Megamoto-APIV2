@@ -18,7 +18,6 @@ async function leerExcel(archivoURL) {
 }
 
 // Función para actualizar los precios y agregar la propiedad vigencia
-//export const updateDbPricesFromExcel = async (req, res) => {
 export const updateDbPricesFromExcel = async (name) => {
 	try {
 		// URL del archivo de precios compartido en Google Drive
@@ -112,17 +111,20 @@ export const updateDbPricesFromExcel = async (name) => {
 				(registro) => registro.modelo
 			)}`,
 		});
-
-		/* res
-			.status(200)
-			.send(
-				`Hay ${
-					dataExcel.length - 1
-				} registros en el Excel y se actualizaron ${updates} modelos.\nListado de modelos actualizados: ${updatedModels.map((model)=>" " + model.modelo +": "+ model.precio)}
-                Faltó actualizar en MegaBot: ${noPrice}  modelo/s.\n
-                ${registrosDesactivados.length} registros desactivados en MegaBot porque no están en el Excel: ${registrosDesactivados.map((registro)=>registro.modelo)}`
-			);	 */
 	} catch (error) {
-		res.status(500).send({ error: error.message });
+		// Notify the user in Zenvia
+		const channel = "whatsapp";
+		let prospectId;
+		if (name === "Gustavo Gomez Villafañe") {
+			prospectId = "6596d62461f4a300081b28cb";
+		} else if (name === "Gg") {
+			prospectId = "640f3ca9d5b0fcf829d24a3b";
+		}
+
+		const url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
+
+		const response = await axios.post(url, {
+			content: error.message
+		});
 	}
 };
