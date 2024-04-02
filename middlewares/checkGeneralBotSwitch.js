@@ -42,8 +42,10 @@ export const checkGeneralBotSwitch = async (req, res, next) => {
 			req.lastDateSwitchON = lastDateSwitchON;
 			next();
 		} else if (
-			message.toLowerCase() === "megabot off" ||
-			message.toLowerCase() === "megabot on"
+			name === "Gustavo Gomez Villafañe" && message.toLowerCase() === "megabot off" ||
+			name === "Gustavo Gomez Villafañe" && message.toLowerCase() === "megabot on" ||
+			name === "Gg" && message.toLowerCase() === "megabot off" ||
+			name === "Gg" && message.toLowerCase() === "megabot on"
 		) {
 			try {
 				// Change Bot Switch
