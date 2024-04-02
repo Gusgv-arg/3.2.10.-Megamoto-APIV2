@@ -18,6 +18,7 @@ export const adminOrders = async (req, res, next) => {
 		: "No name";
 
 	if (
+		// Contact leads in a 24hs window
 		(name === "Gustavo Gomez Villafañe" &&
 			message.toLowerCase() === "megabot responde") ||
 		(name === "Gg" && message.toLowerCase() === "megabot responde")
@@ -33,6 +34,7 @@ export const adminOrders = async (req, res, next) => {
 		res.status(200).send("Received");
 		return;
 	} else if (
+		// Send Leads.xlsx by mail
 		(name === "Gustavo Gomez Villafañe" &&
 			message.toLowerCase() === "megabot leads") ||
 		(name === "Gg" && message.toLowerCase() === "megabot leads")
@@ -42,6 +44,7 @@ export const adminOrders = async (req, res, next) => {
 		res.status(200).send("Received");
 		return;
 	} else if (
+		// Update prices from Google drive in MongoDB
 		(name === "Gustavo Gomez Villafañe" &&
 			message.toLowerCase() === "megabot precios") ||
 		(name === "Gg" && message.toLowerCase() === "megabot precios")

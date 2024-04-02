@@ -60,7 +60,7 @@ export const updateDbPricesFromExcel = async (name) => {
 				}
 			} else {
 				console.error("Precio no válido para el modelo:", modelo);
-				(noPrice = noPrice + " "), +modelo;
+				(noPrice = noPrice + " "), + modelo;
 			}
 		}
 		console.log(
@@ -107,7 +107,9 @@ export const updateDbPricesFromExcel = async (name) => {
 				dataExcel.length - 1
 			} registros en el Excel y se actualizaron ${updates} modelos en MegaBot.\n- Listado de modelos actualizados:\n ${updatedModels.map(
 				(model) => " " + model.modelo + ": $" + model.precio
-			)}\n- Faltó actualizar en MegaBot: ${noPrice}  modelo/s.\n- ${registrosDesactivados.length} registros desactivados en MegaBot porque no están en el Excel: ${registrosDesactivados.map(
+			)}\n- Faltó actualizar en MegaBot: ${noPrice}  modelo/s.\n- ${
+				registrosDesactivados.length
+			} registros desactivados en MegaBot porque no están en el Excel: ${registrosDesactivados.map(
 				(registro) => registro.modelo
 			)}`,
 		});
@@ -124,7 +126,7 @@ export const updateDbPricesFromExcel = async (name) => {
 		const url = `https://api.getsirena.com/v1/prospect/${prospectId}/messaging/${channel}?api-key=${process.env.ZENVIA_API_TOKEN}`;
 
 		const response = await axios.post(url, {
-			content: error.message
+			content: error.message,
 		});
 	}
 };

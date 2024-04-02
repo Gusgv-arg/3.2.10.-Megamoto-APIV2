@@ -30,11 +30,16 @@ export const checkGeneralBotSwitch = async (req, res, next) => {
 			(botSwitchInstance.generalSwitch === "ON" &&
 				message.toLowerCase() !== "megabot off" &&
 				message.toLowerCase() !== "megabot on") ||
-			name === "Gustavo Gomez Villafañe" ||
-			name === "Gg" || req.origin === "Respuesta Agente"
+			(name === "Gustavo Gomez Villafañe" &&
+				message.toLowerCase() !== "megabot off" &&
+				message.toLowerCase() !== "megabot on") ||
+			(name === "Gg" &&
+				message.toLowerCase() !== "megabot off" &&
+				message.toLowerCase() !== "megabot on") ||
+			req.origin === "Respuesta Agente"
 		) {
-			const lastDateSwitchON = botSwitchInstance.updatedAt
-			req.lastDateSwitchON = lastDateSwitchON
+			const lastDateSwitchON = botSwitchInstance.updatedAt;
+			req.lastDateSwitchON = lastDateSwitchON;
 			next();
 		} else if (
 			message.toLowerCase() === "megabot off" ||

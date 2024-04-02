@@ -21,7 +21,8 @@ export const changeBotSwitch = async (message, name, prospectId) => {
 			}
 			return botSwitch.generalSwitch;
 		
-		} else {
+		} 
+		/* else {
 			// Change Individual Bot Switch
 			try {
 				const lead = await Leads.findOne({ id_user: prospectId });
@@ -45,14 +46,14 @@ export const changeBotSwitch = async (message, name, prospectId) => {
 					const response =
 						`${name} nunca fue atendido por Megabot; por lo que no podes apagarlo o prenderlo.`;
 					return response
-				}
+				} 
 			} catch (error) {
 				console.log(
 					"An error occurred while trying to change MegaBot Individual Switch (changeBotSwitch.js"
 				);
 				next(error);
 			}
-		}
+		}*/
 	} catch (error) {
 		console.log(
 			"An error occurred while trying to change MegaBot Switch (changeGeneralBotSwitch.js"
