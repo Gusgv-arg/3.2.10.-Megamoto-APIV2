@@ -25,7 +25,7 @@ export class UserMessageQueue {
 
 				// Process the message with the Assistant
 				const response = await processMessageWithGPTAssistant(newMessage);
-
+				
 				// Check if it's an agent's response
 				if (newMessage.channel === "Respuesta Agente") {
 					// Save the agent's response in DB

@@ -42,12 +42,14 @@ export const updateDbPricesFromExcel = async (name) => {
 			const entrada = dataExcel[i];
 			const modelo = entrada.B;
 			const precio = Math.round(Number(entrada.C));
-
+			const cilindradas = entrada.D ? entrada.D : "";
+			const url = entrada.E ? entrada.E : "";
+			
 			// Verifica si el precio es un número válido antes de actualizar el modelo
 			if (!isNaN(precio)) {
 				const vigencia = fechaActual;
 				try {
-					// Actualiza el precio y la vigencia, o crea un nuevo documento si no existe
+					// Actualiza el precio y la vigencia, o crea un nuevo documento si no existe. Tambien actualiza url  cilindradas si están en el excel
 					const updatedPrice = await Prices.findOneAndUpdate(
 						{ modelo: modelo },
 						{ precio: precio, vigencia: vigencia },
@@ -55,12 +57,24 @@ export const updateDbPricesFromExcel = async (name) => {
 					);
 					updatedModels.push({ modelo, precio });
 					updates++;
+					if (cilindradas !== "") {
+						const updatedCC = await Prices.findOneAndUpdate(
+							{ modelo: modelo },
+							{ cilindradas: cilindradas }
+						);
+					}
+					if (url !== "") {
+						const updatedURL = await Prices.findOneAndUpdate(
+							{ modelo: modelo },
+							{ url: url }
+						);
+					}
 				} catch (error) {
 					console.error("Error al actualizar o crear el documento:", error);
 				}
 			} else {
 				console.error("Precio no válido para el modelo:", modelo);
-				(noPrice = noPrice + " "), + modelo;
+				(noPrice = noPrice + " "), +modelo;
 			}
 		}
 		console.log(
@@ -69,10 +83,13 @@ export const updateDbPricesFromExcel = async (name) => {
 			} registros en el Excel y se actualizaron ${updates} modelos. Faltó actualizar en MegaBot: ${noPrice}.`
 		);
 
+		// Crear una lista de modelos presentes en el Excel
+		let modelosEnExcel = dataExcel.map((entrada) => entrada.B);
+
 		// Busca y cambia isActive a los registros que están en la base pero no en el Excel
 		try {
 			await Prices.updateMany(
-				{ vigencia: { $ne: fechaActual } },
+				{ modelo: { $nin: modelosEnExcel } },
 				{ $set: { isActive: false } }
 			);
 		} catch (error) {
@@ -83,7 +100,6 @@ export const updateDbPricesFromExcel = async (name) => {
 		let registrosDesactivados;
 		try {
 			registrosDesactivados = await Prices.find({
-				vigencia: { $ne: fechaActual },
 				isActive: false,
 			});
 			console.log("Registros desactivados:", registrosDesactivados);

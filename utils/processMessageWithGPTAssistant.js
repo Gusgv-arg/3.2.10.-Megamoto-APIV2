@@ -105,13 +105,13 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			const instructions = await matchkeyWords(newMessage);
 
 			//Variable created to save in Messages DB
-			specialInstructions = instructions; 
+			specialInstructions = instructions;
 
 			if (instructions === "") {
-				// Run the assistant normally
+				// Run the assistant normally without streaming
 				run = await openai.beta.threads.runs.create(threadId, {
 					assistant_id: assistantId,
-				});
+				});				
 			} else {
 				// run the assistant with special instructions
 				console.log(
@@ -119,7 +119,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 					instructions
 				);
 				run = await openai.beta.threads.runs.create(threadId, {
-					assistant_id: assistantId,					
+					assistant_id: assistantId,
 					//instructions: instructions,
 					additional_instructions: instructions,
 				});
