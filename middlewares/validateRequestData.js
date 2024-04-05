@@ -2,10 +2,12 @@
 export const validateRequestData = (req, res, next) => {
 	const data = req.body;
 	const message =
-		data.interaction.output.message && data.interaction.output.message.content
+		data.interaction?.output?.message && data.interaction.output.message.content
 			? data.interaction.output.message.content
 			: data.message?.contents[0].text
 			? data.message.contents[0].text
+			: data.webMessage
+			? data.webMessage
 			: "No message";
 
 	// Object has to have the properties according its origin
@@ -42,6 +44,8 @@ export const validateRequestData = (req, res, next) => {
 	) {
 		const firstFiveWords = message.split(" ").slice(0, 5).join(" ");
 		//console.log(`5. Valid Data --> ${name}: "${firstFiveWords}...".`);
+		next();
+	} else if (req.origin === "web") {
 		next();
 	} else {
 		console.log("3. Invalid data from Zenvia", data);

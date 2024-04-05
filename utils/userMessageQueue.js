@@ -111,6 +111,13 @@ export class UserMessageQueue {
 			receivedMessage =
 				messageToProcess.data.interaction.output.message.content;
 			channel = "Respuesta Agente";
+		} else if (messageToProcess.origin === "web"){
+			name = messageToProcess.data.webUser;
+			senderId = messageToProcess.data.webUser;
+			messageId: "n/d";
+			senderPage: "www.megamoto.com.ar"
+			receivedMessage = messageToProcess.data.webMessage;
+			channel = "web";
 		}
 
 		// Create a new object for sending it to the queue

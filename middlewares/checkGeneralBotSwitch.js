@@ -8,20 +8,24 @@ dotenv.config();
 
 export const checkGeneralBotSwitch = async (req, res, next) => {
 	const data = req.body;
-	//console.log("Entro esto:",data)
-
-	//await saveData(data)
 
 	const message =
-		data.interaction?.output?.message && data.interaction.output.message.content
+		data.interaction?.output?.message &&
+		data.interaction?.output?.message.content
 			? data.interaction.output.message.content
 			: data.message?.contents[0].text
 			? data.message.contents[0].text
+			: data.webMessage
+			? data.webMessage
 			: "No message";
 
 	const name = data.prospect?.firstName
 		? data.prospect.firstName
-		: data.message.visitor.name;
+		: data.message?.visitor.name
+		? data.message.visitor.name
+		: data.webUser
+		? data.webUser
+		: "No name";
 
 	try {
 		let botSwitchInstance = await BotSwitch.findOne();
@@ -42,10 +46,12 @@ export const checkGeneralBotSwitch = async (req, res, next) => {
 			req.lastDateSwitchON = lastDateSwitchON;
 			next();
 		} else if (
-			name === "Gustavo Gomez Villafañe" && message.toLowerCase() === "megabot off" ||
-			name === "Gustavo Gomez Villafañe" && message.toLowerCase() === "megabot on" ||
-			name === "Gg" && message.toLowerCase() === "megabot off" ||
-			name === "Gg" && message.toLowerCase() === "megabot on"
+			(name === "Gustavo Gomez Villafañe" &&
+				message.toLowerCase() === "megabot off") ||
+			(name === "Gustavo Gomez Villafañe" &&
+				message.toLowerCase() === "megabot on") ||
+			(name === "Gg" && message.toLowerCase() === "megabot off") ||
+			(name === "Gg" && message.toLowerCase() === "megabot on")
 		) {
 			try {
 				// Change Bot Switch
@@ -83,7 +89,12 @@ export const checkGeneralBotSwitch = async (req, res, next) => {
 			console.log(
 				"Exiting the process, General Bot Switch is turned OFF. MegaBot is stopped!"
 			);
-			res.status(200).send("Received");
+			res
+				.status(200)
+				.send({
+					message:
+						"¡Hola! Te pedimos disculpas pero en estos momentos nuestro asistente virtual MegaBot se encuentra apagado. Por favor intentá más tarde. ¡Gracias!",
+				});
 			return;
 		}
 	} catch (error) {

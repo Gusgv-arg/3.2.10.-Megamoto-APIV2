@@ -5,18 +5,30 @@ import { logError } from "../utils/logError.js";
 // Function to check and save repeted messages sent by the webhook
 export const checkRepeatedWebhookMessage = async (req, res, next) => {
 	const data = req.body;
-	const name = data.prospect?.firstName? data.prospect.firstName : data.message.visitor.name;
+	const name = data.prospect?.firstName
+		? data.prospect.firstName
+		: data.message?.visitor?.name
+		? data.message.visitor.name
+		: data.webUser
+		? data.webUser
+		: "No name";
+	
 	const message =
-		data.interaction.output.message && data.interaction.output.message.content
+		data.interaction?.output?.message && data.interaction.output.message.content
 			? data.interaction.output.message.content
 			: data.message?.contents[0].text
 			? data.message.contents[0].text
+			: data.webMessage
+			? data.webMessage
 			: "No message";
 
 	console.log(`\n1. Webhook notification --> ${name}: "${message}".`);
-	
-	//console.log(data)
-		
+
+	// If the message comes from the web next()
+	if (data.webMessage){
+		next()
+	}
+
 	// Check if the message has already been processed
 	try {
 		const existingIdMessage = await Messages.findOne({

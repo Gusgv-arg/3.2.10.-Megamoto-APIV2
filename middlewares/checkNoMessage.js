@@ -8,18 +8,34 @@ dotenv.config();
 export const checkNoMessage = async (req, res, next) => {
 	const data = req.body;
 	const message =
-		data.interaction?.output?.message && data.interaction.output.message.content
+		data.interaction?.output?.message &&
+		data?.interaction?.output?.message.content
 			? data.interaction.output.message.content
 			: data.message?.contents[0].text
 			? data.message.contents[0].text
+			: data.webMessage
+			? data.webMessage
 			: "No message";
-	const name = data.prospect?.firstName? data.prospect.firstName : data.message.visitor.name;
-	const prospectId = data.prospect?.id;
+	const name = data.prospect?.firstName
+		? data.prospect.firstName
+		: data.message?.visitor?.name
+		? data.message.visitor.name
+		: data.webUser
+		? data.webUser
+		: "No name";
+
+	const prospectId = data?.prospect?.id ? data.prospect.id : data.webUser;
 	const channel =
-		data.interaction?.via === "whatsApp" ? "whatsapp" : data.interaction?.via;
+		data.interaction?.via === "whatsApp"
+			? "whatsapp"
+			: data?.interaction?.via
+			? data.interaction.via
+			: data?.webUser
+			? "web"
+			: "other";
 	const agentInternalNote = data?.interaction?.output?.comment;
 	const meaninglessSymbols = /^(?:[^\w\s]| )+$/;
-	const matchMeaninglessSymbols = message.match(meaninglessSymbols)
+	const matchMeaninglessSymbols = message.match(meaninglessSymbols);
 
 	let lead;
 
@@ -81,15 +97,13 @@ export const checkNoMessage = async (req, res, next) => {
 			`1. Exiting the process. No message from: ${name} because he is not in Leads DB.`
 		);
 		return;
-	} else if(matchMeaninglessSymbols){
+	} else if (matchMeaninglessSymbols) {
 		// Exit the process
-		res.status(200).send("Received");
+		res.status(200).send({message:"¡Gracias por tu contacto!👋 Por el momento no puedo interpretar archivos, imágenes o audios. Te pido que me escribas y así puedo responder a tus dudas y derivarte más rápido con un vendedor. !Saludos de MegaBot! 😀"});
 		console.log(
 			`1. Exiting the process. Meaningless symbol in message from: ${name}.`
 		);
 		return;
-		
 	}
-
 	next();
 };

@@ -5,17 +5,28 @@ const rejectedMessages = [];
 export const checkNewProspect = async (req, res, next) => {
 	const data = req.body;
 	const targetDate = new Date(req.lastDateSwitchON);
-	const prospectCreatedDate = new Date(data.prospect.created);
-	const name = data.prospect?.firstName;
-	const prospectId = data.prospect?.id;
+	const prospectCreatedDate = new Date(data?.prospect.created || new Date());
+	const name = data.prospect?.firstName
+		? data.prospect.firstName
+		: data.message?.visitor?.name
+		? data.message.visitor.name
+		: data.webUser
+		? data.webUser
+		: "No name";
+	const prospectId = data?.prospect?.id ? data.prospect.id : data.webUser;
 	const message =
-		data.interaction.output.message && data.interaction.output.message.content
+		data.interaction?.output?.message &&
+		data?.interaction?.output?.message?.content
 			? data.interaction.output.message.content
 			: data.message?.contents[0].text
 			? data.message.contents[0].text
+			: data.webMessage
+			? data.webMessage
 			: "No message";
 
-	console.log(`\n${name} was created the ${prospectCreatedDate.toLocaleString()}`);
+	console.log(
+		`\n${name} was created the ${prospectCreatedDate.toLocaleString()}`
+	);
 
 	// Target date in which the API will allow messages.
 	console.log("Date since MegaBot is on:", targetDate.toLocaleString());
@@ -24,7 +35,7 @@ export const checkNewProspect = async (req, res, next) => {
 	let lead = await Leads.findOne({ id_user: prospectId });
 
 	// Get time of creation and message
-	const prospectCreatedTime = new Date(data.prospect.created);
+	const prospectCreatedTime = new Date(data.prospect?.created || new Date());
 	console.log("ProspectCreatedTime:", prospectCreatedTime.toLocaleString());
 
 	const receivedTime = new Date();
@@ -40,7 +51,7 @@ export const checkNewProspect = async (req, res, next) => {
 		(prospectCreatedDate >= targetDate && timeDifferenceInSeconds < 60) ||
 		name === "Gustavo Gomez Villafañe" ||
 		name === "Gg" ||
-		name === "Pablo Rudkiw"
+		name === "Pablo Rudkiw" || data?.webUser
 	) {
 		console.log(
 			`${name} continues. Creation date: ${prospectCreatedDate.toLocaleString()}. MegaBot turned ON: ${targetDate.toLocaleString()}.`
@@ -51,8 +62,8 @@ export const checkNewProspect = async (req, res, next) => {
 		next();
 	} else if (
 		// Check if its an agent response and if its not in Leads save it with botSwitch OFF
-		data.interaction.proactive === true &&
-		data.interaction.hasOwnProperty("agent") &&
+		data?.interaction?.proactive === true &&
+		data?.interaction.hasOwnProperty("agent") &&
 		lead === null
 	) {
 		const currentDateTime = new Date().toLocaleString();
@@ -61,10 +72,12 @@ export const checkNewProspect = async (req, res, next) => {
 		lead = await Leads.create({
 			name: name,
 			id_user: prospectId,
-			channel: data.interaction.via
+			channel: data?.interaction?.via
 				? data.interaction.via
-				: data.channel
+				: data?.channel
 				? data.channel
+				: data?.webUser
+				? "web"
 				: "no channel",
 			content: `${currentDateTime} - Vendedor Megamoto: ${message}`,
 			thread_id: "",

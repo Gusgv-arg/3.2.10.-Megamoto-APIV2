@@ -1,19 +1,29 @@
 export const determineOrigin = (req, res, next) => {
 	const data = req.body;
-	const name = data.prospect?.firstName? data.prospect.firstName : data.message.visitor.name;
+	
+	const name = data.prospect?.firstName
+		? data.prospect.firstName
+		: data.message?.visitor.name
+		? data.message.visitor.name
+		: data.webUser
+		? data.webUser
+		: "No name";
+		
 	const message =
-		data.interaction.output.message && data.interaction.output.message.content
+		data.interaction?.output.message && data.interaction?.output.message.content
 			? data.interaction.output.message.content
 			: data.message?.contents[0].text
 			? data.message.contents[0].text
+			: data.webMessage
+			? data.webMessage
 			: "No message";
-
+	
 	let origin = "";
 
 	const firstTenWords = message.split(" ").slice(0, 10).join(" ");
 	const firstFiveWords = message.split(" ").slice(0, 5).join(" ");
 
-	if (data.interaction.proactive === true) {
+	if (data.interaction?.proactive === true) {
 		origin = "Respuesta Agente";
 		//console.log(`4. Origin: Agent Message --> ${name}: "${firstTenWords}...".`);
 	} else if (data.interaction?.via === "whatsApp") {
@@ -22,19 +32,25 @@ export const determineOrigin = (req, res, next) => {
 	} else if (data.interaction?.via === "instagram") {
 		origin = "instagram";
 		//console.log(`4. Origin: Instagram from --> ${name}: "${firstFiveWords}". Object Instagram ver el senderId --> ${data}`);
-	} else if (data?.channel === "facebook" || data.interaction?.via === "facebook") {
+	} else if (
+		data?.channel === "facebook" ||
+		data.interaction?.via === "facebook"
+	) {
 		origin = "facebook";
 		//console.log(`4. Origin: Facebook from --> ${name}: "${firstFiveWords}".`);
-		console.log("FACEBOOK!!!!!!!", data)
-		console.log("FACEBOOK MESSAGE!!!!!!!", data.interaction.output.message)
+		console.log("FACEBOOK!!!!!!!", data);
+		console.log("FACEBOOK MESSAGE!!!!!!!", data.interaction.output.message);
+	} else if (data.webUser) {
+		origin = "web";
+		console.log("origin:", origin)
 	} else {
 		console.log(
 			"`4. Exit the process. Data with an origin not processed in API",
 			data,
 			data.prospect.contactMediums
 		);
-		res.status(200).send("Received")
-		return
+		res.status(200).send("Received");
+		return;
 	}
 	req.origin = origin;
 	next();

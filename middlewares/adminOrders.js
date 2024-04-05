@@ -9,14 +9,18 @@ export const adminOrders = async (req, res, next) => {
 			? data.interaction.output.message.content
 			: data.message?.contents[0].text
 			? data.message.contents[0].text
+			: data.webMessage
+			? data.webMessage
 			: "No message";
-
+			
 	const name = data.prospect?.firstName
 		? data.prospect.firstName
 		: data.message?.visitor?.name
 		? data.message.visitor.name
+		: data.webUser
+		? data.webUser
 		: "No name";
-
+	
 	if (
 		// Contact leads in a 24hs window
 		(name === "Gustavo Gomez Villafañe" &&
@@ -45,15 +49,14 @@ export const adminOrders = async (req, res, next) => {
 		return;
 	} else if (
 		// Update prices from Google drive in MongoDB
-		(name === "Gustavo Gomez Villafañe" &&
-			message.toLowerCase() === "megabot precios") ||
+		(name === "Gustavo Gomez Villafañe" && message === "megabot precios") ||
 		(name === "Gg" && message.toLowerCase() === "megabot precios")
 	) {
-		const prices = await updateDbPricesFromExcel(name)
+		const prices = await updateDbPricesFromExcel(name);
 		// Exit the process
 		res.status(200).send("Received");
 		return;
-	} else {
+	} else {		
 		next();
 	}
 };

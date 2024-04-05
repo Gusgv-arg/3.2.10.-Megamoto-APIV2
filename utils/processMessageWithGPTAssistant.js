@@ -65,7 +65,13 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		//console.log(`6. New thread created --> ${newMessage.name}.`);
 
 		// Create a First Greet, pass it to the new thread, and post directly to Zenvia without running the assistant
-		const greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer errores. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀`;
+		let greeting;
+		if (newMessage.channel === "web") {
+			greeting =
+				"¡Hola! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer errores. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀";
+		} else {
+			greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer errores. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀`;
+		}
 
 		const form = "https://whatsform.com/cI7aIJ";
 
@@ -111,7 +117,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				// Run the assistant normally without streaming
 				run = await openai.beta.threads.runs.create(threadId, {
 					assistant_id: assistantId,
-				});				
+				});
 			} else {
 				// run the assistant with special instructions
 				console.log(
