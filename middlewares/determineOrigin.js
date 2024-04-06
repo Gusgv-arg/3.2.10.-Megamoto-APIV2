@@ -41,8 +41,7 @@ export const determineOrigin = (req, res, next) => {
 		console.log("FACEBOOK!!!!!!!", data);
 		console.log("FACEBOOK MESSAGE!!!!!!!", data.interaction.output.message);
 	} else if (data.webUser) {
-		origin = "web";
-		console.log("origin:", origin)
+		origin = "web";		
 	} else {
 		console.log(
 			"`4. Exit the process. Data with an origin not processed in API",

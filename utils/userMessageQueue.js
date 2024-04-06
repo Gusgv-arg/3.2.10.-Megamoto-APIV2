@@ -21,15 +21,14 @@ export class UserMessageQueue {
 		while (queue.messages.length > 0) {
 			// Take the first record and delete it from the queue
 			const newMessage = queue.messages.shift();
-			console.log("new message", newMessage);
+			
 			//return
 			try {
 				// PARA REPENSAR EL PROCESO
 
 				// Process the message with the Assistant
 				const response = await processMessageWithGPTAssistant(newMessage);
-				console.log("response", response);
-
+				
 				if (newMessage.channel === "Respuesta Agente") {
 					// Save the agent's response in DB
 					await saveAgentResponseInDb(newMessage, response.threadId);
@@ -84,7 +83,7 @@ export class UserMessageQueue {
 		let senderPage;
 		let receivedMessage;
 		let channel;
-		console.log(messageToProcess);
+		
 		//Depending the origin I define the variables according the object I receive
 		if (messageToProcess.origin === "whatsapp") {
 			name = messageToProcess.data.prospect.firstName;
