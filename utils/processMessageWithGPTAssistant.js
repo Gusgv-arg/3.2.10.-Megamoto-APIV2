@@ -24,6 +24,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			id_user: newMessage.senderId,
 			thread_id: { $exists: true },
 		});
+		
 	} catch (error) {
 		console.error("6. Error fetching thread from the database:", error);
 		throw error;

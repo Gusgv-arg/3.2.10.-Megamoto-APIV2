@@ -40,7 +40,9 @@ export const checkGeneralBotSwitch = async (req, res, next) => {
 			(name === "Gg" &&
 				message.toLowerCase() !== "megabot off" &&
 				message.toLowerCase() !== "megabot on") ||
-			req.origin === "Respuesta Agente"
+			req.origin === "Respuesta Agente" ||
+			//POR AHORA DEJAR PASAR LA WEB - DESPUES HAY QUE SACAR ESTO!!!!!!!!!!!!!!!!!!!!
+			req.origin === "web"
 		) {
 			const lastDateSwitchON = botSwitchInstance.updatedAt;
 			req.lastDateSwitchON = lastDateSwitchON;
@@ -89,12 +91,10 @@ export const checkGeneralBotSwitch = async (req, res, next) => {
 			console.log(
 				"Exiting the process, General Bot Switch is turned OFF. MegaBot is stopped!"
 			);
-			res
-				.status(200)
-				.send({
-					message:
-						"¡Hola! Te pedimos disculpas pero en estos momentos nuestro asistente virtual MegaBot se encuentra apagado. Por favor intentá más tarde. ¡Gracias!",
-				});
+			res.status(200).send({
+				message:
+					"¡Hola! Te pedimos disculpas pero en estos momentos nuestro asistente virtual MegaBot se encuentra apagado. Por favor intentá más tarde. ¡Gracias!",
+			});
 			return;
 		}
 	} catch (error) {

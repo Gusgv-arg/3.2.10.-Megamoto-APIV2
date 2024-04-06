@@ -1,6 +1,8 @@
 import { handleMessageToZenvia } from "./handleMessageToZenvia.js";
 import { processMessageWithGPTAssistant } from "./processMessageWithGPTAssistant.js";
 import { saveAgentResponseInDb } from "./saveAgentResponseInDb.js";
+import { saveGPTMessageInDb } from "./saveGPTMessageInDb.js";
+import { saveGptResponseToWebUser } from "./saveGptResponseToWebUser.js";
 import { sendErrorMessage } from "./sendErrorMessage.js";
 
 // Class definition for the Queue
@@ -19,19 +21,24 @@ export class UserMessageQueue {
 		while (queue.messages.length > 0) {
 			// Take the first record and delete it from the queue
 			const newMessage = queue.messages.shift();
-
+			console.log("new message", newMessage);
+			//return
 			try {
 				// PARA REPENSAR EL PROCESO
 
 				// Process the message with the Assistant
 				const response = await processMessageWithGPTAssistant(newMessage);
-				
-				// Check if it's an agent's response
+				console.log("response", response);
+
 				if (newMessage.channel === "Respuesta Agente") {
 					// Save the agent's response in DB
 					await saveAgentResponseInDb(newMessage, response.threadId);
+				} else if (newMessage.channel === "web") {
+					// Excecute callback for be able to respond the user (res object)
+					queue.responseCallback(null, response);
 				} else {
-					// Send message to Zenvia: can be the greeting, GPT response or error message
+					// Send message to Zenvia: can be the greeting, GPT response or error message &&
+					// Save Gpt message in DB called by handleMessageToZenvia (can refactor this like web origin)
 					await handleMessageToZenvia(
 						newMessage.name,
 						newMessage.senderPage,
@@ -55,25 +62,29 @@ export class UserMessageQueue {
 				const errorMessage = await sendErrorMessage(newMessage);
 
 				// Change flag to allow next message processing
-				queue.processing = false;				
+				queue.processing = false;
+
+				// If there is an error for a web message, I use callback function to send the error to the user
+				if (newMessage.channel === "web" && queue.responseCallback) {
+					queue.responseCallback(error, null);
+				}
 
 				// Return to webhookController that has res.
 				return errorMessage;
 			}
 		}
-
 		// Change flag to allow next message processing
 		queue.processing = false;
 	}
 
-	enqueueMessage(messageToProcess) {
+	enqueueMessage(messageToProcess, responseCallback = null) {
 		let name;
 		let senderId;
 		let messageId;
 		let senderPage;
 		let receivedMessage;
 		let channel;
-
+		console.log(messageToProcess);
 		//Depending the origin I define the variables according the object I receive
 		if (messageToProcess.origin === "whatsapp") {
 			name = messageToProcess.data.prospect.firstName;
@@ -111,11 +122,11 @@ export class UserMessageQueue {
 			receivedMessage =
 				messageToProcess.data.interaction.output.message.content;
 			channel = "Respuesta Agente";
-		} else if (messageToProcess.origin === "web"){
+		} else if (messageToProcess.origin === "web") {
 			name = messageToProcess.data.webUser;
 			senderId = messageToProcess.data.webUser;
-			messageId: "n/d";
-			senderPage: "www.megamoto.com.ar"
+			messageId = messageToProcess.data.webUser;
+			senderPage = messageToProcess.data.webUser;
 			receivedMessage = messageToProcess.data.webMessage;
 			channel = "web";
 		}
@@ -133,9 +144,19 @@ export class UserMessageQueue {
 		};
 
 		if (!this.queues.has(senderId)) {
-			this.queues.set(senderId, { messages: [], processing: false });
+			this.queues.set(senderId, {
+				messages: [],
+				processing: false,
+				responseCallback: null,
+			});
 		}
+
 		const queue = this.queues.get(senderId);
+
+		// If web message, I save the callback
+		if (messageToProcess.origin === "web") {
+			queue.responseCallback = responseCallback;
+		}
 
 		queue.messages.push(newMessage);
 
