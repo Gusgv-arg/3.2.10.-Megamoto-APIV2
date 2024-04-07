@@ -37,7 +37,15 @@ app.use((req, res, next) => {
         next();
     }
 });
-
+app.use((req, res, next) => {
+    res.header("Cross-Origin-Opener-Policy", "same-origin");
+    next();
+});
+//No sniff
+app.use((req, res, next) => {
+    res.header("X-Content-Type-Options", "nosniff");
+    next();
+});
 app.use(
 	cors({
 		origin: ["http://localhost:3000", "https://three-2-10-megamoto-front.onrender.com", "http://127.0.0.1:5500"],
