@@ -24,7 +24,6 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			id_user: newMessage.senderId,
 			thread_id: { $exists: true },
 		});
-		
 	} catch (error) {
 		console.error("6. Error fetching thread from the database:", error);
 		throw error;
@@ -60,45 +59,71 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			});
 		}
 	} else {
+		
 		// Create a new thread because its a new customer
 		const thread = await openai.beta.threads.create();
 		threadId = thread.id;
 		//console.log(`6. New thread created --> ${newMessage.name}.`);
 
-		// Create a First Greet, pass it to the new thread, and post directly to Zenvia without running the assistant
+		// Create a First Greet & pass it to the new thread
 		let greeting;
+		// For Web users run the assistant but with greet already saved
 		if (newMessage.channel === "web") {
 			greeting =
 				"¡Hola! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer errores. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀";
+			// Send to GPT the conversation where the first message is a greeting
+			await openai.beta.threads.messages.create(
+				threadId,
+				{
+					role: "user",
+					content:
+						"Hola soy un cliente que entró por la página web de Megamoto y quería información.",
+				},
+				{
+					role: "assistant",
+					content: greeting,
+				},
+				{ role: "user", content: newMessage.receivedMessage }
+			);
 		} else {
+			// For Zenvia users post directly to Zenvia without running the assistant (returns greeting)
+
 			greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer errores. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀`;
+			
+			// Send to GPT the conversation where the first message is a greeting
+			await openai.beta.threads.messages.create(
+				threadId,
+				{ role: "user", content: newMessage.receivedMessage },
+				{
+					role: "assistant",
+					content: greeting,
+				}
+			);
+			// Save the FIRST received message from ZENVIA USER to the database
+			const role = "user";
+			await saveUserMessageInDb(
+				newMessage.name,
+				newMessage.senderId,
+				role,
+				newMessage.receivedMessage,
+				newMessage.messageId,
+				newMessage.channel,
+				threadId
+			);
+			return { greeting, threadId };
 		}
-
-		const form = "https://whatsform.com/cI7aIJ";
-
-		await openai.beta.threads.messages.create(
-			threadId,
-			{ role: "user", content: newMessage.receivedMessage },
-			{
-				role: "assistant",
-				content: greeting,
-			}
-		);
-
-		// Save the received message from the USER to the database
-		const role = "user";
-		await saveUserMessageInDb(
-			newMessage.name,
-			newMessage.senderId,
-			role,
-			newMessage.receivedMessage,
-			newMessage.messageId,
-			newMessage.channel,
-			threadId
-		);
-		return { greeting, threadId };
 	}
-
+	// Save the received message from USER to the database (web users & Zenvia)
+	const role = "user";
+	await saveUserMessageInDb(
+		newMessage.name,
+		newMessage.senderId,
+		role,
+		newMessage.receivedMessage,
+		newMessage.messageId,
+		newMessage.channel,
+		threadId
+	);
 	// Run the assistant and wait for completion
 	let maxAttempts = 5;
 	let currentAttempt = 0;

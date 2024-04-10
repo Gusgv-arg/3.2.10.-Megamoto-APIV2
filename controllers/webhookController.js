@@ -28,7 +28,7 @@ export const webhookController = (req, res) => {
 					.status(200)
 					.send({
 						message: response?.greeting
-							? response.greeting
+							? response.greeting // This will never happen!!
 							: response?.errorMessage
 							? response.errorMessage
 							: response.messageGpt,
