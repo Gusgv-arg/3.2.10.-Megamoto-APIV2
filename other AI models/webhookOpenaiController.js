@@ -7,9 +7,13 @@ dotenv.config();
 
 //webhook que usa el prompting básico para la base de conocimiento
 const API_KEY = process.env.OPENAI_API_KEY;
+const ORGANIZATION = process.env.ORGANIZATION;
+const PROYECT = process.env.PROYECT;
 
 const openai = new OpenAI({
 	apiKey: API_KEY,
+	organization: ORGANIZATION,
+	project: PROYECT
 });
 
 let contador = 0;

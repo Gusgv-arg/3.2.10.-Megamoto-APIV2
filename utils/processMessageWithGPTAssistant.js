@@ -8,9 +8,13 @@ import { matchkeyWords } from "./matchKeyWords.js";
 dotenv.config();
 
 const API_KEY = process.env.OPENAI_API_KEY;
+const ORGANIZATION = process.env.ORGANIZATION;
+const PROYECT = process.env.PROYECT;
 
 const openai = new OpenAI({
 	apiKey: API_KEY,
+	organization: ORGANIZATION,
+	project: PROYECT
 });
 
 export const processMessageWithGPTAssistant = async (newMessage) => {

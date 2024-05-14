@@ -7,10 +7,15 @@ dotenv.config();
 
 //webhook que usa el prmpting para la base de conocimiento//
 const API_KEY = process.env.OPENAI_API_KEY;
+const ORGANIZATION = process.env.ORGANIZATION;
+const PROYECT = process.env.PROYECT;
 
 const openai = new OpenAI({
 	apiKey: API_KEY,
+	organization: ORGANIZATION,
+	project: PROYECT
 });
+
 let contador = 0;
 export const webhookMegamotoController = async (req, res) => {
 	const data = req.body;

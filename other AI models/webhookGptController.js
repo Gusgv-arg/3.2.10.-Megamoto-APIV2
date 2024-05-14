@@ -7,10 +7,15 @@ import Webhook_Repeated_Messages from "../models/webhook_repeated_messages.js";
 dotenv.config();
 
 const API_KEY = process.env.OPENAI_API_KEY;
+const ORGANIZATION = process.env.ORGANIZATION;
+const PROYECT = process.env.PROYECT;
 
 const openai = new OpenAI({
 	apiKey: API_KEY,
+	organization: ORGANIZATION,
+	project: PROYECT
 });
+
 
 //webhook original sin refactorizar que maneja la repuesta usando el GPT de Megamoto
 export const webhookGptController = async (req, res) => {
