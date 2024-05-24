@@ -59,17 +59,19 @@ export const updateDbPricesFromExcel = async (name) => {
 					);
 
 					// Identifico los modelos nuevos
-					if (result.lastErrorObject.upserted) {
+					if (updatedPrice.lastErrorObject.upserted) {
 						console.log(
 							"Se creó un nuevo registro con modelo:",
-							result.value.modelo
+							updatedPrice.value.modelo
 						);
-						newModels.push(result.value.modelo)
+						newModels.push(updatedPrice.value.modelo)
 						qNewModels++;
 					}
-
+					
+					// Identifico los modelos actualizados
 					updatedModels.push({ modelo, precio });
 					updates++;
+
 					if (cilindradas !== "") {
 						const updatedCC = await Prices.findOneAndUpdate(
 							{ modelo: modelo },
