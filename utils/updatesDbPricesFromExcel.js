@@ -35,7 +35,9 @@ export const updateDbPricesFromExcel = async (name) => {
 		// Actualiza el modelo Prices con la información del Excel
 		let updates = 0;
 		let noPrice = 0;
+		let qNewModels = 0;
 		let updatedModels = [];
+		let newModels = [];
 
 		// Procesa los registros de dataExcel omitiendo el encabezado
 		for (let i = 1; i < dataExcel.length; i++) {
@@ -53,8 +55,19 @@ export const updateDbPricesFromExcel = async (name) => {
 					const updatedPrice = await Prices.findOneAndUpdate(
 						{ modelo: modelo },
 						{ precio: precio, vigencia: vigencia },
-						{ new: true, upsert: true }
+						{ new: true, upsert: true, rawResult: true }
 					);
+
+					// Identifico los modelos nuevos
+					if (result.lastErrorObject.upserted) {
+						console.log(
+							"Se creó un nuevo registro con modelo:",
+							result.value.modelo
+						);
+						newModels.push(result.value.modelo)
+						qNewModels++;
+					}
+
 					updatedModels.push({ modelo, precio });
 					updates++;
 					if (cilindradas !== "") {
@@ -86,7 +99,7 @@ export const updateDbPricesFromExcel = async (name) => {
 		// Crear una lista de modelos presentes en el Excel
 		let modelosEnExcel = dataExcel.map((entrada) => entrada.B);
 
-		// Busca y cambia isActive a los registros que están en la base pero no en el Excel
+		// Busca y cambia isActive false a los registros que están en la base pero no en el Excel
 		try {
 			await Prices.updateMany(
 				{ modelo: { $nin: modelosEnExcel } },
@@ -127,7 +140,7 @@ export const updateDbPricesFromExcel = async (name) => {
 				registrosDesactivados.length
 			} registros desactivados en MegaBot porque no están en el Excel: ${registrosDesactivados.map(
 				(registro) => registro.modelo
-			)}`,
+			)}\n${qNewModels} modelos nuevos que están en el Excel y no estaban en MegaBot: ${newModels.map((newModel)=>newModel.modelo)}`,
 		});
 	} catch (error) {
 		// Notify the user in Zenvia
