@@ -34,7 +34,7 @@ export const updateDbPricesFromExcel = async (name) => {
 
 		// Actualiza el modelo Prices con la información del Excel
 		let updates = 0;
-		let noPrice = "";
+		let noPrice = 0;
 		let updatedModels = [];
 
 		// Procesa los registros de dataExcel omitiendo el encabezado
@@ -44,7 +44,7 @@ export const updateDbPricesFromExcel = async (name) => {
 			const precio = Math.round(Number(entrada.C));
 			const cilindradas = entrada.D ? entrada.D : "";
 			const url = entrada.E ? entrada.E : "";
-			
+
 			// Verifica si el precio es un número válido antes de actualizar el modelo
 			if (!isNaN(precio)) {
 				const vigencia = fechaActual;

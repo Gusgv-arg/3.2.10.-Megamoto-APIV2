@@ -31,11 +31,9 @@ export const matchkeyWords = async (newMessage) => {
 	const keywordsUsed = /(usado|usados|usada|usadas)/i;
 	const keywordsOnlyNumbers =
 		/^(?!100$|110$|125$|135$|149$|150$|180$|200$|202$|250$|251$|300$|302$|390$|400$|450$|500$|502$|600$|650$|750$|752$|1000$|1200$|1300$)\d{7,}$/;
-
-	//const keywordsCilindradas =
-	/\b(100|110|125|135|149|150|200|250|300|390|400|450|500|600|650|750|1000|1200|1300)(?![0-9])([a-zA-Z?!.]*)/gi;
+	
 	const keywordsCilindradas =
-		/(?:\b)(100|110|125|135|149|150|200|250|300|390|400|450|500|600|650|750|1000|1200|1300)(?![0-9])/g;
+		/(?:\b)(50|80|100|110|125|135|149|150|190|200|250|300|390|400|450|500|600|650|700|750|1000|1050|1200|1250|1300)(?![0-9])/g;
 	const characterModels =
 		/\b(imperiale|benelli 150|benelli150|benelli 250|benelli250|benelli 251|benelli251|benelli 300|benelli300|benelli 400|benelli400|benelli 500|benelli500|benelli 502|benelli502|trail|benelli 15|benelli15|benelli 600|benelli600|benelli 750|benelli750|leoncino|tnt|trk|k-light|klight|light|rk|keeway 150|keeway150|keeway 200|keeway200|blitz|blitz 110|blitz110|blitz automatica|start|v8|one|full|plus|tunning|tuning|tunnin|tunin|cg|s2|dlx|deluxe|max|sirius|skua|skua 150|skua150|skua 250|skua250|strato|strato 150|strato150|xmm|xmm 250|xmm250|ax|ax 100|ax100|gn|gn 125|gn125|gsx|gsx 125|gsx125|city|citycom|sym 300|sym300|motocargo|cargo|xtreme|x-treme|motomel 110|motomel110|motomel 125|motomel125|motomel 150|motomel150|new|new generation|silver|motomel 250|motomel250|adventure|euro|alpino|tarpan|suzuki 100|suzuki100|suzuki 125|suzuki125)\b/gi;
 
