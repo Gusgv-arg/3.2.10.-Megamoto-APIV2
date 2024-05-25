@@ -67,7 +67,7 @@ export const updateDbPricesFromExcel = async (name) => {
 						newModels.push(updatedPrice.value.modelo)
 						qNewModels++;
 					}
-					
+
 					// Identifico los modelos actualizados
 					updatedModels.push({ modelo, precio });
 					updates++;
@@ -140,9 +140,9 @@ export const updateDbPricesFromExcel = async (name) => {
 				(model) => " " + model.modelo + ": $" + model.precio
 			)}\n- Faltó actualizar en MegaBot: ${noPrice}  modelo/s.\n- ${
 				registrosDesactivados.length
-			} registros desactivados en MegaBot porque no están en el Excel: ${registrosDesactivados.map(
+			} modelos desactivados en MegaBot: ${registrosDesactivados.map(
 				(registro) => registro.modelo
-			)}\n${qNewModels} modelos nuevos que están en el Excel y no estaban en MegaBot: ${newModels.map((newModel)=>newModel.modelo)}`,
+			)}\n$- {qNewModels} modelos nuevos en MegaBot: ${newModels.map((newModel)=>newModel.modelo)}`,
 		});
 	} catch (error) {
 		// Notify the user in Zenvia

@@ -29,7 +29,7 @@ export const checkGeneralBotSwitch = async (req, res, next) => {
 
 	try {
 		let botSwitchInstance = await BotSwitch.findOne();
-		// Next() if general switch is ON or message is not megabot on/off or name is different from me and "Gg" or origin is an Agent response to a user that is in Leads DB
+		// Next() if general switch is ON or message is not megabot on/off or name is "Gustavo Gomez Villafañe" or "Gg" or origin is an Agent response to a user that is in Leads DB
 		if (
 			(botSwitchInstance.generalSwitch === "ON" &&
 				message.toLowerCase() !== "megabot off" &&

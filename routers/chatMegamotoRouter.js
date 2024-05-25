@@ -13,6 +13,7 @@ import { quantityToProcess } from "../middlewares/quantityToProcess.js";
 import { checkNewProspect } from "../middlewares/checkNewProspect.js";
 import { sendMessageToUser } from "../controllers/sendMessageController.js";
 import { adminOrders } from "../middlewares/adminOrders.js";
+import { isOpenMiddleware } from "../middlewares/isOpenMiddleware.js";
 
 const chatMegamotoRouter = express.Router();
 
@@ -21,6 +22,7 @@ const targetDate = new Date("2024-03-03");
 // Receives data from Zenvia webhook
 chatMegamotoRouter.post(
 	"/webhook-megamoto",
+	isOpenMiddleware,
 	adminOrders,
 	determineOrigin,
 	checkAgentResponse,
