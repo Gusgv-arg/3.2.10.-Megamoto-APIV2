@@ -74,7 +74,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		// For Web users run the assistant but with greet already saved
 		if (newMessage.channel === "web") {
 			greeting =
-				"¡Hola! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer errores. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀";
+				"¡Hola! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer algún error. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀";
 			// Send to GPT the conversation where the first message is a greeting
 			await openai.beta.threads.messages.create(
 				threadId,
@@ -92,7 +92,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 		} else {
 			// For Zenvia users post directly to Zenvia without running the assistant (returns greeting)
 
-			greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer errores. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀`;
+			greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer algún error. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀`;
 			
 			// Send to GPT the conversation where the first message is a greeting
 			await openai.beta.threads.messages.create(

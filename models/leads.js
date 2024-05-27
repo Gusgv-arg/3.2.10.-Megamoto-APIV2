@@ -9,7 +9,8 @@ const leadsSchema = new mongoose.Schema(
 		thread_id: {type: String},
 		botSwitch: { type: String, enum: ['ON', 'OFF'], required: true },					
 		phones: { type: String },
-		emails: {type: String}		
+		emails: {type: String},
+		interactions: {type: Number}		
 	},
 	{
 		timestamps: true,

@@ -52,6 +52,9 @@ export const saveGptResponseToWebUser = async (messageToProcess, response) => {
 		// Update the lead content
 		lead.content = newContent;
 
+		// Increase interactions counter
+		lead.interactions = lead.interactions + 1
+
 		// Save the updated lead
 		await lead.save();
 		console.log(
