@@ -27,6 +27,7 @@ export const exportLeadsToExcel = async (name) => {
 			content: lead.content,
 			id_user: lead.id_user,
 			createdAt: lead.createdAt,
+			interactions: lead.interactions
 		}));
 		
 		const wb = xlsx.utils.book_new();
