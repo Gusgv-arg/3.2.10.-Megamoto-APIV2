@@ -62,8 +62,8 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				content: newMessage.receivedMessage,
 			});
 		}
-	} else {
-		
+
+	} else {		
 		// Create a new thread because its a new customer
 		const thread = await openai.beta.threads.create();
 		threadId = thread.id;
@@ -89,9 +89,9 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				},
 				{ role: "user", content: newMessage.receivedMessage }
 			);
+
 		} else {
 			// For Zenvia users post directly to Zenvia without running the assistant (returns greeting)
-
 			greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer algún error. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀`;
 			
 			// Send to GPT the conversation where the first message is a greeting
@@ -201,17 +201,6 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 	if (newMessage.receivedMessage && lastMessageForRun) {
 		let messageGpt = lastMessageForRun.content[0].text.value;
 
-		// Save the received message from the USER to the database
-		const role = "user";
-		await saveUserMessageInDb(
-			newMessage.name,
-			newMessage.senderId,
-			role,
-			newMessage.receivedMessage,
-			newMessage.messageId,
-			newMessage.channel,
-			threadId
-		);
 		return { messageGpt, threadId, specialInstructions };
 	}
 };
