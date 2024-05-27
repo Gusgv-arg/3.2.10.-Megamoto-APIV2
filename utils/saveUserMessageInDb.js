@@ -42,7 +42,8 @@ export const saveUserMessageInDb = async (
 				channel: channel,
 				content: `${currentDateTime} - ${name}: ${userMessage}`,
 				thread_id: threadId,	
-				botSwitch: "ON"			
+				botSwitch: "ON",
+				interactions: 0			
 			});
 			//console.log(`9. New lead created in Leads DB --> ${name}`);
 			return;
