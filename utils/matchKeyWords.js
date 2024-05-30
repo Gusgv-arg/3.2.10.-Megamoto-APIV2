@@ -19,6 +19,7 @@ import {
 export const matchkeyWords = async (newMessage) => {
 	let instructions = "";
 	let allModelsList = "";
+	let modelsByCC = "";
 
 	const keywordsFinance =
 		/(préstamo|prestamo|financiación|financiado|financiar|sin interes|sin intereses)(?!.*(?:tarjeta de crédito|tarjeta de débito|transferencia|tarjeta))/i;
@@ -31,7 +32,7 @@ export const matchkeyWords = async (newMessage) => {
 	const keywordsUsed = /(usado|usados|usada|usadas)/i;
 	const keywordsOnlyNumbers =
 		/^(?!100$|110$|125$|135$|149$|150$|180$|200$|202$|250$|251$|300$|302$|390$|400$|450$|500$|502$|600$|650$|750$|752$|1000$|1200$|1300$)\d{7,}$/;
-	
+
 	const keywordsCilindradas =
 		/(?:\b)(50|80|100|110|125|135|149|150|190|200|250|300|390|400|450|500|600|650|700|750|1000|1050|1200|1250|1300)(?![0-9])/g;
 	const characterModels =
@@ -78,10 +79,10 @@ export const matchkeyWords = async (newMessage) => {
 
 		let allModels = checkAllModels(newMessage, characterModels);
 		//console.log("all models", allModels);
-		
+
 		for (const model of allModels) {
 			let oneModel = await searchPricesPerFamily(model);
-			allModelsList = `${allModelsList} ${oneModel}\n`;
+			allModelsList = `${allModelsList} ${oneModel}\n`;			
 		}
 		//console.log("allModels:", allModelsList);
 		instructionsQuantity++;
@@ -95,7 +96,7 @@ export const matchkeyWords = async (newMessage) => {
 
 		let allModels = checkAllModels(newMessage, numericModels);
 		//console.log("all models", allModels);
-		
+
 		for (const model of allModels) {
 			let oneModel = await searchPricesPerFamily(model);
 			allModelsList = `${allModelsList} ${oneModel}\n`;
@@ -111,9 +112,7 @@ export const matchkeyWords = async (newMessage) => {
 			`In the message of ${newMessage.name} appears ${matchCilindradas[0]}. He is refering to cc.`
 		);
 		console.log("matchcilindros", matchCilindradas[0]);
-		const modelsByCC = await searchModelsByCC(
-			parseInt(matchCilindradas[0], 10)
-		);
+		modelsByCC = await searchModelsByCC(parseInt(matchCilindradas[0], 10));
 
 		if (modelInstructions === "") {
 			instructionsQuantity++;
@@ -193,25 +192,29 @@ export const matchkeyWords = async (newMessage) => {
 			instructions + instructionsQuantity + ". " + enviosInstructions;
 	}
 
-	let moreThanOneInstruction;
-
-	if (instructionsQuantity === 1) {
+	// If competitors it overwrites everything
+	if (matchCompetitors) {
+		instructions = competitorInstructions;
 		return instructions;
-	} else if (instructionsQuantity > 1) {
-		if (matchCompetitors) {
-			instructions = competitorInstructions;
-			return instructions;
-		} else if(matchCharacterModels && matchCilindradas){
-			instructions = modelInstructions1 + allModelsList + modelInstructions2
-			return instructions;
-		} else if (matchNumericModels && matchCilindradas){
-			instructions = modelInstructions1 + allModelsList + modelInstructions2
-			return instructions;
-		}
-		let moreThanOneInstruction = `Debes responder considerando estos ${instructionsQuantity} aspectos:\n`;
-		return `${moreThanOneInstruction}${instructions}`;
-	} else {
+
+		// If it detects character model && cc. overwrites cc with character models
+	} else if (
+		(matchCharacterModels && matchCilindradas) ||
+		matchCharacterModels
+	) {
+		return { models: allModelsList, type: "price model options" };
+		// If it detects numeric model && cc. overwrites cc with numeric models
+	} else if ((matchNumericModels && matchCilindradas) || matchNumericModels) {
+		return { models: allModelsList, type: "price model options" };
+	} else if (matchCilindradas) {
+		return { models: modelsByCC, type: "price cc. options" };
+	}
+	//let moreThanOneInstruction = `Debes responder considerando estos ${instructionsQuantity} aspectos:\n`;
+	//return `${moreThanOneInstruction}${instructions}`;
+	else {
 		return instructions;
 	}
+
+	// Returns instructions as ""
 	return instructions;
 };

@@ -14,7 +14,7 @@ const PROYECT = process.env.PROYECT;
 const openai = new OpenAI({
 	apiKey: API_KEY,
 	organization: ORGANIZATION,
-	project: PROYECT
+	project: PROYECT,
 });
 
 export const processMessageWithGPTAssistant = async (newMessage) => {
@@ -62,8 +62,7 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				content: newMessage.receivedMessage,
 			});
 		}
-
-	} else {		
+	} else {
 		// Create a new thread because its a new customer
 		const thread = await openai.beta.threads.create();
 		threadId = thread.id;
@@ -89,11 +88,10 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				},
 				{ role: "user", content: newMessage.receivedMessage }
 			);
-
 		} else {
 			// For Zenvia users post directly to Zenvia without running the assistant (returns greeting)
 			greeting = `¡Hola ${newMessage.name}! 👋 Soy MegaBot, Asistente Virtual de Megamoto, puedo cometer algún error. Estoy para agilizar tu atención y luego un vendedor se pondrá en contacto contigo. ¿Qué moto estás buscando? 😀`;
-			
+
 			// Send to GPT the conversation where the first message is a greeting
 			await openai.beta.threads.messages.create(
 				threadId,
@@ -144,10 +142,42 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 			specialInstructions = instructions;
 
 			if (instructions === "") {
-				// Run the assistant normally without streaming
+				// Run the assistant normally
 				run = await openai.beta.threads.runs.create(threadId, {
 					assistant_id: assistantId,
 				});
+			
+			} else if (instructions.type === "price model options") {
+				// Post directly to the user the price model options without running GPT
+				const directMessage = `Te podemos ofrecer los siguientes modelos:\n${instructions.models}\nLos precios incluyen patentamiento en provincia y deberán ser confirmados por un vendedor. ¿Me confirmarías tu modelo del interes?`;
+				specialInstructions = "Se respondió sin GPT."
+				
+				//Save the response in GPT thread_id
+				await openai.beta.threads.messages.create(
+					threadId,
+					{
+						role: "assistant",
+						content: directMessage,
+					},					
+				);
+
+				return { directMessage, threadId, specialInstructions };
+				
+			} else if (instructions.type === "price cc. options") {
+				specialInstructions = "Se respondió sin GPT."
+				// Post directly to the user the price model options without running GPT
+				const directMessage = `En las cilindradas que buscas te podemos ofrecer:\n${instructions.models}\nLos precios incluyen patentamiento en provincia y deberán ser confirmados por un vendedor. ¿Me confirmarías tu modelo del interes?`;
+
+				//Save the response in GPT thread_id
+				await openai.beta.threads.messages.create(
+					threadId,
+					{
+						role: "assistant",
+						content: directMessage,
+					},					
+				);
+				return { directMessage, threadId, specialInstructions };
+			
 			} else {
 				// run the assistant with special instructions
 				console.log(
@@ -156,7 +186,6 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 				);
 				run = await openai.beta.threads.runs.create(threadId, {
 					assistant_id: assistantId,
-					//instructions: instructions,
 					additional_instructions: instructions,
 				});
 			}
@@ -200,7 +229,6 @@ export const processMessageWithGPTAssistant = async (newMessage) => {
 	// Send the assistants response
 	if (newMessage.receivedMessage && lastMessageForRun) {
 		let messageGpt = lastMessageForRun.content[0].text.value;
-
 		return { messageGpt, threadId, specialInstructions };
 	}
 };

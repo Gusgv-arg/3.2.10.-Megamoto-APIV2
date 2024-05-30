@@ -16,8 +16,8 @@ export const searchPricesPerFamily = async (family) => {
         if (prices.length > 0) {
             const modelPrices = prices
                 .map(
-                    (modelo) =>
-                        `Modelo ${modelo.modelo} marca ${
+                    (modelo, index) =>
+                        `${index + 1}. Modelo ${modelo.modelo} marca ${
                             modelo.marca
                         } a $ ${modelo.precio.toLocaleString()}. Catálogo: ${modelo.url}`
                 )

@@ -21,14 +21,14 @@ export class UserMessageQueue {
 		while (queue.messages.length > 0) {
 			// Take the first record and delete it from the queue
 			const newMessage = queue.messages.shift();
-			
+
 			//return
 			try {
 				// PARA REPENSAR EL PROCESO
 
 				// Process the message with the Assistant
 				const response = await processMessageWithGPTAssistant(newMessage);
-				
+
 				if (newMessage.channel === "Respuesta Agente") {
 					// Save the agent's response in DB
 					await saveAgentResponseInDb(newMessage, response.threadId);
@@ -36,7 +36,7 @@ export class UserMessageQueue {
 					// Excecute callback for be able to respond the user (res object)
 					queue.responseCallback(null, response);
 				} else {
-					// Send message to Zenvia: can be the greeting, GPT response or error message &&
+					// Send message to Zenvia: can be the greeting, GPT response, direct message or error message &&
 					// Save Gpt message in DB called by handleMessageToZenvia (can refactor this like web origin)
 					await handleMessageToZenvia(
 						newMessage.name,
@@ -46,6 +46,8 @@ export class UserMessageQueue {
 							? response.messageGpt
 							: response.greeting
 							? response.greeting
+							: response.directMessage
+							? response.directMessage
 							: response.errorMessage,
 						response.threadId,
 						newMessage.messageId,
@@ -83,7 +85,7 @@ export class UserMessageQueue {
 		let senderPage;
 		let receivedMessage;
 		let channel;
-		
+
 		//Depending the origin I define the variables according the object I receive
 		if (messageToProcess.origin === "whatsapp") {
 			name = messageToProcess.data.prospect.firstName;

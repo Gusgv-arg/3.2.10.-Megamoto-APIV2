@@ -23,7 +23,7 @@ export const saveGPTMessageInDb = async (
 			id_message: messageId,
 			channel: channel,
 			thread_id: threadId,
-			instructions: specialInstructions			
+			instructions: specialInstructions ? specialInstructions : ""	//Saves this for tracking GPT responses		
 		});
 
 		//console.log(`10. Store GPT response in Messages DB --> ${name}: "${messageGpt}"`);

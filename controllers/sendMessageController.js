@@ -10,7 +10,7 @@ export const sendMessageToUser = async (req, res) => {
     
     const prospectId= ""
     
-    const message = "Estimado ..., lo contactamos del equipo de soporte de Megamoto para informarle que nuestro Asistente virtual, MegaBot, le proporcionó información errónea. En breve será contactado por un vendedor para seguir con la operación. !Que tenga buen día!";
+    const message = "Estimado ..., lo contactamos del equipo de soporte de Megamoto para informarle que nuestro Asistente virtual, MegaBot, le proporcionó información errónea sobre ....precios. En breve será contactado por un vendedor para seguir con la operación. !Que tenga buen día!";
     //const message = "Prueba !Que tenga buen día!";
 
     //Aca debería hacer que el switch individual se ponga en off
