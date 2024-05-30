@@ -82,7 +82,7 @@ export const matchkeyWords = async (newMessage) => {
 
 		for (const model of allModels) {
 			let oneModel = await searchPricesPerFamily(model);
-			allModelsList = `${allModelsList} ${oneModel}\n`;			
+			allModelsList = `${allModelsList}${oneModel}\n`;			
 		}
 		//console.log("allModels:", allModelsList);
 		instructionsQuantity++;
@@ -99,7 +99,7 @@ export const matchkeyWords = async (newMessage) => {
 
 		for (const model of allModels) {
 			let oneModel = await searchPricesPerFamily(model);
-			allModelsList = `${allModelsList} ${oneModel}\n`;
+			allModelsList = `${allModelsList}${oneModel}\n`;
 		}
 		//console.log("allModels:", allModelsList);
 		instructionsQuantity++;

@@ -450,7 +450,9 @@ export const precios = [
 			"Alpino",
 			"Strato 150",
 			"Strato150",
-			"Scooter"
+			"Scooter",
+			"Escuter",
+			"Scuter"
 		],
 		cilindradas: 150,
 		url: "https://motomel.com.ar/fichas-tecnicas/ficha-tecnica-strato-alpino-150.pdf",
@@ -511,7 +513,7 @@ export const precios = [
 		familia: "CITYCOM",
 		marca: "SYM",
 		precio: 7863281,
-		sinonimos: ["City", "Sym 300", "Sym300","Scooter Sym", "Scooter"],
+		sinonimos: ["City", "Sym 300", "Sym300","Scooter Sym", "Scooter", "Escuter", "Scooter"],
 		cilindradas: 300,
 		url: "https://sym-argentina.com.ar/modelos/citycom-s-300i/",
 		vigencia: "29/03/2024",
